@@ -1,0 +1,41 @@
+/* Universal Fonts */
+*{
+    text-decoration: none;
+}
+.titleFont{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.bodyFont{
+    font-family: 'Work Sans', sans-serif;
+}
+
+/* Navbar */
+.navbarGV{
+    background-color:#0F2456;
+}
+
+.navbarTitle{
+    color: white;
+    font-size: 31px;
+    font-weight: 600;
+}
+
+.navbarTitle:hover{
+    color: white !important;
+}
+
+.navbarOption{
+    color: white !important;
+    font-size: 26px;
+    text-decoration: none;
+    border-bottom: 3px solid  #0F2456;
+    margin-right: 20px;
+    /* transition: all 0.4s !important; */
+}
+
+.navbarOption:hover{
+    color: white !important;
+    border-bottom: 3px solid  #ECC66E;
+    /* transition: all 0.4s !important; */
+}

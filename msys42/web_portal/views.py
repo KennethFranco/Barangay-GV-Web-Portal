@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from .models import barangay_id
 
 # Create your views here.
+def base(request):
+    return render(request, "base.html")
+
 def say_hello(request):
     return render(request, "hello.html")
 
