@@ -39,3 +39,19 @@
     border-bottom: 3px solid  #ECC66E;
     /* transition: all 0.4s !important; */
 }
+
+/* HERO */
+.hero{
+    border: 3px solid #0F2456; 
+    background-color: #0F2456; 
+    color: white; 
+    border-radius: 8px;
+}
+.heroBody{
+    border-left: 6px solid #ECC66E;
+}
+
+.heroTitle{
+    font-weight: 700;
+    font-size: 68px;
+}
