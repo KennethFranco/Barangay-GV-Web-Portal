@@ -52,7 +52,19 @@
                         <div class = "hero">
                             <h1 class = "bodyFont heroBody p-5">Welcome to <br><span class = "titleFont heroTitle">Guadalupe Viejo!</span></h1>
                         </div>
-    
+                    </div>
+                    
+                    <div class="row mt-5">
+                        <h1 class = "titleFont"><span class = "announcementsHeader">Announcements</span></h1>
+                    </div>
+                    <div class="row mt-5 p-5 announcementsFrame">
+                        {% for a in announcements %}
+                            <div>
+                                <h1>{{a.title}}</h1>
+                                <p>{{a.content}}</p>
+                            </div>
+                        {% endfor %}
+
                     </div>
     
                 </div>
