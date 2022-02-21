@@ -5,23 +5,23 @@ from .models import barangay_id, announcement
 # Create your views here.
 def base(request):
     context = {
-        "barangay_ids": barangay_id.objects.all(),
+        "barangay_id_form": barangay_id.objects.all(),
         "announcements": announcement.objects.all()
     }
     return render(request, "base.html", context)
 
 def say_hello(request):
-    return render(request, "hello.html")
+    return render(request, "base.html")
 
-def create_barangay_id(request):
+def barangay_id_form(request):
     if (request.method == "POST"):
         ln = request.POST.get('last_name')
         fn = request.POST.get('first_name')
         barangay_id.objects.create(last_name = ln, first_name= fn) 
         return redirect("hello/")
     else:
-        return render(request, "hello.html")
+        return render(request, "barangay_id_form.html")
 
-def barangay_ids(request):
-    barangay_id_objects = barangay_id.objects.all()
-    return render(request, "base.html", {'barangay_ids': barangay_id_objects})
+# def barangay_ids(request):
+#     barangay_id_objects = barangay_id.objects.all()
+#     return render(request, "base.html", {'barangay_ids': barangay_id_objects})
