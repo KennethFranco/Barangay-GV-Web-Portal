@@ -173,14 +173,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0F2456;
+    background: linear-gradient(1.42deg, #3B5182 -2.24%, rgba(196, 196, 196, 0) 207.45%);
     width: 1339px;
     border-radius: 8px;
 }
 
 .form {
-    background-color: gray;
+    background-color: white;
     height: fit-content;
     width: 1240px;
     border-radius: 8px;
+}
+
+.formTitle{
+    font-size: 40px;
+    border-bottom: 5px solid #ECC66E;
+    font-weight: 500;
+}
+
+.formLabel{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.formInput{
+    border-radius: 10px;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #B8B8B8;
+    font-size: 30px;
 }

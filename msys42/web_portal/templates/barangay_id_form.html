@@ -64,45 +64,114 @@
             </div>
 
             <div class="formCard mt-5">
-                <div class="form">
+                <div class="form p-5">
                     <form action=""></form>
-                    <p>Personal Details</p>
-                    <div class="row">
+
+                    
+                    <span class = "formTitle titleFont mb-5">Personal Details</span>
+                    <div class="row mt-5 mb-3">
                         <div class="col">
-                            <label for="last_name">Last Name</label><br>
-                            <input type="text">
+                            <label class = "bodyFont formLabel" for="last_name">Last Name<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "Last Name">
                         </div>
                         <div class="col">
-                            <label for="first_name">First Name</label><br>
-                            <input type="text">
+                            <label class = "bodyFont formLabel" for="first_name">First Name<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "First Name">
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col">
-                            <label for="middle_name">Middle Name</label><br>
-                            <input type="text">
+                            <label class = "bodyFont formLabel" for="middle_name">Middle Name<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "Middle Name">
                         </div>
                         <div class="col">
-                            <label for="age">Age</label><br>
-                            <input type="number">
+                            <label class = "bodyFont formLabel" for="age">Age<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="number" placeholder = "Age">
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col">
-                            <label for="birthday">Birthday</label><br>
-                            <input type="date">
+                            <label class = "bodyFont formLabel" for="birthday">Birthday<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="date" placeholder = "Birthday">
                         </div>
                         <div class="col">
-                            <label for="sex"> Sex</label><br>
-                            <select name="sex" id="sex">
+                            <label class = "bodyFont formLabel" for="sex"> Sex<span style = "color: #B30000;">*</span></label><br>
+                            <select class = "bodyFont formInput" name="sex" id="sex">
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Prefer not to say">Prefer not to say</option>
                             </select>
                         </div>
                     </div>
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="nationality">Nationality<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "Nationality">
+                        </div>
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="civil_status">Civil Status<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "Civil Status">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="email">Email<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "Email">
+                        </div>
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="contact_number">Contact Number<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="number" placeholder = "Contact Number">
+                        </div>
+                    </div>
+
+                    <span class = "formTitle titleFont">Address</span>
+                    <div class="row mt-5 mb-3">
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="address_first_line">House Number - Blk - Street<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "House Number - Blk - Street">
+                        </div>
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="address_city">City<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "City">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="address_barangay">Barangay<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "Barangay">
+                        </div>
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="address_province">Province<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "Province">
+                        </div>
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="address_zip_code">Zip Code<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="number" placeholder = "Zip Code">
+                        </div>
+                    </div>
+
+                    <span class = "formTitle titleFont">Emergency Contact</span>
+                    <div class="row mt-5 mb-3">
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="emergency_name">Name<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "Last Name">
+                        </div>
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="emergency_contact_number">Contact Number<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="number"placeholder = "Last Name">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label class = "bodyFont formLabel" for="emergency_address">Address<span style = "color: #B30000;">*</span></label><br>
+                            <input class = "bodyFont formInput" type="text" placeholder = "Last Name">
+                        </div>
+                    </div>
+  
 
                     
 
