@@ -22,7 +22,8 @@
         <div class="container p-2">
             <img class="mr-2" src="{% static 'logo.png' %}" style="width: 60px; height: 60px; margin-right: 20px"
                 alt="">
-            <a href="" class="titleFont navbarTitle" style="text-decoration: none;">Barangay GV Web Portal</a>
+            <a href="{% url 'base' %}" class="titleFont navbarTitle" style="text-decoration: none;">Barangay GV Web
+                Portal</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu"
                 aria-controls="toggleMobileMenu" aria-expanded="false" aria-lable="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -51,131 +52,154 @@
 
     </nav>
     <div class="main">
-        <div class="container">
-            <div class="row pt-5">
+        <div class="container pb-5">
+            <div class="row pt-5 justify-content-end">
                 <div class="col-6 bg-primary cardHeader">
                     <p class="cardText">Barangay ID (Constituent)</p>
                 </div>
                 <div class="col-4">
                 </div>
-                <div class="col-2 align-self-end">
-                    <button class="btn btn-secondary">Back</button>
+                <div class="col-2 d-flex justify-content-end">
+                    <a href="{% url 'base' %}" class="align-self-end"><button
+                            class="btn btn-secondary">Back</button></a>
                 </div>
             </div>
 
             <div class="formCard mt-5">
                 <div class="form p-5">
-                    <form action=""></form>
+                    <form action="POST" action="{% url 'base' %}">{% csrf_token %}
+                        <span class="formTitle titleFont mb-5">Personal Details</span>
+                        <div class="row mt-5 mb-3">
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="last_name">Last Name<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="Last Name">
+                            </div>
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="first_name">First Name<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="First Name">
+                            </div>
+                        </div>
 
-                    
-                    <span class = "formTitle titleFont mb-5">Personal Details</span>
-                    <div class="row mt-5 mb-3">
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="last_name">Last Name<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "Last Name">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="middle_name">Middle Name<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="Middle Name">
+                            </div>
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="age">Age<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="number" placeholder="Age">
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="first_name">First Name<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "First Name">
-                        </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="middle_name">Middle Name<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "Middle Name">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="birthday">Birthday<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="date" placeholder="Birthday">
+                            </div>
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="sex"> Sex<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <select class="bodyFont formInput" name="sex" id="sex">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="age">Age<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="number" placeholder = "Age">
-                        </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="birthday">Birthday<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="date" placeholder = "Birthday">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="nationality">Nationality<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="Nationality" required>
+                            </div>
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="civil_status">Civil Status<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="Civil Status" required>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="sex"> Sex<span style = "color: #B30000;">*</span></label><br>
-                            <select class = "bodyFont formInput" name="sex" id="sex">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Prefer not to say">Prefer not to say</option>
-                            </select>
-                        </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="nationality">Nationality<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "Nationality">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="email">Email<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="Email" required>
+                            </div>
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="contact_number">Contact Number<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="number" placeholder="Contact Number" required>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="civil_status">Civil Status<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "Civil Status">
-                        </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="email">Email<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "Email">
+                        <span class="formTitle titleFont">Address</span>
+                        <div class="row mt-5 mb-3">
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="address_first_line">House Number - Blk -
+                                    Street<span style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="House Number - Blk - Street"
+                                    required>
+                            </div>
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="address_city">City<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="City" required>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="contact_number">Contact Number<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="number" placeholder = "Contact Number">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="address_barangay">Barangay<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="Barangay" required>
+                            </div>
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="address_province">Province<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="Province" required>
+                            </div>
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="address_zip_code">Zip Code<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="number" placeholder="Zip Code" required>
+                            </div>
                         </div>
-                    </div>
 
-                    <span class = "formTitle titleFont">Address</span>
-                    <div class="row mt-5 mb-3">
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="address_first_line">House Number - Blk - Street<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "House Number - Blk - Street">
+                        <span class="formTitle titleFont">Emergency Contact</span>
+                        <div class="row mt-5 mb-3">
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="emergency_name">Name<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="Name" required>
+                            </div>
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="emergency_contact_number">Contact Number<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="number"
+                                    placeholder="Contact Number" required>
+                            </div>
                         </div>
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="address_city">City<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "City">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="bodyFont formLabel" for="emergency_address">Address<span
+                                        style="color: #B30000;">*</span></label><br>
+                                <input class="bodyFont formInput" type="text" placeholder="Address" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="address_barangay">Barangay<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "Barangay">
+                        <div class="d-flex justify-content-end">
+                            <a href="" class="align-self-end"><button type="submit"
+                                    class="btn btn-secondary">Next</button></a>
                         </div>
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="address_province">Province<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "Province">
-                        </div>
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="address_zip_code">Zip Code<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="number" placeholder = "Zip Code">
-                        </div>
-                    </div>
-
-                    <span class = "formTitle titleFont">Emergency Contact</span>
-                    <div class="row mt-5 mb-3">
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="emergency_name">Name<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "Last Name">
-                        </div>
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="emergency_contact_number">Contact Number<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="number"placeholder = "Last Name">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label class = "bodyFont formLabel" for="emergency_address">Address<span style = "color: #B30000;">*</span></label><br>
-                            <input class = "bodyFont formInput" type="text" placeholder = "Last Name">
-                        </div>
-                    </div>
-  
-
-                    
-
+                    </form>
                 </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                Back to top &#8593
             </div>
         </div>
 

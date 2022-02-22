@@ -18,7 +18,7 @@ def barangay_id_form(request):
         ln = request.POST.get('last_name')
         fn = request.POST.get('first_name')
         barangay_id.objects.create(last_name = ln, first_name= fn) 
-        return redirect("hello/")
+        return redirect("base")
     else:
         return render(request, "barangay_id_form.html")
 
