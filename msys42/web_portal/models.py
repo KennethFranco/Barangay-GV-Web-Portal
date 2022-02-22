@@ -27,6 +27,12 @@ class barangay_id(models.Model):
     emergency_name = models.CharField(max_length = 100, default="null")
     emergency_contact_num = models.IntegerField(default = 0)
     emergency_address = models.CharField(max_length = 100, default="null")
+
+    # Files
+    personal_photo = models.FileField(default="null")
+    government_id_or_letter = models.FileField(default="null")
+    voters_id = models.FileField(default="null")
+
     objects = models.Manager()
 
 class announcement(models.Model):
