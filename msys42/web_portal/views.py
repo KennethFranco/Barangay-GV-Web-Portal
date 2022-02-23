@@ -7,21 +7,13 @@ from .models import barangay_id, announcement
 def base(request):
     context = {
         "barangay_id_form": barangay_id.objects.all(),
+        # "barangay_id_form_existing": barangay_id.objects.all().filter(status="Submitted"),
         "announcements": announcement.objects.all()
     }
     return render(request, "base.html", context)
 
 def say_hello(request):
     return render(request, "base.html")
-
-def barangay_id_form(request):
-    if (request.method == "POST"):
-        ln = request.POST.get('last_name')
-        fn = request.POST.get('first_name')
-        barangay_id.objects.create(last_name = ln, first_name= fn) 
-        return redirect("base")
-    else:
-        return render(request, "barangay_id_form.html")
 
 def create_barangay_id(request):
     if (request.method == "POST"):
