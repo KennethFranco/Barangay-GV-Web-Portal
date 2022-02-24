@@ -16,7 +16,7 @@ class barangay_id(models.Model):
     nationality = models.CharField(max_length = 100, default="null")
     civil_status = models.CharField(max_length = 100, default="null")
     email = models.CharField(max_length = 100, default="null")
-    contact_num = models.IntegerField(default = 0)
+    contact_num = models.CharField(max_length = 100, default="null")
     # Address 
     street = models.CharField(max_length = 100, default="null")
     city = models.CharField(max_length = 100, default="null")
@@ -32,6 +32,13 @@ class barangay_id(models.Model):
     personal_photo = models.FileField(default="null")
     government_id_or_letter = models.FileField(default="null")
     voters_id = models.FileField(default="null")
+
+    # Status
+    status = models.CharField(
+        max_length = 100,
+        choices =  [('Submitted', 'Submitted'), ('Under Review', 'Under Review')], 
+        default = "null"
+    )
 
     objects = models.Manager()
 

@@ -68,6 +68,14 @@
             <div class="formCard p-5 mt-5">
                 <div class="form p-5">
                     <form id = "mainForm" method = "POST" action="{% url 'create_barangay_id' %}"> {% csrf_token %}
+                        <!-- :) -->
+                        <div class="row" style  = "display: none;">
+                            <ul id = "trial">
+                                {% for b in ids %}
+                                <li>{{ b.contact_num }}:{{ b.status }}</li>
+                                {% endfor %} 
+                            </ul>
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <span class="formTitle titleFont mb-5">Personal Details</span>

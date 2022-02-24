@@ -72,16 +72,24 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
 
 
 // data validation
+
 const form = document.getElementById("mainForm");
 const modal = document.getElementById("exampleModal");
 var error = true;
 const modalContent = document.getElementById("modalText");
 // console.log(modalContent.textContent)
+var list = document.getElementById('trial').childNodes;
+var theArray = [];
+for(var i=0;i < list.length; i++) {
+    var arrValue = list[i].innerHTML;
+    // alert(arrValue);
+    theArray.push(arrValue);
+}
 
 // FIELDS
 
-
 form.addEventListener("submit", (e) => {
+
   var count = 0;
   var last_name = document.getElementById("last_name").value;
   var first_name = document.getElementById("first_name").value;
@@ -105,6 +113,24 @@ form.addEventListener("submit", (e) => {
   var second_file = document.getElementById("second_file").value;
   var third_file = document.getElementById("third_file").value;
 
+  var existCheck = true;
+  if (contact_number != ""){
+    console.log("Contact Number: " + contact_number)
+    for (const value of theArray){
+      if (value != null){
+        split = value.split(":");
+        if (contact_number === split[0]){
+          console.log("same")
+          console.log(split[1])
+          if (split[1] === "Submitted"){
+            existCheck = false;
+            error = true;
+          }
+        }
+        
+      }
+    }
+  }
 
 
   // checking for validity of email
@@ -285,8 +311,11 @@ form.addEventListener("submit", (e) => {
   if (error == true){
     console.log(emailCheck)
     e.preventDefault();
+    if (existCheck == false){
+      modalContent.innerHTML = "";
+      modalContent.innerHTML += "<br />" + "You currently have an onging request with this phone number. Please wait for it to be resolved/finished before submitting a new one.";
+    }
     $('#exampleModal').modal("show");
-    // modalContent.innerHTML = "";
   } else{
     console.log("good");
   }

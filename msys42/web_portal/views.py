@@ -2,6 +2,7 @@ from winreg import REG_QWORD
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import barangay_id, announcement
+from django.core import serializers
 
 # Create your views here.
 def base(request):
@@ -15,7 +16,11 @@ def base(request):
 def say_hello(request):
     return render(request, "base.html")
 
+
 def create_barangay_id(request):
+    context = {
+        "ids": barangay_id.objects.all(),
+    }
     if (request.method == "POST"):
         # Personal Details
         last_name = request.POST.get("last_name")
@@ -67,10 +72,11 @@ def create_barangay_id(request):
             personal_photo = personal_photo,
             government_id_or_letter = government_id_or_letter,
             voters_id = voters_id,
+            status = "Submitted",
             ) 
         return redirect("base")
     else:
-        return render(request, "barangay_id_form.html")
+        return render(request, "barangay_id_form.html", context)
 
 # def barangay_ids(request):
 #     barangay_id_objects = barangay_id.objects.all()
