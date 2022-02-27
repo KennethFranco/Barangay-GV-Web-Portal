@@ -312,3 +312,10 @@
     font-size: 14px;
     text-align: center;
 }
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 766px) {
+    .navbarTitle {
+        display: none;
+    }
+  }

@@ -19,14 +19,24 @@
 
 <body>
     <nav class="container-fluid navbar navbar-expand-md navbarGV">
-        <div class="container p-2">
-            <img class="mr-2" src="{% static 'logo.png' %}" style="width: 60px; height: 60px; margin-right: 20px"
-                alt="">
-            <a href="{% url 'base' %}" class="titleFont navbarTitle" style="text-decoration: none;">Barangay GV Web
-                Portal</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu"
-                aria-controls="toggleMobileMenu" aria-expanded="false" aria-lable="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <div class="container">
+            <a href="{% url 'base' %}" style="padding: 0px; margin: 0px;"><img class="mr-2"
+                    src="{% static 'logo.png' %}" style="width: 60px; height: 60px; margin-right: 20px" alt=""></a>
+
+            <div class="titleFont">
+                <a href="{% url 'base' %}" class="navbarTitle" style="text-decoration: none; ">Barangay GV Web
+                    Portal</a>
+            </div>
+
+            <button class="navbar-toggler btn-secondary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#toggleMobileMenu" aria-controls="toggleMobileMenu" aria-expanded="false"
+                aria-lable="Toggle navigation">
+                <div class="navBarDrawer">
+                </div>
+                <div class="navBarDrawer">
+                </div>
+                <div class="navBarDrawer">
+                </div>
             </button>
 
             <div class="collapse navbar-collapse" id="toggleMobileMenu">
@@ -60,8 +70,7 @@
                 <div class="col-lg-4 col-sm-1">
                 </div>
                 <div class="col-lg-2 col-sm-12 align-self-end mt-5 d-flex justify-content-end">
-                    <a href="{% url 'base' %}"><button
-                            class="btn btn-secondary">Back</button></a>
+                    <a href="{% url 'base' %}"><button class="btn btn-secondary">Back</button></a>
                 </div>
             </div>
 
@@ -314,6 +323,9 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
