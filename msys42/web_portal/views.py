@@ -1,7 +1,7 @@
 from winreg import REG_QWORD
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import barangay_id, announcement
+from .models import barangay_id, announcement, certificate_of_indigency
 from django.core import serializers
 
 # Create your views here.
@@ -15,6 +15,62 @@ def base(request):
 
 def say_hello(request):
     return render(request, "base.html")
+
+
+def create_barangay_clearance(request):
+    context = {
+        "ids": barangay_id.objects.all(),
+    }
+    return render(request, "barangay_clearance_form.html", context)
+
+def create_certificate_of_indigency(request):
+    context = {
+        "ids": barangay_id.objects.all(),
+    }
+    if (request.method == "POST"):
+        # Personal Details
+        last_name = request.POST.get("last_name")
+        first_name = request.POST.get("first_name")
+        middle_name = request.POST.get('middle_name')
+        age = request.POST.get("age")
+        birthday = request.POST.get("birthday")
+        sex = request.POST.get("sex")
+        nationality = request.POST.get("nationality")
+        civil_status = request.POST.get("civil_status")
+        email = request.POST.get("email")
+        contact_num = request.POST.get("contact_number")
+
+        street = request.POST.get("address_first_line")
+        city = request.POST.get("address_city")
+        barangay = request.POST.get("address_barangay")
+        zip_code = request.POST.get("address_zip_code")
+        province = request.POST.get("address_province")
+
+        government_id_or_letter = request.POST.get("first_file")
+        voters_id = request.POST.get("second_file")
+
+        certificate_of_indigency.objects.create(
+            last_name = last_name,
+            first_name = first_name,
+            middle_name = middle_name,
+            age = age,
+            birthday = birthday,
+            sex = sex,
+            nationality = nationality,
+            civil_status = civil_status,
+            email = email,
+            contact_num = contact_num,
+            street = street,
+            city = city,
+            barangay = barangay,
+            province= province,
+            zip_code = zip_code,
+            government_id_or_letter = government_id_or_letter,
+            voters_id = voters_id,
+            status = "Submitted",) 
+        return redirect("base")
+    else:
+        return render(request, "certificate_of_indigency_form.html", context)
 
 
 def create_barangay_id(request):
@@ -49,6 +105,12 @@ def create_barangay_id(request):
         voters_id = request.POST.get("second_file")
         personal_photo = request.POST.get("third_file")
 
+        type = request.POST.get("barangay_id_type")
+
+        landlord_name = request.POST.get("landlord_name")
+        landlord_contact_number = request.POST.get("landlord_contact_number")
+        landlord_address = request.POST.get("landlord_address")
+
         barangay_id.objects.create(
             # Personal Info
             last_name = last_name,
@@ -72,6 +134,10 @@ def create_barangay_id(request):
             personal_photo = personal_photo,
             government_id_or_letter = government_id_or_letter,
             voters_id = voters_id,
+            type = type,
+            landlord_name = landlord_name,
+            landlord_address = landlord_address,
+            landlord_contact_number = landlord_contact_number,
             status = "Submitted",
             ) 
         return redirect("base")

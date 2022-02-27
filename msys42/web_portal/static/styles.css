@@ -4,6 +4,24 @@
     text-decoration: none;
 }
 
+/* GLOBAL FONTS */
+.globalTitle{
+    font-size: calc(16px + 2.5vw);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.globalHeader{
+    font-size: calc(16px + 1.35vw);
+}
+
+.globalSubHeader{
+    font-size: calc(16px + 0.70vw);
+}
+
+.globalBody{
+    font-size: calc(16px + 0.25vw);
+}
+
 .main {
     background-image: url('/static/test3.png');
     height: 100%;
@@ -55,16 +73,17 @@
 }
 
 .cardHeader {
-    height: 120px;
+    height: fit-content;
     width: fit-content;
     border-radius: 8px;
 }
 
 .cardText {
-    border-bottom: 3px solid #ECC66E;
+    border-bottom: 5px solid #ECC66E;
     color: white;
     margin-top: 10px;
-    font-size: 55px;
+    font-weight: 700;
+    /* font-size: 55px; */
 }
 
 /* Navbar */
@@ -111,13 +130,13 @@
 
 .heroTitle {
     font-weight: 700;
-    font-size: 68px;
 }
 
 /* ANNOUNCEMENTS */
 .announcementsHeader {
     height: 86px;
     width: fit-content;
+    height: fit-content;
     background: #FFFFFF;
     box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
@@ -131,7 +150,6 @@
     width: fit-content;
     color: #000000;
     font-weight: 500;
-    font-size: 33px;
 }
 
 .announcementsFrame {
@@ -141,13 +159,15 @@
 
 .announcementsTitle {
     font-weight: 500;
-    font-size: 24px;
+    /* font-size: 24px; */
+    font-size: calc(16px + 0.70vw);
     line-height: 29px;
 }
 
 .announcementsDesc {
     font-weight: 300;
-    font-size: 20px;
+    /* font-size: 20px; */
+    font-size: calc(16px + 0.25vw);
     line-height: 23px;
 }
 
@@ -169,17 +189,15 @@
 }
 
 .servicesBody {
-    font-size: 19px;
     font-weight: 300
 }
 
 .servicesTitle {
-    font-size: 28px;
     font-weight: 400
 }
 
 .servicesMainTitle {
-    font-size: 42px;
+    /* font-size: 42px; */
     font-weight: 600;
 }
 
@@ -210,22 +228,35 @@
 }
 
 .formTitle {
-    font-size: 40px;
+    /* font-size: 40px; */
     border-bottom: 5px solid #ECC66E;
     font-weight: 500;
 }
 
 .formLabel {
-    font-size: 30px;
+    /* font-size: 30px; */
     font-weight: 600;
 }
 
 .formInput {
+
     border-radius: 10px;
     width: 100%;
     background: #FFFFFF;
     border: 1px solid #B8B8B8;
     font-size: 30px;
+    padding-left: 15px  !important;
+}
+
+
+.specialFormInput {
+
+    border-radius: 10px;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #B8B8B8;
+    font-size: 30px;
+    padding-left: 100px !important;
 }
 
 /* DROP ZONE CODE */
