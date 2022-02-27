@@ -55,14 +55,13 @@
 }
 
 .cardHeader {
-    height: 120px;
-    width: fit-content;
     border-radius: 8px;
 }
 
 .cardText {
     border-bottom: 3px solid #ECC66E;
     color: white;
+    height: fit-content;
     margin-top: 10px;
     font-size: 55px;
 }
