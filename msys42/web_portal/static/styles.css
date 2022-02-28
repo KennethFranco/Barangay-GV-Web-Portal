@@ -314,7 +314,7 @@
 }
 
 /* MEDIA QUERIES */
-@media screen and (max-width: 766px) {
+@media screen and (max-width: 768px) {
     .navbarTitle {
         display: none;
     }
