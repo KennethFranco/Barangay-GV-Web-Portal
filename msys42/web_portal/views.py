@@ -1,0 +1,266 @@
+from winreg import REG_QWORD
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from .models import barangay_certificate, barangay_id, announcement, certificate_of_indigency, barangay_clearance
+from django.core import serializers
+
+# Create your views here.
+def base(request):
+    context = {
+        "barangay_id_form": barangay_id.objects.all(),
+        "announcements": announcement.objects.all(),
+    }
+    return render(request, "base.html", context)
+
+def say_hello(request):
+    return render(request, "base.html")
+
+def create_barangay_certificate(request):
+    context = {
+        "ids": barangay_id.objects.all(),
+        "clearances": barangay_clearance.objects.all(),
+        "certificateIndigency": certificate_of_indigency.objects.all(),
+        "certificate": barangay_certificate.objects.all(),
+    }
+    if (request.method == "POST"):
+        last_name = request.POST.get("last_name")
+        first_name = request.POST.get("first_name")
+        middle_name = request.POST.get('middle_name')
+        age = request.POST.get("age")
+        birthday = request.POST.get("birthday")
+        sex = request.POST.get("sex")
+        nationality = request.POST.get("nationality")
+        civil_status = request.POST.get("civil_status")
+        email = request.POST.get("email")
+        contact_num = request.POST.get("contact_number")
+
+        street = request.POST.get("address_first_line")
+        city = request.POST.get("address_city")
+        barangay = request.POST.get("address_barangay")
+        zip_code = request.POST.get("address_zip_code")
+        province = request.POST.get("address_province")
+
+        government_id_or_letter = request.POST.get("first_file")
+        voters_id = request.POST.get("second_file")
+        personal_photo = request.POST.get("third_file")
+
+        type = request.POST.get("barangay_certificate_type")
+
+        barangay_certificate.objects.create(
+            # Personal Info
+            last_name = last_name,
+            first_name = first_name,
+            middle_name = middle_name,
+            age = age,
+            birthday = birthday,
+            sex = sex,
+            nationality = nationality,
+            civil_status = civil_status,
+            email = email,
+            contact_num = contact_num,
+            street = street,
+            city = city,
+            barangay = barangay,
+            province= province,
+            zip_code = zip_code,
+            personal_photo = personal_photo,
+            government_id_or_letter = government_id_or_letter,
+            voters_id = voters_id,
+            type = type,
+            status = "Submitted",
+            ) 
+        return redirect("base")
+    else:
+        return render(request, "barangay_certificate_form.html", context)
+
+def create_barangay_clearance(request):
+    context = {
+        "ids": barangay_id.objects.all(),
+        "clearances": barangay_clearance.objects.all(),
+        "certificateIndigency": certificate_of_indigency.objects.all(),
+        "certificate": barangay_certificate.objects.all(),
+    }
+    if (request.method == "POST"):
+        # Personal Details
+        last_name = request.POST.get("last_name")
+        first_name = request.POST.get("first_name")
+        middle_name = request.POST.get('middle_name')
+        age = request.POST.get("age")
+        birthday = request.POST.get("birthday")
+        sex = request.POST.get("sex")
+        nationality = request.POST.get("nationality")
+        civil_status = request.POST.get("civil_status")
+        email = request.POST.get("email")
+        contact_num = request.POST.get("contact_number")
+
+        street = request.POST.get("address_first_line")
+        city = request.POST.get("address_city")
+        barangay = request.POST.get("address_barangay")
+        zip_code = request.POST.get("address_zip_code")
+        province = request.POST.get("address_province")
+
+        government_id_or_letter = request.POST.get("first_file")
+        voters_id = request.POST.get("second_file")
+        personal_photo = request.POST.get("third_file")
+
+        type = request.POST.get("barangay_clearance_type")
+
+        barangay_clearance.objects.create(
+            # Personal Info
+            last_name = last_name,
+            first_name = first_name,
+            middle_name = middle_name,
+            age = age,
+            birthday = birthday,
+            sex = sex,
+            nationality = nationality,
+            civil_status = civil_status,
+            email = email,
+            contact_num = contact_num,
+            street = street,
+            city = city,
+            barangay = barangay,
+            province= province,
+            zip_code = zip_code,
+            personal_photo = personal_photo,
+            government_id_or_letter = government_id_or_letter,
+            voters_id = voters_id,
+            type = type,
+            status = "Submitted",
+            ) 
+        return redirect("base")
+    else:
+        return render(request, "barangay_clearance_form.html", context)
+
+def create_certificate_of_indigency(request):
+    context = {
+        "ids": barangay_id.objects.all(),
+        "clearances": barangay_clearance.objects.all(),
+        "certificateIndigency": certificate_of_indigency.objects.all(),
+        "certificate": barangay_certificate.objects.all(),
+    }
+    if (request.method == "POST"):
+        # Personal Details
+        last_name = request.POST.get("last_name")
+        first_name = request.POST.get("first_name")
+        middle_name = request.POST.get('middle_name')
+        age = request.POST.get("age")
+        birthday = request.POST.get("birthday")
+        sex = request.POST.get("sex")
+        nationality = request.POST.get("nationality")
+        civil_status = request.POST.get("civil_status")
+        email = request.POST.get("email")
+        contact_num = request.POST.get("contact_number")
+
+        street = request.POST.get("address_first_line")
+        city = request.POST.get("address_city")
+        barangay = request.POST.get("address_barangay")
+        zip_code = request.POST.get("address_zip_code")
+        province = request.POST.get("address_province")
+
+        government_id_or_letter = request.POST.get("first_file")
+        voters_id = request.POST.get("second_file")
+        personal_photo = request.POST.get("third_file")
+
+        certificate_of_indigency.objects.create(
+            last_name = last_name,
+            first_name = first_name,
+            middle_name = middle_name,
+            age = age,
+            birthday = birthday,
+            sex = sex,
+            nationality = nationality,
+            civil_status = civil_status,
+            email = email,
+            contact_num = contact_num,
+            street = street,
+            city = city,
+            barangay = barangay,
+            province= province,
+            zip_code = zip_code,
+            government_id_or_letter = government_id_or_letter,
+            voters_id = voters_id,
+            personal_photo = personal_photo,
+            status = "Submitted",) 
+        return redirect("base")
+    else:
+        return render(request, "certificate_of_indigency_form.html", context)
+
+
+def create_barangay_id(request):
+    context = {
+        "ids": barangay_id.objects.all(),
+        "clearances": barangay_clearance.objects.all(),
+        "certificateIndigency": certificate_of_indigency.objects.all(),
+        "certificate": barangay_certificate.objects.all(),
+    }
+    if (request.method == "POST"):
+        # Personal Details
+        last_name = request.POST.get("last_name")
+        first_name = request.POST.get("first_name")
+        middle_name = request.POST.get('middle_name')
+        age = request.POST.get("age")
+        birthday = request.POST.get("birthday")
+        sex = request.POST.get("sex")
+        nationality = request.POST.get("nationality")
+        civil_status = request.POST.get("civil_status")
+        email = request.POST.get("email")
+        contact_num = request.POST.get("contact_number")
+
+        street = request.POST.get("address_first_line")
+        city = request.POST.get("address_city")
+        barangay = request.POST.get("address_barangay")
+        zip_code = request.POST.get("address_zip_code")
+        province = request.POST.get("address_province")
+
+        emergency_name = request.POST.get("emergency_name")
+        emergency_contact_num = request.POST.get("emergency_contact_number")
+        emergency_address = request.POST.get("emergency_address")
+
+        
+        government_id_or_letter = request.POST.get("first_file")
+        voters_id = request.POST.get("second_file")
+        personal_photo = request.POST.get("third_file")
+
+        type = request.POST.get("barangay_id_type")
+
+        landlord_name = request.POST.get("landlord_name")
+        landlord_contact_number = request.POST.get("landlord_contact_number")
+        landlord_address = request.POST.get("landlord_address")
+
+        barangay_id.objects.create(
+            # Personal Info
+            last_name = last_name,
+            first_name = first_name,
+            middle_name = middle_name,
+            age = age,
+            birthday = birthday,
+            sex = sex,
+            nationality = nationality,
+            civil_status = civil_status,
+            email = email,
+            contact_num = contact_num,
+            street = street,
+            city = city,
+            barangay = barangay,
+            province= province,
+            zip_code = zip_code,
+            emergency_name = emergency_name,
+            emergency_contact_num = emergency_contact_num,
+            emergency_address = emergency_address,
+            personal_photo = personal_photo,
+            government_id_or_letter = government_id_or_letter,
+            voters_id = voters_id,
+            type = type,
+            landlord_name = landlord_name,
+            landlord_address = landlord_address,
+            landlord_contact_number = landlord_contact_number,
+            status = "Submitted",
+            ) 
+        return redirect("base")
+    else:
+        return render(request, "barangay_id_form.html", context)
+
+# def barangay_ids(request):
+#     barangay_id_objects = barangay_id.objects.all()
+#     return render(request, "base.html", {'barangay_ids': barangay_id_objects})
