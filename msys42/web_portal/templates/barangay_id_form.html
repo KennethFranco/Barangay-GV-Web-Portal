@@ -23,67 +23,67 @@
 
 <body>
     <nav class="container-fluid navbar navbar-expand-md navbarGV">
-        <div class="container p-2">
-            <img class="mr-2" src="{% static 'logo.png' %}" style="width: 60px; height: 60px; margin-right: 20px"
-                alt="">
-            <a href="{% url 'base' %}" class="titleFont navbarTitle" style="text-decoration: none;">Barangay Guadalupe Viejo</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleMobileMenu"
-                aria-controls="toggleMobileMenu" aria-expanded="false" aria-lable="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <div class="container">
+            <a href="{% url 'base' %}" style="padding: 0px; margin: 0px;"><img class="mr-2"
+                    src="{% static 'logo.png' %}" style="width: 60px; height: 60px; margin-right: 20px" alt=""></a>
+
+            <div class="titleFont">
+                <a href="{% url 'base' %}" class="navbarTitle globalSubHeader" style="text-decoration: none; ">Barangay GV Web
+                    Portal</a>
+            </div>
+
+            <button class="navbar-toggler btn-secondary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#toggleMobileMenu" aria-controls="toggleMobileMenu" aria-expanded="false"
+                aria-lable="Toggle navigation">
+                <div class="navBarDrawer">
+                </div>
+                <div class="navBarDrawer">
+                </div>
+                <div class="navBarDrawer">
+                </div>
             </button>
 
             <div class="collapse navbar-collapse" id="toggleMobileMenu">
                 <ul class="navbar-nav ms-auto">
-                    <li class="bodyFont">
-                        <a class="nav-link navbarOption" href="about.html">Home</a>
+                    <li class="bodyFont globalBody">
+                        <a class="nav-link navbarOption" href="">Home</a>
                     </li>
-                    <li class="bodyFont">
-                        <a class="nav-link navbarOption" href="#projects">Contact</a>
+                    <li class="bodyFont globalBody">
+                        <a class="nav-link navbarOption" href="">Contact</a>
                     </li>
-                    <li class="bodyFont">
-                        <a class="nav-link navbarOption" href="#footer">About Us</a>
+                    <li class="bodyFont globalBody">
+                        <a class="nav-link navbarOption" href="">About Us</a>
                     </li>
-                    <li class="bodyFont">
-                        <a class="nav-link navbarOption" href="#footer">Sign In</a>
+                    <li class="bodyFont globalBody">
+                        <a class="nav-link navbarOption" href="">Sign In</a>
                     </li>
-                    <li class="bodyFont">
-                        <a style="margin-right: 0px;" class="nav-link navbarOption" href="#footer">Register</a>
+                    <li class="bodyFont globalBody">
+                        <a style="margin-right: 0px;" class="nav-link navbarOption" href="">Register</a>
                     </li>
                 </ul>
             </div>
         </div>
-
     </nav>
+
+    
     <div class="main">
         <div class="container pb-5">
-            <div class="row pt-5 justify-content-start">
-                
-                <div class="col-lg-6  bg-primary cardHeader">
+            <div class="row pt-5 justify-content-center">
+                <div class="col-lg-6 col-sm-12 bg-primary cardHeader d-flex justify-content-center">
                     <p class="cardText globalTitle titleFont" id = "checkerTitle" value =  "Barangay ID (Constituent)">
                         {% block title %}
                         Barangay ID (Constituent)
                         {% endblock %}
                     </p>
                 </div>
-                
-                <!-- <div class="col-4">
-                </div> -->
-                <div class="col-lg  d-flex justify-content-end">
-                    <a href="{% url 'base' %}" class="align-self-end"><button
-                            class="btn btn-secondary titleFont globalSubHeader" id = "backButton">Back</button></a>
+                <div class="col-lg">
+                </div>
+                <div class="col-lg-2 col-sm-12 align-self-end mt-5 d-flex justify-content-center">
+                    <a href="{% url 'base' %}"><button class="btn btn-secondary">Back</button></a>
                 </div>
             </div>
 
-            <!-- <div class="row pt-5 justify-content-end">
-                <div class="col-lg-6 col-sm-12 bg-primary cardHeader text-center">
-                    <p class="cardText">Barangay ID (Constituent)</p>
-                </div>
-                <div class="col-lg-4 col-sm-1">
-                </div>
-                <div class="col-lg-2 col-sm-12 align-self-end mt-5 d-flex justify-content-end">
-                    <a href="{% url 'base' %}"><button class="btn btn-secondary">Back</button></a>
-                </div>
-            </div> -->
+            
 
             <div class="formCard p-5 mt-5">
                 <div class="form p-5">
@@ -388,6 +388,9 @@
         </div>
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
