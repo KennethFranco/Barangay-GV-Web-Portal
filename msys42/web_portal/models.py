@@ -27,7 +27,6 @@ class barangay_clearance(models.Model):
 
     # Files
     government_id_or_letter = models.FileField(default="null")
-    voters_id = models.FileField(null = True)
     personal_photo = models.FileField(default="null")
 
     type = models.CharField(
@@ -71,7 +70,6 @@ class barangay_certificate(models.Model):
 
     # Files
     government_id_or_letter = models.FileField(default="null")
-    voters_id = models.FileField(null = True)
     personal_photo = models.FileField(default="null")
 
     type = models.CharField(
@@ -118,7 +116,7 @@ class barangay_id(models.Model):
 
     # Files
     personal_photo = models.FileField(default="null")
-    government_id_or_letter = models.FileField(default="null")
+    government_id_or_letter = models.FileField(null = True)
     voters_id = models.FileField(default="null")
 
     # Status
@@ -167,7 +165,6 @@ class certificate_of_indigency(models.Model):
 
     # Files
     government_id_or_letter = models.FileField(default="null")
-    voters_id = models.FileField(default="null")
     personal_photo = models.FileField(default="null")
 
     # Status
