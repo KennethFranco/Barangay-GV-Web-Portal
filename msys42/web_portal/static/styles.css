@@ -4,52 +4,6 @@
     text-decoration: none;
 }
 
-/* NAV / DROP DOWN */
-.collapsible {
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    outline: none;
-    font-size: 15px;
-}
-
-.contentBlock {
-    padding: 20px;
-    display: none;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #f1f1f1;
-}
-
-.content {
-    color: #0F2456;
-    text-decoration: none;
-}
-
-.content:hover {
-    color: #ECC66E;
-    text-decoration: none;
-}
-
-/* GLOBAL FONTS */
-.globalTitle{
-    font-size: calc(16px + 2.5vw);
-    font-family: 'Montserrat', sans-serif;
-}
-
-.globalHeader{
-    font-size: calc(16px + 1.35vw);
-}
-
-.globalSubHeader{
-    font-size: calc(16px + 0.70vw);
-}
-
-.globalBody{
-    font-size: calc(16px + 0.25vw);
-}
-
 .main {
     background-image: url('/static/test3.png');
     height: 100%;
@@ -83,7 +37,7 @@
     margin: 0px;
     width: fit-content !important;
     height: fit-content !important;
-    /* font-size: 36px !important; */
+    font-size: 36px !important;
     font-weight: 600;
     color: #0F2456 !important;
     padding-left: 30px !important;
@@ -101,19 +55,18 @@
 }
 
 .cardHeader {
-    height: fit-content;
-    width: fit-content;
     border-radius: 8px;
 }
 
 .cardText {
-    border-bottom: 5px solid #ECC66E;
+    border-bottom: 3px solid #ECC66E;
     color: white;
-    /* height: fit-content; */
+    height: fit-content;
     margin-top: 10px;
-    font-weight: 700;
-    /* font-size: 55px; */
+    font-size: 55px;
 }
+
+
 
 /* Navbar */
 
@@ -130,7 +83,7 @@
 
 .navbarTitle {
     color: white;
-    /* font-size: 31px; */
+    font-size: 31px;
     font-weight: 600;
 }
 
@@ -140,7 +93,7 @@
 
 .navbarOption {
     color: white !important;
-    /* font-size: 26px; */
+    font-size: 26px;
     text-decoration: none;
     border-bottom: 3px solid #0F2456;
     margin-right: 20px;
@@ -167,13 +120,13 @@
 
 .heroTitle {
     font-weight: 700;
+    font-size: 68px;
 }
 
 /* ANNOUNCEMENTS */
 .announcementsHeader {
     height: 86px;
     width: fit-content;
-    height: fit-content;
     background: #FFFFFF;
     box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
@@ -187,6 +140,7 @@
     width: fit-content;
     color: #000000;
     font-weight: 500;
+    font-size: 33px;
 }
 
 .announcementsFrame {
@@ -196,15 +150,13 @@
 
 .announcementsTitle {
     font-weight: 500;
-    /* font-size: 24px; */
-    font-size: calc(16px + 0.70vw);
+    font-size: 24px;
     line-height: 29px;
 }
 
 .announcementsDesc {
     font-weight: 300;
-    /* font-size: 20px; */
-    font-size: calc(16px + 0.25vw);
+    font-size: 20px;
     line-height: 23px;
 }
 
@@ -226,15 +178,17 @@
 }
 
 .servicesBody {
+    font-size: 19px;
     font-weight: 300
 }
 
 .servicesTitle {
+    font-size: 28px;
     font-weight: 400
 }
 
 .servicesMainTitle {
-    /* font-size: 42px; */
+    font-size: 42px;
     font-weight: 600;
 }
 
@@ -242,6 +196,33 @@
     border-bottom: 1px solid black;
     font-weight: 600;
     font-size: 15px;
+}
+
+.collapsible {
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.contentBlock {
+    padding: 20px;
+    display: none;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.content {
+    color: #0F2456;
+    text-decoration: none;
+}
+
+.content:hover {
+    color: #ECC66E;
+    text-decoration: none;
 }
 
 /* FORMS */
@@ -265,39 +246,22 @@
 }
 
 .formTitle {
-    /* font-size: 40px; */
+    font-size: 40px;
     border-bottom: 5px solid #ECC66E;
     font-weight: 500;
 }
 
 .formLabel {
-    /* font-size: 30px; */
+    font-size: 30px;
     font-weight: 600;
 }
 
 .formInput {
-
     border-radius: 10px;
     width: 100%;
     background: #FFFFFF;
     border: 1px solid #B8B8B8;
-    font-size: calc(16px + 0.70vw);
-    padding-left: 15px  !important;
-}
-
-
-.specialFormInput {
-
-    border-radius: 10px;
-    width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #B8B8B8;
-    font-size: calc(16px + 0.70vw);
-    padding-left: 100px !important;
-}
-
-.numberLabel{
-    font-size: calc(16px + 0.70vw);
+    font-size: 30px;
 }
 
 /* DROP ZONE CODE */
@@ -313,20 +277,20 @@
     font-weight: 500;
     font-size: 24px;
     cursor: pointer;
-    color:  black;
+    color: black;
     border: 4px dashed #B1B1B1;
     border-radius: 10px;
-  }
-  
-  .drop-zone--over {
+}
+
+.drop-zone--over {
     border-style: solid;
-  }
-  
-  .drop-zone__input {
+}
+
+.drop-zone__input {
     display: none;
-  }
-  
-  .drop-zone__thumb {
+}
+
+.drop-zone__thumb {
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -334,9 +298,9 @@
     background-color: #cccccc;
     background-size: cover;
     position: relative;
-  }
-  
-  .drop-zone__thumb::after {
+}
+
+.drop-zone__thumb::after {
     content: attr(data-label);
     position: absolute;
     bottom: 0;
@@ -347,17 +311,11 @@
     background: rgba(0, 0, 0, 0.75);
     font-size: 14px;
     text-align: center;
-  }
-  
-@media screen and (max-width: 992px){
-    #backButton{
-        margin-top: 100px;
-    }
 }
-@media screen and (max-width: 766px) {
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 768px) {
     .navbarTitle {
         display: none;
     }
-
-
   }
