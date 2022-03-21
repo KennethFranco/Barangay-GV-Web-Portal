@@ -64,6 +64,7 @@ console.log(checkerTitle)
 // BARANGAY ID CONSTITUENT
 if (checkerTitle === "Barangay ID (Constituent)"){
   document.getElementById("barangay_id_type").value = "Constituent";
+  document.getElementById("votersDiv").style.display = "block";
   
   document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     const dropZoneElement = inputElement.closest(".drop-zone");
@@ -463,6 +464,7 @@ if (checkerTitle === "Barangay ID (Constituent)"){
 else if(checkerTitle === "Barangay ID (Transient)"){
   document.getElementById("landlordDiv").style.display = "block";
   document.getElementById("barangay_id_type").value = "Transient";
+  document.getElementById("votersDiv").style.display = "none";
   
   document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     const dropZoneElement = inputElement.closest(".drop-zone");
@@ -599,7 +601,6 @@ else if(checkerTitle === "Barangay ID (Transient)"){
     var landlord_address = document.getElementById("landlord_address").value;
     var landlord_contact_number = document.getElementById("landlord_contact_number").value;
     var first_file = document.getElementById("first_file").value;
-    var second_file = document.getElementById("second_file").value;
     var third_file = document.getElementById("third_file").value;
   
     var existCheck = true;
@@ -702,18 +703,7 @@ else if(checkerTitle === "Barangay ID (Transient)"){
         file1TypeCheck = fileSplit[1].includes("docx") || fileSplit[1].includes("pdf");
       }
     }
-  
-    var file2TypeCheck = true;
-    if (second_file != "") {
-      file2TypeCheck = true;
-      if (second_file != "") {
-        var secondFileInput = document.getElementById('second_file');
-        var filename = secondFileInput.files[0].name;
-        const fileSplit = filename.split(".");
-        file2TypeCheck = fileSplit[1].includes("jpg") || fileSplit[1].includes("jpeg") || fileSplit[1].includes("png");
-      }
-    }
-  
+
     var file3TypeCheck = true;
     if (third_file != "") {
       file3TypeCheck = true;
@@ -747,7 +737,6 @@ else if(checkerTitle === "Barangay ID (Transient)"){
       emergency_contact_number,
       emergency_address,
       first_file,
-      second_file,
       third_file,
       landlord_name,
       landlord_address,
@@ -774,7 +763,6 @@ else if(checkerTitle === "Barangay ID (Transient)"){
       "Emergency Contact Number",
       "Emergency Address",
       "Government ID/Letter of Acknowledgement",
-      "Voter's ID",
       "1x1 Photo",
       "Landlord/landlady Name",
       "Landlord/landlady Address",
@@ -800,7 +788,7 @@ else if(checkerTitle === "Barangay ID (Transient)"){
     }
   
     console.log(count)
-    if (count == 24) {
+    if (count == 23) {
       error = false;
     }
   
@@ -835,12 +823,10 @@ else if(checkerTitle === "Barangay ID (Transient)"){
   
     // files check
     console.log("File Check 1: " + file1TypeCheck);
-    console.log("File Check 2: " + file2TypeCheck);
     console.log("File Check 3: " + file3TypeCheck);
-    if (file1TypeCheck === false || file2TypeCheck === false || file3TypeCheck === false) {
+    if (file1TypeCheck === false ||  file3TypeCheck === false) {
       error = true;
       console.log(file1TypeCheck);
-      console.log(file2TypeCheck);
       console.log(file3TypeCheck);
       modalContent.innerHTML += "<br />" + "<br />" + "Unaccepted file types:";
   
@@ -852,10 +838,7 @@ else if(checkerTitle === "Barangay ID (Transient)"){
         }
   
       }
-  
-      if (file2TypeCheck === false) {
-        modalContent.innerHTML += "<br />" + "Voter's ID field has an unaccepted file type. Please use .jpeg, .jpg, or .png.";
-      }
+
   
       if (file3TypeCheck === false) {
         modalContent.innerHTML += "<br />" + "1x1 photo field has an unaccepted file type. Please use .jpeg, .jpg, or .png.";
@@ -885,7 +868,6 @@ else if(checkerTitle === "Barangay ID (Transient)"){
 
 // BARANGAY CLEARANCE BONAFIDE
 else if (checkerTitle === "Barangay Clearance (Bonafide)"){
-  document.getElementById("clearanceVoters").style.display = "block";
   document.getElementById("barangay_clearance_type").value = "Bonafide";
   
   document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
@@ -1017,7 +999,6 @@ else if (checkerTitle === "Barangay Clearance (Bonafide)"){
     var address_zip_code = document.getElementById("address_zip_code").value;
     var address_province = document.getElementById("address_province").value;
     var first_file = document.getElementById("first_file").value;
-    var second_file = document.getElementById("second_file").value;
     var third_file = document.getElementById("third_file").value;
   
     var existCheck = true;
@@ -1102,17 +1083,6 @@ else if (checkerTitle === "Barangay Clearance (Bonafide)"){
       }
     }
   
-    var file2TypeCheck = true;
-    if (second_file != "") {
-      file2TypeCheck = true;
-      if (second_file != "") {
-        var secondFileInput = document.getElementById('second_file');
-        var filename = secondFileInput.files[0].name;
-        const fileSplit = filename.split(".");
-        file2TypeCheck = fileSplit[1].includes("jpg") || fileSplit[1].includes("jpeg") || fileSplit[1].includes("png");
-      }
-    }
-  
     var file3TypeCheck = true;
     if (third_file != "") {
       file3TypeCheck = true;
@@ -1143,7 +1113,6 @@ else if (checkerTitle === "Barangay Clearance (Bonafide)"){
       address_zip_code,
       address_province,
       first_file,
-      second_file,
       third_file,
     ]
   
@@ -1164,7 +1133,6 @@ else if (checkerTitle === "Barangay Clearance (Bonafide)"){
       "Address Zip Code",
       "Address Province",
       "Government ID/Letter of Acknowledgement",
-      "Voter's ID",
       "1x1 Photo",
     ]
   
@@ -1187,7 +1155,7 @@ else if (checkerTitle === "Barangay Clearance (Bonafide)"){
     }
   
     console.log(count)
-    if (count == 18) {
+    if (count == 17) {
       error = false;
     }
   
@@ -1212,12 +1180,10 @@ else if (checkerTitle === "Barangay Clearance (Bonafide)"){
     
     // files check
     console.log("File Check 1: " + file1TypeCheck);
-    console.log("File Check 2: " + file2TypeCheck);
     console.log("File Check 3: " + file3TypeCheck);
-    if (file1TypeCheck === false || file2TypeCheck === false || file3TypeCheck === false) {
+    if (file1TypeCheck === false || file3TypeCheck === false) {
       error = true;
       console.log(file1TypeCheck);
-      console.log(file2TypeCheck);
       console.log(file3TypeCheck);
       modalContent.innerHTML += "<br />" + "<br />" + "Unaccepted file types:";
   
@@ -1229,11 +1195,7 @@ else if (checkerTitle === "Barangay Clearance (Bonafide)"){
         }
   
       }
-  
-      if (file2TypeCheck === false) {
-        modalContent.innerHTML += "<br />" + "Voter's ID field has an unaccepted file type. Please use .jpeg, .jpg, or .png.";
-      }
-  
+
       if (file3TypeCheck === false) {
         modalContent.innerHTML += "<br />" + "1x1 photo field has an unaccepted file type. Please use .jpeg, .jpg, or .png.";
       }
@@ -1262,7 +1224,6 @@ else if (checkerTitle === "Barangay Clearance (Bonafide)"){
 
 // BARANGAY CLEARANCE TRANSIENNT
 else if (checkerTitle === "Barangay Clearance (Transient)"){
-  document.getElementById("clearanceVoters").style.display = "none";
   document.getElementById("barangay_clearance_type").value = "Transient";
   
   document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
@@ -1756,7 +1717,6 @@ else if(checkerTitle === "Certificate of Indigency"){
     var address_zip_code = document.getElementById("address_zip_code").value;
     var address_province = document.getElementById("address_province").value;
     var first_file = document.getElementById("first_file").value;
-    var second_file = document.getElementById("second_file").value;
     var third_file = document.getElementById("third_file").value;
     
     var existCheck = true;
@@ -1840,16 +1800,7 @@ else if(checkerTitle === "Certificate of Indigency"){
       }
     }
   
-    var file2TypeCheck = true;
-    if (second_file != "") {
-      file2TypeCheck = true;
-      if (second_file != "") {
-        var secondFileInput = document.getElementById('second_file');
-        var filename = secondFileInput.files[0].name;
-        const fileSplit = filename.split(".");
-        file2TypeCheck = fileSplit[1].includes("jpg") || fileSplit[1].includes("jpeg") || fileSplit[1].includes("png");
-      }
-    }
+
 
     var file3TypeCheck = true;
     if (third_file != "") {
@@ -1881,7 +1832,6 @@ else if(checkerTitle === "Certificate of Indigency"){
       address_zip_code,
       address_province,
       first_file,
-      second_file,
       third_file,
     ]
     
@@ -1902,7 +1852,6 @@ else if(checkerTitle === "Certificate of Indigency"){
       "Address Zip Code",
       "Address Province",
       "Government ID/Letter of Acknowledgement",
-      "Voter's ID",
       "1x1 Photo",
     ]
   
@@ -1949,10 +1898,8 @@ else if(checkerTitle === "Certificate of Indigency"){
     }
   
     // files check
-    if (file1TypeCheck === false || file2TypeCheck === false || file3TypeCheck === false) {
+    if (file1TypeCheck === false ||  file3TypeCheck === false) {
       error = true;
-      console.log(file1TypeCheck);
-      console.log(file2TypeCheck);
       modalContent.innerHTML += "<br />" + "<br />" + "Unaccepted file types:";
   
       if (file1TypeCheck === false) {
@@ -1963,10 +1910,6 @@ else if(checkerTitle === "Certificate of Indigency"){
         }
   
       }
-  
-      if (file2TypeCheck === false) {
-        modalContent.innerHTML += "<br />" + "Voter's ID field has an unaccepted file type. Please use .jpeg, .jpg, or .png.";
-      }  
 
       if (file3TypeCheck === false){
         modalContent.innerHTML += "<br />" + "1x1 Photo field has an unaccepted file type. Please use .jpeg, .jpg, or .png.";
@@ -2124,7 +2067,6 @@ else if (checkerTitle === "Barangay Certificate (Bonafide)"){
     var address_zip_code = document.getElementById("address_zip_code").value;
     var address_province = document.getElementById("address_province").value;
     var first_file = document.getElementById("first_file").value;
-    var second_file = document.getElementById("second_file").value;
     var third_file = document.getElementById("third_file").value;
   
     var existCheck = true;
@@ -2209,16 +2151,7 @@ else if (checkerTitle === "Barangay Certificate (Bonafide)"){
       }
     }
   
-    var file2TypeCheck = true;
-    if (second_file != "") {
-      file2TypeCheck = true;
-      if (second_file != "") {
-        var secondFileInput = document.getElementById('second_file');
-        var filename = secondFileInput.files[0].name;
-        const fileSplit = filename.split(".");
-        file2TypeCheck = fileSplit[1].includes("jpg") || fileSplit[1].includes("jpeg") || fileSplit[1].includes("png");
-      }
-    }
+
   
     var file3TypeCheck = true;
     if (third_file != "") {
@@ -2250,7 +2183,6 @@ else if (checkerTitle === "Barangay Certificate (Bonafide)"){
       address_zip_code,
       address_province,
       first_file,
-      second_file,
       third_file,
     ]
   
@@ -2271,7 +2203,6 @@ else if (checkerTitle === "Barangay Certificate (Bonafide)"){
       "Address Zip Code",
       "Address Province",
       "Government ID/Letter of Acknowledgement",
-      "Voter's ID",
       "1x1 Photo",
     ]
   
@@ -2294,7 +2225,7 @@ else if (checkerTitle === "Barangay Certificate (Bonafide)"){
     }
   
     console.log(count)
-    if (count == 18) {
+    if (count == 17) {
       error = false;
     }
   
@@ -2319,9 +2250,8 @@ else if (checkerTitle === "Barangay Certificate (Bonafide)"){
     
     // files check
     console.log("File Check 1: " + file1TypeCheck);
-    console.log("File Check 2: " + file2TypeCheck);
     console.log("File Check 3: " + file3TypeCheck);
-    if (file1TypeCheck === false || file2TypeCheck === false || file3TypeCheck === false) {
+    if (file1TypeCheck === false || file3TypeCheck === false) {
       error = true;
       console.log(file1TypeCheck);
       console.log(file2TypeCheck);
@@ -2336,10 +2266,7 @@ else if (checkerTitle === "Barangay Certificate (Bonafide)"){
         }
   
       }
-  
-      if (file2TypeCheck === false) {
-        modalContent.innerHTML += "<br />" + "Voter's ID field has an unaccepted file type. Please use .jpeg, .jpg, or .png.";
-      }
+
   
       if (file3TypeCheck === false) {
         modalContent.innerHTML += "<br />" + "1x1 photo field has an unaccepted file type. Please use .jpeg, .jpg, or .png.";
@@ -2500,7 +2427,6 @@ else if (checkerTitle === "Barangay Certificate (Transient)") {
     var address_zip_code = document.getElementById("address_zip_code").value;
     var address_province = document.getElementById("address_province").value;
     var first_file = document.getElementById("first_file").value;
-    var second_file = document.getElementById("second_file").value;
     var third_file = document.getElementById("third_file").value;
   
     var existCheck = true;
@@ -2584,17 +2510,7 @@ else if (checkerTitle === "Barangay Certificate (Transient)") {
         file1TypeCheck = fileSplit[1].includes("docx") || fileSplit[1].includes("pdf");
       }
     }
-  
-    var file2TypeCheck = true;
-    if (second_file != "") {
-      file2TypeCheck = true;
-      if (second_file != "") {
-        var secondFileInput = document.getElementById('second_file');
-        var filename = secondFileInput.files[0].name;
-        const fileSplit = filename.split(".");
-        file2TypeCheck = fileSplit[1].includes("jpg") || fileSplit[1].includes("jpeg") || fileSplit[1].includes("png");
-      }
-    }
+
   
     var file3TypeCheck = true;
     if (third_file != "") {
@@ -2626,7 +2542,6 @@ else if (checkerTitle === "Barangay Certificate (Transient)") {
       address_zip_code,
       address_province,
       first_file,
-      second_file,
       third_file,
     ]
   
@@ -2647,7 +2562,6 @@ else if (checkerTitle === "Barangay Certificate (Transient)") {
       "Address Zip Code",
       "Address Province",
       "Government ID/Letter of Acknowledgement",
-      "Voter's ID",
       "1x1 Photo",
     ]
   
@@ -2670,7 +2584,7 @@ else if (checkerTitle === "Barangay Certificate (Transient)") {
     }
   
     console.log(count)
-    if (count == 18) {
+    if (count == 17) {
       error = false;
     }
   
@@ -2695,12 +2609,10 @@ else if (checkerTitle === "Barangay Certificate (Transient)") {
     
     // files check
     console.log("File Check 1: " + file1TypeCheck);
-    console.log("File Check 2: " + file2TypeCheck);
     console.log("File Check 3: " + file3TypeCheck);
     if (file1TypeCheck === false || file2TypeCheck === false || file3TypeCheck === false) {
       error = true;
       console.log(file1TypeCheck);
-      console.log(file2TypeCheck);
       console.log(file3TypeCheck);
       modalContent.innerHTML += "<br />" + "<br />" + "Unaccepted file types:";
   
@@ -2711,10 +2623,6 @@ else if (checkerTitle === "Barangay Certificate (Transient)") {
           modalContent.innerHTML += "<br />" + "Letter of Acknowledgement field has an unaccepted file type. Please use .docx or .pdf.";
         }
   
-      }
-  
-      if (file2TypeCheck === false) {
-        modalContent.innerHTML += "<br />" + "Voter's ID field has an unaccepted file type. Please use .jpeg, .jpg, or .png.";
       }
   
       if (file3TypeCheck === false) {
