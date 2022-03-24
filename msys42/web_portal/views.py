@@ -5,6 +5,108 @@ from .models import barangay_certificate, barangay_id, announcement, certificate
 from django.core import serializers
 
 # Create your views here.
+
+# ADMIN
+def admin_base (request):
+    return render(request, 'admin_base.html')
+
+def admin_documents_list (request): 
+    ids1 = barangay_id.objects.all().filter(status = "Submitted for Review")
+    ids2 = barangay_id.objects.all().filter(status = "Review Completed")
+    ids3 = barangay_id.objects.all().filter(status = "Pre-filled Template Verified")
+    ids = ids1 | ids2 | ids3
+
+    cl1 = barangay_clearance.objects.all().filter(status = "Submitted for Review")
+    cl2 = barangay_clearance.objects.all().filter(status = "Review Completed")
+    cl3 = barangay_clearance.objects.all().filter(status = "Pre-filled Template Verified")
+    clearances = cl1 | cl2 | cl3
+
+    ci1 = certificate_of_indigency.objects.all().filter(status = "Submitted for Review")
+    ci2 = certificate_of_indigency.objects.all().filter(status = "Review Completed")
+    ci3 = certificate_of_indigency.objects.all().filter(status = "Pre-filled Template Verified")
+    cois = ci1 | ci2 | ci3
+
+    ce1 = barangay_certificate.objects.all().filter(status = "Submitted for Review")
+    ce2 = barangay_certificate.objects.all().filter(status = "Review Completed")
+    ce3 = barangay_certificate.objects.all().filter(status = "Pre-filled Template Verified")
+    certificates = ce1 | ce2 | ce3
+    context = {
+        # order by date submitted
+        "ids": ids.order_by("date_submitted"),
+        "clearances": clearances.order_by("date_submitted"),
+        "certificates": certificates.order_by("date_submitted"),
+        "cois": cois.order_by("date_submitted"),
+    }
+
+    return render(request, 'admin_documents_list.html', context)
+
+def admin_indiviudal_document (request, pk):
+
+    return render(request, "admin_individual_document.html")
+
+def admin_individual_barangay_id(request,pk):
+    lia = get_object_or_404(barangay_id, pk=pk)
+    context = {
+        "lia": lia,
+    }
+    return render(request, "admin_individual_barangay_id.html", context)
+
+def admin_update_status_barangay_id_to_printed(request, pk):
+    barangay_id.objects.all().filter(pk=pk).update(status="Printed, Not Paid")
+    lia = get_object_or_404(barangay_id, pk=pk)
+    context = {
+        "lia": lia,
+    }
+    return render(request, "admin_individual_barangay_id.html", context)
+
+def print_barangay_id_constituent(request, pk):
+    lia = get_object_or_404(barangay_id, pk=pk)
+    context = {
+        "lia": lia,
+    }
+    return render(request, "print_barangay_id_constituent.html", context)
+
+def admin_individual_barangay_clearance(request,pk):
+    lia = get_object_or_404(barangay_clearance, pk=pk)
+    context = {
+        "lia": lia,
+    }
+    return render(request, "admin_individual_barangay_clearance.html", context)
+
+def admin_individual_certificate_of_indigency(request,pk):
+    lia = get_object_or_404(certificate_of_indigency, pk=pk)
+    context = {
+        "lia": lia,
+    }
+    return render(request, "admin_individual_certificate_of_indigency.html", context)
+
+def admin_individual_barangay_certificate(request, pk):
+    lia = get_object_or_404(barangay_certificate, pk=pk)
+    context = {
+        "lia": lia,
+    }
+    return render(request, "admin_individual_barangay_certificate.html", context)
+
+def admin_individual_id(request):
+    return render(request, "admin_individual_id.html")
+
+def admin_individual_id(request):
+    return render(request, "admin_individual_id.html")
+
+def admin_printed_documents (request): 
+    return render(request, 'admin_printed_documents.html')
+
+def admin_manage_announcements (request): 
+    return render(request, 'admin_manage_announcements.html')
+
+def admin_create_announcements (request): 
+    return render(request, 'admin_create_announcements.html')
+
+
+
+
+# USER
+
 def base(request):
     context = {
         "barangay_id_form": barangay_id.objects.all(),
@@ -41,7 +143,6 @@ def create_barangay_certificate(request):
         province = request.POST.get("address_province")
 
         government_id_or_letter = request.POST.get("first_file")
-        voters_id = request.POST.get("second_file")
         personal_photo = request.POST.get("third_file")
 
         type = request.POST.get("barangay_certificate_type")
@@ -65,7 +166,6 @@ def create_barangay_certificate(request):
             zip_code = zip_code,
             personal_photo = personal_photo,
             government_id_or_letter = government_id_or_letter,
-            voters_id = voters_id,
             type = type,
             status = "Submitted",
             ) 
@@ -100,7 +200,6 @@ def create_barangay_clearance(request):
         province = request.POST.get("address_province")
 
         government_id_or_letter = request.POST.get("first_file")
-        voters_id = request.POST.get("second_file")
         personal_photo = request.POST.get("third_file")
 
         type = request.POST.get("barangay_clearance_type")
@@ -124,7 +223,6 @@ def create_barangay_clearance(request):
             zip_code = zip_code,
             personal_photo = personal_photo,
             government_id_or_letter = government_id_or_letter,
-            voters_id = voters_id,
             type = type,
             status = "Submitted",
             ) 
@@ -159,7 +257,6 @@ def create_certificate_of_indigency(request):
         province = request.POST.get("address_province")
 
         government_id_or_letter = request.POST.get("first_file")
-        voters_id = request.POST.get("second_file")
         personal_photo = request.POST.get("third_file")
 
         certificate_of_indigency.objects.create(
@@ -179,7 +276,6 @@ def create_certificate_of_indigency(request):
             province= province,
             zip_code = zip_code,
             government_id_or_letter = government_id_or_letter,
-            voters_id = voters_id,
             personal_photo = personal_photo,
             status = "Submitted",) 
         return redirect("base")

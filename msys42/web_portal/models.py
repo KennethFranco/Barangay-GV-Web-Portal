@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 class barangay_clearance(models.Model):
     # Personal Details
+    document_type = models.CharField(max_length = 100, default="null")
     last_name = models.CharField(max_length = 100, default="null")
     first_name = models.CharField(max_length = 100, default="null")
     middle_name = models.CharField(max_length = 100, default="null")
@@ -36,9 +37,10 @@ class barangay_clearance(models.Model):
     )
 
     # Status
+    date_submitted = models.DateField(default="2022-01-01")
     status = models.CharField(
         max_length = 100,
-        choices =  [('Submitted', 'Submitted'), ('Under Review', 'Under Review')], 
+        choices =  [('Submitted for Review', 'Submitted for Review'), ('Review Completed', 'Review Completed'), ('Pre-filled Template Verified', 'Pre-filled Template Verified'), ('Printed, Not Paid', 'Printed, Not Paid'), ('Printed, Paid', 'Printed, Paid'), ('Printed, Out for Delivery/Ready for Pickup', 'Printed, Out for Delivery/Ready for Pickup'), ('Delivered/Picked-up', 'Delivered/Picked-up'), ('Rejected', 'Rejected')], 
         default = "null"
     )
 
@@ -46,6 +48,7 @@ class barangay_clearance(models.Model):
 
 class barangay_certificate(models.Model):
     # Personal Details
+    document_type = models.CharField(max_length = 100, default="null")
     last_name = models.CharField(max_length = 100, default="null")
     first_name = models.CharField(max_length = 100, default="null")
     middle_name = models.CharField(max_length = 100, default="null")
@@ -79,9 +82,10 @@ class barangay_certificate(models.Model):
     )
 
     # Status
+    date_submitted = models.DateField(default="2022-01-01")
     status = models.CharField(
         max_length = 100,
-        choices =  [('Submitted', 'Submitted'), ('Under Review', 'Under Review')], 
+        choices =  [('Submitted for Review', 'Submitted for Review'), ('Review Completed', 'Review Completed'), ('Pre-filled Template Verified', 'Pre-filled Template Verified'), ('Printed, Not Paid', 'Printed, Not Paid'), ('Printed, Paid', 'Printed, Paid'), ('Printed, Out for Delivery/Ready for Pickup', 'Printed, Out for Delivery/Ready for Pickup'), ('Delivered/Picked-up', 'Delivered/Picked-up'), ('Rejected', 'Rejected')],  
         default = "null"
     )
 
@@ -89,6 +93,7 @@ class barangay_certificate(models.Model):
 
 class barangay_id(models.Model):
     # Personal Details
+    document_type = models.CharField(max_length = 100, default="null")
     last_name = models.CharField(max_length = 100, default="null")
     first_name = models.CharField(max_length = 100, default="null")
     middle_name = models.CharField(max_length = 100, default="null")
@@ -120,9 +125,10 @@ class barangay_id(models.Model):
     voters_id = models.FileField(default="null")
 
     # Status
+    date_submitted = models.DateField(default="2022-01-01")
     status = models.CharField(
         max_length = 100,
-        choices =  [('Submitted', 'Submitted'), ('Under Review', 'Under Review')], 
+        choices =  [('Submitted for Review', 'Submitted for Review'), ('Review Completed', 'Review Completed'), ('Pre-filled Template Verified', 'Pre-filled Template Verified'), ('Printed, Not Paid', 'Printed, Not Paid'), ('Printed, Paid', 'Printed, Paid'), ('Printed, Out for Delivery/Ready for Pickup', 'Printed, Out for Delivery/Ready for Pickup'), ('Delivered/Picked-up', 'Delivered/Picked-up'), ('Rejected', 'Rejected')], 
         default = "null"
     )
 
@@ -142,6 +148,7 @@ class barangay_id(models.Model):
 
 class certificate_of_indigency(models.Model):
         # Personal Details
+    document_type = models.CharField(max_length = 100, default="null")
     last_name = models.CharField(max_length = 100, default="null")
     first_name = models.CharField(max_length = 100, default="null")
     middle_name = models.CharField(max_length = 100, default="null")
@@ -168,9 +175,10 @@ class certificate_of_indigency(models.Model):
     personal_photo = models.FileField(default="null")
 
     # Status
+    date_submitted = models.DateField(default="2022-01-01")
     status = models.CharField(
         max_length = 100,
-        choices =  [('Submitted', 'Submitted'), ('Under Review', 'Under Review')], 
+        choices =  [('Submitted for Review', 'Submitted for Review'), ('Review Completed', 'Review Completed'), ('Pre-filled Template Verified', 'Pre-filled Template Verified'), ('Printed, Not Paid', 'Printed, Not Paid'), ('Printed, Paid', 'Printed, Paid'), ('Printed, Out for Delivery/Ready for Pickup', 'Printed, Out for Delivery/Ready for Pickup'), ('Delivered/Picked-up', 'Delivered/Picked-up'), ('Rejected', 'Rejected')], 
         default = "null"
     )
 
