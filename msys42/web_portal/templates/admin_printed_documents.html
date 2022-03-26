@@ -1,4 +1,6 @@
+{% extends "admin_base.html" %}
 {% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,45 +21,12 @@
 </head>
 
 <body>
-    <nav class="container-fluid navbar navbar-expand-md navbarGV">
-        <div class="container">
-            <a href="{% url 'base' %}" style="padding: 0px; margin: 0px;"><img class="mr-2"
-                    src="{% static 'logo.png' %}" style="width: 60px; height: 60px; margin-right: 20px" alt=""></a>
-
-            <div class="titleFont">
-                <a href="{% url 'base' %}" class="navbarTitle globalSubHeader" style="text-decoration: none; ">Barangay GV Web
-                    Portal</a>
-            </div>
-
-            <button class="navbar-toggler btn-secondary" type="button" data-bs-toggle="collapse"
-                data-bs-target="#toggleMobileMenu" aria-controls="toggleMobileMenu" aria-expanded="false"
-                aria-lable="Toggle navigation">
-                <div class="navBarDrawer">
-                </div>
-                <div class="navBarDrawer">
-                </div>
-                <div class="navBarDrawer">
-                </div>
-            </button>
-
-            <div class="collapse navbar-collapse" id="toggleMobileMenu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="bodyFont globalBody">
-                        <a class="nav-link navbarOption" href="">Home</a>
-                    </li>
-                    <li class="bodyFont globalBody btn btn-secondary">
-                        <a style="margin-right: 0px; color: white; font-weight: 600;" class="nav-link" href="">Log Out</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <div class="main">
         <div class = "sideBar">
             <div class = "container">
                 <div class = "row">
-                    <h1>Employee name</h1>
+                    <h1>Printed Documents</h1>
                 </div>
             </div>
 
@@ -77,3 +46,5 @@
 </body>
 
 </html>
+
+{% endblock %}

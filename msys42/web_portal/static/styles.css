@@ -34,21 +34,26 @@
 
 /* GLOBAL FONTS */
 .globalTitle{
-    font-size: calc(16px + 2.5vw);
-    font-family: 'Montserrat', sans-serif;
+    font-size: calc(16px + 2.5vw)!important;
+    font-family: 'Montserrat', sans-serif!important;
 }
 
 .globalHeader{
-    font-size: calc(16px + 1.35vw);
+    font-size: calc(16px + 1.35vw)!important;
 }
 
 .globalSubHeader{
-    font-size: calc(16px + 0.70vw);
+    font-size: calc(16px + 0.70vw)!important;
 }
 
 .globalBody{
-    font-size: calc(16px + 0.25vw);
+    font-size: calc(16px + 0.25vw)!important;
 }
+
+.globalTableCell{
+    font-size: calc(12px + 0.1vw)!important;
+}
+
 
 .main {
     background-image: url('/static/test3.png');
@@ -85,7 +90,7 @@
     width: fit-content !important;
     height: fit-content !important;
     /* font-size: 36px !important; */
-    font-weight: 600;
+    font-weight: 200;
     color: #0F2456 !important;
     padding-left: 30px !important;
     padding-right: 30px !important;
@@ -373,6 +378,7 @@
 
 .dropdownMain{
     width: 386px !important;
+    max-width: 100%;
 }
 
 .dropdown-item{
@@ -391,4 +397,22 @@
 
     color: white;
     border-radius: 8px;
+}
+
+
+/* ADMIN DOCUMENT LIST */
+.tdl {
+    border-collapse: collapse;
+    text-align: center;
+    max-width: 100%;
+}
+
+.tdld, .tdlh {
+    border: 3px solid black;
+    padding: 10px;
+}
+
+.tdlh {
+    background-color: #0F2456;
+    color: #ffffff;
 }

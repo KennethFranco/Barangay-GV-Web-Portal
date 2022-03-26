@@ -32,10 +32,10 @@ def admin_documents_list (request):
     certificates = ce1 | ce2 | ce3
     context = {
         # order by date submitted
-        "ids": ids.order_by("date_submitted"),
-        "clearances": clearances.order_by("date_submitted"),
-        "certificates": certificates.order_by("date_submitted"),
-        "cois": cois.order_by("date_submitted"),
+        "ids": ids.order_by("date_submitted").reverse(),
+        "clearances": clearances.order_by("date_submitted").reverse(),
+        "certificates": certificates.order_by("date_submitted").reverse(),
+        "cois": cois.order_by("date_submitted").reverse(),
     }
 
     return render(request, 'admin_documents_list.html', context)
