@@ -39,19 +39,19 @@
 }
 
 .globalHeader{
-    font-size: calc(16px + 1.35vw)!important;
+    font-size: calc(16px + 1.35vw);
 }
 
 .globalSubHeader{
-    font-size: calc(16px + 0.70vw)!important;
+    font-size: calc(16px + 0.70vw);
 }
 
 .globalBody{
-    font-size: calc(16px + 0.25vw)!important;
+    font-size: calc(16px + 0.25vw);
 }
 
 .globalTableCell{
-    font-size: calc(12px + 0.1vw)!important;
+    font-size: calc(12px + 0.1vw);
 }
 
 
@@ -382,7 +382,8 @@
 }
 
 .dropdown-item{
-    width: 386px !important;
+    width: 200px !important;
+    max-width: 100%;
 }
 
 .documentContainer{
