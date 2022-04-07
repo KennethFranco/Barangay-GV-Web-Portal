@@ -25,11 +25,25 @@
     <div class="main">
         <div class = "sideBar">
             <div class = "container">
-                <div class = "row">
-                    <h1>Create Announcements</h1>
+                <div class="adminMainBlock p-5 mt-5" style="background-color: white;">
+                    <div class="row">
+                        <h1 style="text-decoration: underline #ECC66E;">Create Announcements</h1>
+                        <form method="POST" action="{% url 'admin_create_announcements' %}"> {% csrf_token %}
+                            <div>
+                                <label for="title"><h5>Announcement Title</h5></label><br>
+                                <input type="text" name="title" class="bodyFont formInput" id="title" placeholder="Announcement Title">
+                            <div><br>
+                            <div>
+                                <label for="content"><h5>Announcement Body</h5></label><br>
+                                <textarea name="content" class="bodyFont formInput" id="content" cols="30" rows="10" placeholder="Announcement Body"></textarea>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <input class="btn btn-secondary" type="submit" value="Create">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 

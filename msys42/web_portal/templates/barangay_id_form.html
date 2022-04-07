@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id = "maintitle">
+    <title id="maintitle">
         {% block checkerTitle %}
         Barangay ID (Constituent)
         {% endblock %}
@@ -28,7 +28,8 @@
                     src="{% static 'logo.png' %}" style="width: 60px; height: 60px; margin-right: 20px" alt=""></a>
 
             <div class="titleFont">
-                <a href="{% url 'base' %}" class="navbarTitle globalSubHeader" style="text-decoration: none; ">Barangay GV Web
+                <a href="{% url 'base' %}" class="navbarTitle globalSubHeader" style="text-decoration: none; ">Barangay
+                    GV Web
                     Portal</a>
             </div>
 
@@ -65,12 +66,12 @@
         </div>
     </nav>
 
-    
+
     <div class="main">
         <div class="container pb-5">
             <div class="row pt-5 justify-content-center">
                 <div class="col-lg-6 col-sm-12 bg-primary cardHeader d-flex justify-content-center">
-                    <p class="cardText globalTitle titleFont" id = "checkerTitle" value =  "Barangay ID (Constituent)">
+                    <p class="cardText globalTitle titleFont" id="checkerTitle" value="Barangay ID (Constituent)">
                         {% block title %}
                         Barangay ID (Constituent)
                         {% endblock %}
@@ -83,14 +84,15 @@
                 </div>
             </div>
 
-            
+
 
             <div class="formCard p-5 mt-5">
                 <div class="form p-5">
                     {% block form %}
                     <form id="mainForm" method="POST" action="{% url 'create_barangay_id' %}"> {% csrf_token %}
                         <!-- :) -->
-                        <input id = "barangay_id_type" name = "barangay_id_type" type="text" style = "display: none;">
+                        <input id="barangay_id_type" name="barangay_id_type" type="text" style="display: none;">
+                        <input id="document_id" name="document_id" type="text" style="display: none;">
                         <div class="row" style="display: none;">
                             <ul id="trial">
                                 {% for b in ids %}
@@ -186,21 +188,23 @@
                                     placeholder="Email">
                             </div>
                             <div class="col">
-                                <label class="bodyFont formLabel globalSubHeader" for="contact_number">Contact Number<span
-                                        style="color: #B30000;">*</span></label><br>
+                                <label class="bodyFont formLabel globalSubHeader" for="contact_number">Contact
+                                    Number<span style="color: #B30000;">*</span></label><br>
                                 <div class="d-flex justify-content-center"
                                     style="position: absolute; width: 80px; height: 49px; border-right: 1px solid #B8B8B8;">
-                                    <h2 class="align-self-end numberLabel numberLabel" style="font-weight: 400;">+63</h2>
+                                    <h2 class="align-self-end numberLabel numberLabel" style="font-weight: 400;">+63
+                                    </h2>
                                 </div>
-                                <input id="contact_number" name="contact_number"
-                                    class="bodyFont specialFormInput" type="number" placeholder="Contact Number">
+                                <input id="contact_number" name="contact_number" class="bodyFont specialFormInput"
+                                    type="number" placeholder="Contact Number">
                             </div>
                         </div>
 
                         <span class="formTitle titleFont globalHeader">Address</span>
                         <div class="row mt-5 mb-3">
                             <div class="col">
-                                <label class="bodyFont formLabel globalSubHeader" for="address_first_line">House Number - Blk -
+                                <label class="bodyFont formLabel globalSubHeader" for="address_first_line">House Number
+                                    - Blk -
                                     Street<span style="color: #B30000;">*</span></label><br>
                                 <input id="address_first_line" name="address_first_line" class="bodyFont formInput"
                                     type="text" placeholder="House Number - Blk - Street">
@@ -233,16 +237,18 @@
                             </div>
                         </div>
 
-                        <div id = "landlordDiv" style = "display: none;">
+                        <div id="landlordDiv" style="display: none;">
                             <span class="formTitle titleFont globalHeader">Landlady/landlord information</span>
                             <div class="row mt-5 mb-3">
                                 <div class="col">
-                                    <label class="bodyFont formLabel globalSubHeader" for="address_first_line">Name<span style="color: #B30000;">*</span></label><br>
+                                    <label class="bodyFont formLabel globalSubHeader" for="address_first_line">Name<span
+                                            style="color: #B30000;">*</span></label><br>
                                     <input id="landlord_name" name="landlord_name" class="bodyFont formInput"
                                         type="text" placeholder="Name">
                                 </div>
                                 <div class="col">
-                                    <label class="bodyFont formLabel globalSubHeader" for="landlord_contact_number">Contact Number<span
+                                    <label class="bodyFont formLabel globalSubHeader"
+                                        for="landlord_contact_number">Contact Number<span
                                             style="color: #B30000;">*</span></label><br>
                                     <div class="d-flex justify-content-center"
                                         style="position: absolute; width: 80px; height: 49px; border-right: 1px solid #B8B8B8;">
@@ -254,14 +260,15 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col">
-                                    <label class="bodyFont formLabel globalSubHeader" for="landlord_address">Landlady/lord address<span
+                                    <label class="bodyFont formLabel globalSubHeader"
+                                        for="landlord_address">Landlady/lord address<span
                                             style="color: #B30000;">*</span></label><br>
                                     <input id="landlord_address" name="landlord_address" class="bodyFont formInput"
                                         type="text" placeholder="Landlady/lord address">
                                 </div>
                             </div>
                         </div>
-    
+
 
                         <span class="formTitle titleFont globalHeader">Emergency Contact</span>
                         <div class="row mt-5 mb-3">
@@ -272,15 +279,14 @@
                                     placeholder="Name">
                             </div>
                             <div class="col">
-                                <label class="bodyFont formLabel globalSubHeader" for="emergency_contact_number">Contact Number<span
-                                        style="color: #B30000;">*</span></label><br>
+                                <label class="bodyFont formLabel globalSubHeader" for="emergency_contact_number">Contact
+                                    Number<span style="color: #B30000;">*</span></label><br>
                                 <div class="d-flex justify-content-center"
                                     style="position: absolute; width: 80px; height: 49px; border-right: 1px solid #B8B8B8;">
                                     <h2 class="align-self-end numberLabel" style="font-weight: 400;">+63</h2>
                                 </div>
-                                <input  id="emergency_contact_number"
-                                    name="emergency_contact_number" class="bodyFont specialFormInput" type="number"
-                                    placeholder="Contact Number">
+                                <input id="emergency_contact_number" name="emergency_contact_number"
+                                    class="bodyFont specialFormInput" type="number" placeholder="Contact Number">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -292,15 +298,16 @@
                             </div>
                         </div>
                         <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
-                        
+
                         <div class="row mb-5">
                             <div class="col">
-                                <div class = "d-flex justify-content-center">
-                                    <select name="first_file_choice" id="first_file_choice" class="formInput" style="font-weight: 600;">
-                                        <option value="government_id" class = "formLabel bodyFont ">Government ID</option>
+                                <div class="d-flex justify-content-center">
+                                    <select name="first_file_choice" id="first_file_choice" class="formInput"
+                                        style="font-weight: 600;">
+                                        <option value="government_id" class="formLabel bodyFont ">Government ID</option>
                                         <option value="letter_of_acknowledgement">Letter of Acknowledgement</option>
                                     </select>
-                                    <p class = "bodyFont formLabel globalSubHeader" style = "color:#B30000; ">*</p>
+                                    <p class="bodyFont formLabel globalSubHeader" style="color:#B30000; ">*</p>
                                 </div>
 
                             </div>
@@ -310,8 +317,8 @@
                                     <p><span style="color: #B30000;">*</span> Government ID or Letter of Acknowledgement is
                                         required</p>
                                 </div> -->
-                                <div class="row" id = "selectText" >
-                                    <p class = "bodyFont globalBody">Accepted files: .jpeg, .jpg, .png</p>
+                                <div class="row" id="selectText">
+                                    <p class="bodyFont globalBody">Accepted files: .jpeg, .jpg, .png</p>
                                 </div>
 
                             </div>
@@ -326,8 +333,9 @@
                                 </svg>Click or drag a file to this area to upload.</span>
                             <input id="first_file" name="first_file" type="file" name="myFile" class="drop-zone__input">
                         </div>
-                        <div class="row mb-4" id =  "votersDiv">
-                            <p class="bodyFont formLabel globalSubHeader">Voter’s I.D.<span style="color: #B30000;">*</span></p>
+                        <div class="row mb-4" id="votersDiv">
+                            <p class="bodyFont formLabel globalSubHeader">Voter’s I.D.<span
+                                    style="color: #B30000;">*</span></p>
                             <div class="drop-zone mb-5">
                                 <span class="drop-zone__prompt">
                                     <svg style="width: 100px; height: 100px; margin-right: 50px;"
@@ -340,9 +348,10 @@
                                     class="drop-zone__input">
                             </div>
                         </div>
-    
+
                         <div class="row mb-4">
-                            <p class="bodyFont formLabel globalSubHeader">Most recent 1x1 photo<span style="color: #B30000;">*</span></p>
+                            <p class="bodyFont formLabel globalSubHeader">Most recent 1x1 photo<span
+                                    style="color: #B30000;">*</span></p>
                         </div>
                         <div class="drop-zone mb-5" style="height: 300px; width: 300px;">
                             <span class="drop-zone__prompt">
@@ -357,7 +366,7 @@
                             <input id="third_file" name="third_file" type="file" name="myFile" class="drop-zone__input">
                         </div>
                         <div class="d-flex justify-content-end">
-                            <input class="btn btn-secondary" type="submit" value="Submit">
+                            <input class="btn btn-secondary" id="submit" type="submit" value="Submit">
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -402,6 +411,42 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>
+
+    <script>
+        var submitting = false
+        console.log("SUBMITTING:" + submitting)
+
+        document.getElementById("submit").addEventListener("click", function () {
+            submitting = true
+            console.log("SUBMITTING:" + submitting)
+        })
+
+        window.onbeforeunload = function () {
+            if (submitting == false) {
+                console.log("SUBMITTING THE THING HELP HELP HELP :" + submitting)
+                return "Data will be lost if you leave the page, are you sure?";
+            }
+            else if (submitting == true) {
+                console.log("SUBMITTING THE THING POLEASEEEEEEEEEEEEE :" + submitting)
+                return;
+            }
+
+
+        };
+
+        function uuidGenerator() {
+            uuid = ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+            uuidArray = uuid.split("-");
+
+            
+
+            return uuidArray[0];
+        }
+        document.getElementById("document_id").setAttribute('value',uuidGenerator());
+
+    </script>
 </body>
 
 </html>

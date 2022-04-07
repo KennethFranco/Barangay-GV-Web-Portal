@@ -1,4 +1,5 @@
 from winreg import REG_QWORD
+from datetime import date
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import barangay_certificate, barangay_id, announcement, certificate_of_indigency, barangay_clearance
@@ -125,6 +126,8 @@ def create_barangay_certificate(request):
         "certificate": barangay_certificate.objects.all(),
     }
     if (request.method == "POST"):
+        barangay_certificate_type = "Barangay Certificate"
+        document_id = "02-" + str(date.today().year) + "-" + request.POST.get("document_id")
         last_name = request.POST.get("last_name")
         first_name = request.POST.get("first_name")
         middle_name = request.POST.get('middle_name')
@@ -148,6 +151,8 @@ def create_barangay_certificate(request):
         type = request.POST.get("barangay_certificate_type")
 
         barangay_certificate.objects.create(
+            barangay_certificate_type = barangay_certificate_type,
+            document_id = document_id,
             # Personal Info
             last_name = last_name,
             first_name = first_name,
@@ -181,6 +186,8 @@ def create_barangay_clearance(request):
         "certificate": barangay_certificate.objects.all(),
     }
     if (request.method == "POST"):
+        barangay_clearance_type = "Barangay Clearance"
+        document_id = "01-" + str(date.today().year) + "-" + request.POST.get("document_id")
         # Personal Details
         last_name = request.POST.get("last_name")
         first_name = request.POST.get("first_name")
@@ -205,6 +212,8 @@ def create_barangay_clearance(request):
         type = request.POST.get("barangay_clearance_type")
 
         barangay_clearance.objects.create(
+            barangay_clearance_type = barangay_clearance_type,
+            document_id = document_id,
             # Personal Info
             last_name = last_name,
             first_name = first_name,
@@ -238,6 +247,7 @@ def create_certificate_of_indigency(request):
         "certificate": barangay_certificate.objects.all(),
     }
     if (request.method == "POST"):
+        document_id = "03-" + str(date.today().year) + "-" + request.POST.get("document_id")
         # Personal Details
         last_name = request.POST.get("last_name")
         first_name = request.POST.get("first_name")
@@ -260,6 +270,7 @@ def create_certificate_of_indigency(request):
         personal_photo = request.POST.get("third_file")
 
         certificate_of_indigency.objects.create(
+            document_id = document_id,
             last_name = last_name,
             first_name = first_name,
             middle_name = middle_name,
@@ -291,6 +302,8 @@ def create_barangay_id(request):
         "certificate": barangay_certificate.objects.all(),
     }
     if (request.method == "POST"):
+        document_type = "Barangay ID"
+        document_id = str(date.today().year) + "-" + str(date.today().month) + "-" + request.POST.get("document_id")
         # Personal Details
         last_name = request.POST.get("last_name")
         first_name = request.POST.get("first_name")
@@ -325,6 +338,8 @@ def create_barangay_id(request):
         landlord_address = request.POST.get("landlord_address")
 
         barangay_id.objects.create(
+            document_type = document_type,
+            document_id = document_id,
             # Personal Info
             last_name = last_name,
             first_name = first_name,
@@ -360,3 +375,20 @@ def create_barangay_id(request):
 # def barangay_ids(request):
 #     barangay_id_objects = barangay_id.objects.all()
 #     return render(request, "base.html", {'barangay_ids': barangay_id_objects})
+
+def admin_create_announcements(request):
+    context = {
+        "announcements": announcement.objects.all(),
+    }
+    if (request.method =="POST"):
+        title = request.POST.get("title")
+        content = request.POST.get("content")
+
+        announcement.objects.create(
+            title = title,
+            content = content,
+        )
+        return redirect("admin_manage_announcements")
+
+    else:
+        return render(request, "admin_create_announcements.html", context)

@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class barangay_clearance(models.Model):
+    document_id = models.CharField(max_length = 100, default="null")
     # Personal Details
     document_type = models.CharField(max_length = 100, default="null")
     last_name = models.CharField(max_length = 100, default="null")
@@ -47,6 +48,7 @@ class barangay_clearance(models.Model):
     objects = models.Manager()
 
 class barangay_certificate(models.Model):
+    document_id = models.CharField(max_length = 100, default="null")
     # Personal Details
     document_type = models.CharField(max_length = 100, default="null")
     last_name = models.CharField(max_length = 100, default="null")
@@ -92,6 +94,7 @@ class barangay_certificate(models.Model):
     objects = models.Manager()
 
 class barangay_id(models.Model):
+    document_id = models.CharField(max_length = 100, default="null")
     # Personal Details
     document_type = models.CharField(max_length = 100, default="null")
     last_name = models.CharField(max_length = 100, default="null")
@@ -147,6 +150,7 @@ class barangay_id(models.Model):
     objects = models.Manager()
 
 class certificate_of_indigency(models.Model):
+    document_id = models.CharField(max_length = 100, default="null")
         # Personal Details
     document_type = models.CharField(max_length = 100, default="null")
     last_name = models.CharField(max_length = 100, default="null")

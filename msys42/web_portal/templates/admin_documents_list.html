@@ -2,20 +2,6 @@
 {% load static %}
 {% block content %}
 
-<style>
-    @media screen and (max-width: 480px) {
-        .globalTableCell {
-            font-size: 10px;
-        }
-
-        .tdld,
-        .tdlh {
-            border: 3px solid black;
-            padding: 2px;
-        }
-    }
-</style>
-
 <body>
     <!-- CONTENT -->
 
@@ -28,7 +14,7 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Current Filter: All Documents
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">git 
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="#" onclick="filterState0()">All Documents</a>
                         <a class="dropdown-item" href="#" onclick="filterState1()">Barangay IDs</a>
                         <a class="dropdown-item" href="#" onclick="filterState2()">Barangay Clearances</a>
@@ -53,7 +39,7 @@
                     <tbody>
                         {% for i in ids %}
                         <tr class="globalTableCell">
-                            <td class="tdld"><a href="{% url 'admin_individual_barangay_id' pk=i.pk %}">{{ i.pk }}</a>
+                            <td class="tdld"><a href="{% url 'admin_individual_barangay_id' pk=i.pk %}">{{ i.document_id }}</a>
                             </td>
                             <td class="tdld">{{ i.date_submitted}}</td>
                             <td class="tdld">{{ i.status }}</td>
@@ -78,8 +64,7 @@
                     <tbody>
                         {% for cl in clearances %}
                         <tr class="globalTableCell">
-                            <td class="tdld"><a href="{% url 'admin_individual_barangay_clearance' pk=cl.pk %}">{{ cl.pk
-                                    }}</a></td>
+                            <td class="tdld"><a href="{% url 'admin_individual_barangay_clearance' pk=cl.pk %}">{{ cl.document_id }}</a></td>
                             <td class="tdld">{{ cl.date_submitted}}</td>
                             <td class="tdld">{{ cl.status }}</td>
                             <td class="tdld">PLACEHOLDER</td>
@@ -103,10 +88,9 @@
                     <tbody>
                         {% for ci in cois %}
                         <tr class="globalTableCell">
-                            <td class="tdld"><a href="{% url 'admin_individual_barangay_clearance' pk=cl.pk %}">{{ cl.pk
-                                    }}</a></td>
-                            <td class="tdld">{{ cl.date_submitted}}</td>
-                            <td class="tdld">{{ cl.status }}</td>
+                            <td class="tdld"><a href="{% url 'admin_individual_barangay_clearance' pk=cl.pk %}">{{ ci.pk }}</a></td>
+                            <td class="tdld">{{ ci.date_submitted}}</td>
+                            <td class="tdld">{{ ci.status }}</td>
                             <td class="tdld">PLACEHOLDER</td>
                         </tr>
                         {% endfor %}
@@ -128,8 +112,7 @@
                     <tbody>
                         {% for ce in certificates %}
                         <tr class="globalTableCell">
-                            <td class="tdld"><a href="{% url 'admin_individual_barangay_certificate' pk=ce.pk %}">{{
-                                    ce.pk }}</a></td>
+                            <td class="tdld"><a href="{% url 'admin_individual_barangay_certificate' pk=ce.pk %}">{{ ce.pk }}</a></td>
                             <td class="tdld">{{ ce.date_submitted}}</td>
                             <td class="tdld">{{ ce.status }}</td>
                             <td class="tdld">PLACEHOLDER</td>
