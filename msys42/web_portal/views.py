@@ -2,12 +2,19 @@ from winreg import REG_QWORD
 from datetime import date
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import barangay_certificate, barangay_id, announcement, certificate_of_indigency, barangay_clearance
+from .models import barangay_certificate, barangay_id, announcement, certificate_of_indigency, barangay_clearance, admin_account
 from django.core import serializers
 
 # Create your views here.
 
 # ADMIN
+
+def admin_login(request):
+    context = {
+        "accts": admin_account.objects.all(),
+    }
+    return render(request, 'admin_login.html', context)
+
 def admin_base (request):
     return render(request, 'admin_base.html')
 
@@ -31,7 +38,7 @@ def admin_documents_list (request):
     ce2 = barangay_certificate.objects.all().filter(status = "Review Completed")
     ce3 = barangay_certificate.objects.all().filter(status = "Pre-filled Template Verified")
     certificates = ce1 | ce2 | ce3
-    context = {
+    context = {    
         # order by date submitted
         "ids": ids.order_by("date_submitted").reverse(),
         "clearances": clearances.order_by("date_submitted").reverse(),

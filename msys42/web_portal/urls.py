@@ -10,6 +10,7 @@ urlpatterns = [
     path("create_certificate_of_indigency/", views.create_certificate_of_indigency, name = "create_certificate_of_indigency"),
 
     # admin
+    path("admin_login/", views.admin_login, name = 'admin_login'),
     path("admin_base/", views.admin_base, name = "admin_documents_list"),
     path("documents_list/", views.admin_documents_list, name = "admin_documents_list"),
     path("printed_documents/", views.admin_printed_documents, name="admin_printed_documents"),

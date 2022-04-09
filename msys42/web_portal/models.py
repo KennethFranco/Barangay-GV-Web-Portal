@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 # Create your models here.
@@ -45,6 +46,7 @@ class barangay_clearance(models.Model):
         default = "null"
     )
 
+    additional_details = models.CharField(max_length=100, default="null")
     objects = models.Manager()
 
 class barangay_certificate(models.Model):
@@ -91,6 +93,7 @@ class barangay_certificate(models.Model):
         default = "null"
     )
 
+    additional_details = models.CharField(max_length=100, default="null")
     objects = models.Manager()
 
 class barangay_id(models.Model):
@@ -147,6 +150,7 @@ class barangay_id(models.Model):
     landlord_contact_number = models.CharField(max_length = 100, null=True)
     landlord_address = models.CharField(max_length = 100, null=True)
 
+    additional_details = models.CharField(max_length=100, default="null")
     objects = models.Manager()
 
 class certificate_of_indigency(models.Model):
@@ -187,10 +191,19 @@ class certificate_of_indigency(models.Model):
     )
 
 
-
+    additional_details = models.CharField(max_length=100, default="null")
     objects = models.Manager()
 
 class announcement(models.Model):
     title = models.CharField(max_length = 100)
     content = models.CharField(max_length = 1000)
+    objects = models.Manager()
+
+
+
+class admin_account(models.Model): 
+    username = models.CharField(max_length = 100, default="null")
+    password = models.CharField(max_length = 100, default="null")
+    last_name = models.CharField(max_length = 100, default="null")
+    first_name = models.CharField(max_length = 100, default="null")
     objects = models.Manager()

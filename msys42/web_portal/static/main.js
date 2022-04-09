@@ -1,21 +1,23 @@
 // ADMIN
-$('[data-toggle=offcanvas]').click(function(e) {
+$('[data-toggle=offcanvas]').click(function (e) {
   e.preventDefault()
   $('.row-offcanvas').toggleClass('active');
   $('.collapse').toggleClass('in').toggleClass('hidden-xs').toggleClass('visible-xs');
 });
 
-function confirmationFunction(){
+function confirmationFunction() {
   document.getElementById("mainFormContent").style.display = "none";
   document.getElementById("confirmationPage").style.display = "block";
   document.getElementById("nextButton").style.display = "none";
 }
 
-function backFunction(){
+function backFunction() {
   document.getElementById("mainFormContent").style.display = "block";
   document.getElementById("confirmationPage").style.display = "none";
   document.getElementById("nextButton").style.display = "block";
 }
+
+
 // CURRENT FORM 
 var currentForm = localStorage.getItem("currentForm");
 
@@ -237,7 +239,7 @@ if (checkerTitle === "Barangay ID (Constituent)") {
       }
     }
 
-    
+
     var emailCheck = true;
     // checking for validity of email
     console.log(emailCheck)
@@ -640,7 +642,7 @@ else if (checkerTitle === "Barangay ID (Transient)") {
       }
     }
 
-    
+
     var emailCheck = true;
     // checking for validity of email
     console.log(emailCheck)
@@ -1039,7 +1041,7 @@ else if (checkerTitle === "Barangay Clearance (Bonafide)") {
       }
     }
 
-    
+
     var emailCheck = true;
     // checking for validity of email
     console.log(emailCheck)
@@ -1396,7 +1398,7 @@ else if (checkerTitle === "Barangay Clearance (Transient)") {
       }
     }
 
-    
+
     var emailCheck = true;
     // checking for validity of email
     console.log(emailCheck)
@@ -1759,7 +1761,7 @@ else if (checkerTitle === "Certificate of Indigency") {
       }
     }
 
-    
+
     var emailCheck = true;
     // checking for validity of email
     console.log(emailCheck)
@@ -2110,7 +2112,7 @@ else if (checkerTitle === "Barangay Certificate (Bonafide)") {
       }
     }
 
-    
+
     var emailCheck = true;
     // checking for validity of email
     console.log(emailCheck)
@@ -2471,7 +2473,7 @@ else if (checkerTitle === "Barangay Certificate (Transient)") {
       }
     }
 
-    
+
     var emailCheck = true;
     // checking for validity of email
     console.log(emailCheck)
