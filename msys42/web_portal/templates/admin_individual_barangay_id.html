@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +16,7 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 </head>
+
 <body>
     <!-- FIRST FRAME -->
     <h1>{{ lia.status }}</h1>
@@ -31,7 +33,7 @@
 
     <!-- shows modal -->
     <button>
-        
+
     </button>
 
     <!-- modal -->
@@ -39,7 +41,7 @@
     <form action="">
 
     </form>
-    {% elif lia.status ==  "Review Completed" %}
+    {% elif lia.status == "Review Completed" %}
 
     <!-- accepts, leads to accept view which redirect to this page -->
     <form action="">
@@ -47,35 +49,52 @@
     </form>
 
     {% elif lia.status == "Pre-filled Template Verified" %}
-        {% if lia.type == "Constituent" %}
-        <div class = "container documentContainer">
-            <h1 class = "row headerRowDocument p-3">
-                Document Information
-            </h1>
+    {% if lia.type == "Constituent" %}
+    <div class="container documentContainer">
+        <h1 class="row headerRowDocument p-3">
+            Document Information
+        </h1>
 
-            <div class = "dynamicFrame row mt-1 p-5">
-                <h1>Document Link: <a href="{% url 'print_barangay_id_constituent' pk=lia.pk %}">BarangayID#{{lia.pk}}.pdf</a></h1>
+        <div class="dynamicFrame row mt-1 p-5">
+            <h1>Document Link: <a
+                    href="{% url 'print_barangay_id_constituent' pk=lia.pk %}">BarangayID#{{lia.pk}}.pdf</a></h1>
 
-                <h1 class = "mt-5">Instructions</h1>
-                <p>Print the document by clicking the PDF. It will open a new tab and start printing from there. Return to this page to UPDATE its status.</p>
-            </div>
-
-            <div class="row">
-                <!-- has to be a modal for confirmation shit! -->
-                <form method="POST">  {% csrf_token %}
-                    <input class="btn btn-secondary" type="submit" value="Cancel">
-                </form>
-
-                <!-- FUCKING WORKS!!!!! -->
-                <form method="POST" action="{% url 'admin_update_status_barangay_id_to_printed' pk=lia.pk  %}"> {% csrf_token %}
-                    <input class="btn btn-secondary" type="submit" value="Update Status to Printed">
-                </form>
-            </div>
+            <h1 class="mt-5">Instructions</h1>
+            <p>Print the document by clicking the PDF. It will open a new tab and start printing from there. Return to
+                this page to UPDATE its status.</p>
         </div>
-        {% elif lia.type == "Transient" %}
 
-        {% endif %}
+        <div class="row">
+            <a href="{% url 'admin_documents_list' %}"> {% csrf_token %}
+                <button class="btn btn-secondary">Back to Documents list</button></a>
+
+
+            <!-- has to be a modal for confirmation shit! -->
+            <form method="POST"> {% csrf_token %}
+                <input class="btn btn-secondary" type="submit" value="Cancel">
+            </form>
+
+            <!-- FUCKING WORKS!!!!! -->
+            <form method="POST" action="{% url 'admin_update_status_barangay_id_to_printed' pk=lia.pk %}"> {% csrf_token %}
+                <!-- :) -->
+                <div class="d-none">
+                    <input name="latest_contributor" type="text" id="latest_contributor">
+                </div>
+                <input class="btn btn-secondary" type="submit" value="Update Status to Printed">
+            </form>
+        </div>
+    </div>
+    {% elif lia.type == "Transient" %}
 
     {% endif %}
+
+    {% endif %}
+
+    <script>
+        let data = sessionStorage.getItem('username');
+
+        document.getElementById('latest_contributor').value = data
+    </script>
 </body>
+
 </html>

@@ -45,6 +45,7 @@ class barangay_clearance(models.Model):
         choices =  [('Submitted for Review', 'Submitted for Review'), ('Review Completed', 'Review Completed'), ('Pre-filled Template Verified', 'Pre-filled Template Verified'), ('Printed, Not Paid', 'Printed, Not Paid'), ('Printed, Paid', 'Printed, Paid'), ('Printed, Out for Delivery/Ready for Pickup', 'Printed, Out for Delivery/Ready for Pickup'), ('Delivered/Picked-up', 'Delivered/Picked-up'), ('Rejected', 'Rejected')], 
         default = "null"
     )
+    latest_contributor = models.CharField(max_length=100, default="PLACEHOLDER")
 
     additional_details = models.CharField(max_length=100, default="null")
     objects = models.Manager()
@@ -92,6 +93,8 @@ class barangay_certificate(models.Model):
         choices =  [('Submitted for Review', 'Submitted for Review'), ('Review Completed', 'Review Completed'), ('Pre-filled Template Verified', 'Pre-filled Template Verified'), ('Printed, Not Paid', 'Printed, Not Paid'), ('Printed, Paid', 'Printed, Paid'), ('Printed, Out for Delivery/Ready for Pickup', 'Printed, Out for Delivery/Ready for Pickup'), ('Delivered/Picked-up', 'Delivered/Picked-up'), ('Rejected', 'Rejected')],  
         default = "null"
     )
+    latest_contributor = models.CharField(max_length=100, default="PLACEHOLDER")
+    
 
     additional_details = models.CharField(max_length=100, default="null")
     objects = models.Manager()
@@ -137,6 +140,7 @@ class barangay_id(models.Model):
         choices =  [('Submitted for Review', 'Submitted for Review'), ('Review Completed', 'Review Completed'), ('Pre-filled Template Verified', 'Pre-filled Template Verified'), ('Printed, Not Paid', 'Printed, Not Paid'), ('Printed, Paid', 'Printed, Paid'), ('Printed, Out for Delivery/Ready for Pickup', 'Printed, Out for Delivery/Ready for Pickup'), ('Delivered/Picked-up', 'Delivered/Picked-up'), ('Rejected', 'Rejected')], 
         default = "null"
     )
+    latest_contributor = models.CharField(max_length=100, default="PLACEHOLDER")
 
     # Type
     type = models.CharField(
@@ -189,6 +193,7 @@ class certificate_of_indigency(models.Model):
         choices =  [('Submitted for Review', 'Submitted for Review'), ('Review Completed', 'Review Completed'), ('Pre-filled Template Verified', 'Pre-filled Template Verified'), ('Printed, Not Paid', 'Printed, Not Paid'), ('Printed, Paid', 'Printed, Paid'), ('Printed, Out for Delivery/Ready for Pickup', 'Printed, Out for Delivery/Ready for Pickup'), ('Delivered/Picked-up', 'Delivered/Picked-up'), ('Rejected', 'Rejected')], 
         default = "null"
     )
+    latest_contributor = models.CharField(max_length=100, default="PLACEHOLDER")
 
 
     additional_details = models.CharField(max_length=100, default="null")

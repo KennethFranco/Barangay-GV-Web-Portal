@@ -103,11 +103,11 @@
 <body>
   <nav class="container-fluid navbar navbar-expand-md navbarGV">
     <div class="container">
-      <a href="{% url 'base' %}" style="padding: 0px; margin: 0px;"><img class="mr-2" src="{% static 'logo.png' %}"
+      <a href="{% url 'admin_documents_list' %}" style="padding: 0px; margin: 0px;"><img class="mr-2" src="{% static 'logo.png' %}"
           style="width: 60px; height: 60px; margin-right: 20px" alt=""></a>
 
       <div class="titleFont">
-        <a href="{% url 'base' %}" class="navbarTitle globalSubHeader" style="text-decoration: none; ">Barangay GV Web
+        <a href="{% url 'admin_documents_list' %}" class="navbarTitle globalSubHeader" style="text-decoration: none; ">Barangay GV Web
           Portal</a>
       </div>
 
@@ -124,11 +124,11 @@
 
       <div class="collapse navbar-collapse" id="toggleMobileMenu">
         <ul class="navbar-nav ms-auto">
-          <li class="bodyFont globalBody">
+          <li class="mt-2 bodyFont globalBody">
             <a class="nav-link navbarOption" href="">Home</a>
           </li>
           <li class="bodyFont globalBody btn btn-secondary">
-            <a style="margin-right: 0px; color: white; font-weight: 600;" class="nav-link" href="">Log Out</a>
+            <a style="margin-right: 0px; color: white; font-weight: 600;" class="nav-link" href="{% url 'admin_login' %}">Log Out</a>
           </li>
         </ul>
       </div>

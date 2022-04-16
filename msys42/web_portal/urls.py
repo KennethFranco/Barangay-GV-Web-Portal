@@ -11,7 +11,7 @@ urlpatterns = [
 
     # admin
     path("admin_login/", views.admin_login, name = 'admin_login'),
-    path("admin_base/", views.admin_base, name = "admin_documents_list"),
+    path("admin_base/", views.admin_documents_list, name = "admin_documents_list"),
     path("documents_list/", views.admin_documents_list, name = "admin_documents_list"),
     path("printed_documents/", views.admin_printed_documents, name="admin_printed_documents"),
     path("manage_announcements/", views.admin_manage_announcements, name="admin_manage_announcements"),

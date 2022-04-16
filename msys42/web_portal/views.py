@@ -29,21 +29,23 @@ def admin_documents_list (request):
     cl3 = barangay_clearance.objects.all().filter(status = "Pre-filled Template Verified")
     clearances = cl1 | cl2 | cl3
 
-    ci1 = certificate_of_indigency.objects.all().filter(status = "Submitted for Review")
-    ci2 = certificate_of_indigency.objects.all().filter(status = "Review Completed")
-    ci3 = certificate_of_indigency.objects.all().filter(status = "Pre-filled Template Verified")
-    cois = ci1 | ci2 | ci3
+    # ci1 = certificate_of_indigency.objects.all().filter(status = "Submitted for Review")
+    # ci2 = certificate_of_indigency.objects.all().filter(status = "Review Completed")
+    # ci3 = certificate_of_indigency.objects.all().filter(status = "Pre-filled Template Verified")
+    # cois = ci1 | ci2 | ci3
 
     ce1 = barangay_certificate.objects.all().filter(status = "Submitted for Review")
     ce2 = barangay_certificate.objects.all().filter(status = "Review Completed")
     ce3 = barangay_certificate.objects.all().filter(status = "Pre-filled Template Verified")
     certificates = ce1 | ce2 | ce3
+    
     context = {    
         # order by date submitted
         "ids": ids.order_by("date_submitted").reverse(),
         "clearances": clearances.order_by("date_submitted").reverse(),
+        # "cois": cois.order_by("date_submitted").reverse(),
         "certificates": certificates.order_by("date_submitted").reverse(),
-        "cois": cois.order_by("date_submitted").reverse(),
+        
     }
 
     return render(request, 'admin_documents_list.html', context)
@@ -60,7 +62,13 @@ def admin_individual_barangay_id(request,pk):
     return render(request, "admin_individual_barangay_id.html", context)
 
 def admin_update_status_barangay_id_to_printed(request, pk):
-    barangay_id.objects.all().filter(pk=pk).update(status="Printed, Not Paid")
+    if (request.method == "POST"):
+        barangay_id.objects.all().filter(pk=pk).update(status="Printed, Not Paid")
+        latest_contributor = request.POST.get("latest_contributor")
+        print(request.POST.get("latest_contributor"))
+        barangay_id.objects.all().filter(pk=pk).update(latest_contributor = latest_contributor)
+        return redirect("admin_documents_list")
+
     lia = get_object_or_404(barangay_id, pk=pk)
     context = {
         "lia": lia,
@@ -102,7 +110,34 @@ def admin_individual_id(request):
     return render(request, "admin_individual_id.html")
 
 def admin_printed_documents (request): 
-    return render(request, 'admin_printed_documents.html')
+    ids1 = barangay_id.objects.all().filter(status = "Printed, Not Paid")
+    ids2 = barangay_id.objects.all().filter(status = "Printed, Paid")
+    ids3 = barangay_id.objects.all().filter(status = "Printed, Out for Delivery/Ready for Pickup")
+    ids = ids1 | ids2 | ids3
+
+    cl1 = barangay_clearance.objects.all().filter(status = "Printed, Not Paid")
+    cl2 = barangay_clearance.objects.all().filter(status = "Printed, Paid")
+    cl3 = barangay_clearance.objects.all().filter(status = "Printed, Out for Delivery/Ready for Pickup")
+    clearances = cl1 | cl2 | cl3
+
+    ci1 = certificate_of_indigency.objects.all().filter(status = "Printed, Not Paid")
+    ci2 = certificate_of_indigency.objects.all().filter(status = "Printed, Paid")
+    ci3 = certificate_of_indigency.objects.all().filter(status = "Printed, Out for Delivery/Ready for Pickup")
+    cois = ci1 | ci2 | ci3
+
+    ce1 = barangay_certificate.objects.all().filter(status = "Printed, Not Paid")
+    ce2 = barangay_certificate.objects.all().filter(status = "Printed, Paid")
+    ce3 = barangay_certificate.objects.all().filter(status = "Printed, Out for Delivery/Ready for Pickup")
+    certificates = ce1 | ce2 | ce3
+    context = {    
+        # order by date submitted
+        "ids": ids.order_by("date_submitted").reverse(),
+        "clearances": clearances.order_by("date_submitted").reverse(),
+        "certificates": certificates.order_by("date_submitted").reverse(),
+        "cois": cois.order_by("date_submitted").reverse(),
+    }
+
+    return render(request, 'admin_printed_documents.html', context)
 
 def admin_manage_announcements (request): 
     return render(request, 'admin_manage_announcements.html')
