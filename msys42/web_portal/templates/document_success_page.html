@@ -1,0 +1,14 @@
+{% extends "barangay_id_form.html" %}
+{% load static %}
+
+{% block title %}
+Success
+{% endblock %}
+
+{% block form %}
+<h1>Thank you for submitting your document request to Guadalupe Viejo.</h1>
+<p>The information below will serve as your document's identification number.</p>
+<p>An email and SMS message have also been sent to your respective devices.</p>
+<p>Please regularly check on your document's status at URL.</p>
+<h1>{{ document_id }}</h1>
+{% endblock %}

@@ -1,53 +1,296 @@
+{% extends "admin_base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-</head>
-
+{% block content %}
 <body>
     <!-- FIRST FRAME -->
-    <h1>{{ lia.status }}</h1>
+    <div class = "container mt-5">
+        <div class = "row">
+            <div class = "col">
+                <h1>Document #{{ lia.document_id }}</h1>
+            </div>
+
+
+            <div class = "col">
+                <a href="{% url 'admin_documents_list' %}"> {% csrf_token %}
+                    <button class="btn btn-secondary">Back to Documents list</button>
+                </a>
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class = "col">
+                <p>Document Requested: {{ lia.document_type }}</p>
+            </div>
+
+            <div class = "col">
+                <p>Document Requested: {{ lia.status }}</p>
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class = "col">
+                <p>Latest Contributor: {{ lia.latest_contributor }}</p>
+            </div>
+
+            <div class = "col">
+                <p>Additional Details: {{ lia.additional_details }}</p>
+            </div>
+        </div>
+    </div>
+
 
     <!-- DYANAMIC FRAME -->
     {% if lia.status == "Submitted for Review"%}
-    <h1>helo</h1>
+    <div class="container documentContainer">
+        <h1 class="row headerRowDocument p-3">
+            Details
+        </h1>
+        <div class="dynamicFrame mt-1 p-5">
+            <div class="row mt-5 mb-3">
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="last_name">Last Name<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="last_name" name="last_name" class="bodyFont formInput" type="text"
+                        placeholder="Last Name" value = {{lia.last_name}} disabled>
+                </div>
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="first_name">First Name<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="first_name" name="first_name" class="bodyFont formInput" type="text"
+                        placeholder="First Name" value = {{lia.first_name}} disabled>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="middle_name">Middle Name<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="middle_name" name="middle_name" class="bodyFont formInput" type="text"
+                        placeholder="Middle Name" value = {{lia.middle_name}} disabled>
+                </div>
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="age">Age<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="age" name="age" class="bodyFont formInput" type="number" placeholder="Age" value = {{lia.age}} disabled>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="birthday">Birthday<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="birthday" name="birthday" class="bodyFont formInput" type="date"
+                        placeholder="Birthday" value = {{lia.birthday}} disabled>
+                </div>
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="sex">Sex<span
+                            style="color: #B30000;">*</span></label><br>
+                    <select id="sex" name="sex" class="bodyFont formInput" name="sex" id="sex" value = {{lia.sex}} disabled>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="nationality">Nationality<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="nationality" name="nationality" class="bodyFont formInput" type="text"
+                        placeholder="Nationality" value = {{lia.nationality}} disabled>
+                </div>
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="civil_status">Civil Status<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="civil_status" name="civil_status" class="bodyFont formInput" type="text"
+                        placeholder="Civil Status" value = {{lia.civil_status}} disabled>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="email">Email<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="email" name="email" class="bodyFont formInput" type="text"
+                        placeholder="Email" value = {{lia.email}} disabled>
+                </div>
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="contact_number">Contact
+                        Number<span style="color: #B30000;">*</span></label><br>
+                    <div class="d-flex justify-content-center"
+                        style="position: absolute; width: 80px; height: 49px; border-right: 1px solid #B8B8B8;">
+                        <h2 class="align-self-end numberLabel numberLabel" style="font-weight: 400;">+63
+                        </h2>
+                    </div>
+                    <input id="contact_number" name="contact_number" class="bodyFont specialFormInput"
+                        type="number" placeholder="Contact Number" value = {{lia.contact_num}} disabled>
+                </div>
+            </div>
+
+            <span class="formTitle titleFont globalHeader">Address</span>
+            <div class="row mt-5 mb-3">
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="address_first_line">House Number
+                        - Blk -
+                        Street<span style="color: #B30000;">*</span></label><br>
+                    <input id="address_first_line" name="address_first_line" class="bodyFont formInput"
+                        type="text" placeholder="House Number - Blk - Street" value = {{lia.street}} disabled>
+                </div>
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="address_city">City<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="address_city" name="address_city" class="bodyFont formInput" type="text"
+                        placeholder="City" value = {{lia.city}} disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="address_barangay">Barangay<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="address_barangay" name="address_barangay" class="bodyFont formInput"
+                        type="text" placeholder="Barangay" value = {{lia.barangay}} disabled>
+                </div>
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="address_province">Province<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="address_province" name="address_province" class="bodyFont formInput"
+                        type="text" placeholder="Province" value = {{lia.province}} disabled>
+                </div>
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="address_zip_code">Zip Code<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="address_zip_code" name="address_zip_code" class="bodyFont formInput"
+                        type="number" placeholder="Zip Code" value = {{lia.zip_code}} disabled>
+                </div>
+            </div>
+
+            <div id="landlordDiv" style="display: none;">
+                <span class="formTitle titleFont globalHeader">Landlady/landlord information</span>
+                <div class="row mt-5 mb-3">
+                    <div class="col">
+                        <label class="bodyFont formLabel globalSubHeader" for="address_first_line">Name<span
+                                style="color: #B30000;">*</span></label><br>
+                        <input id="landlord_name" name="landlord_name" class="bodyFont formInput"
+                            type="text" placeholder="Name" value = {{lia.last_name}} disabled>
+                    </div>
+                    <div class="col">
+                        <label class="bodyFont formLabel globalSubHeader"
+                            for="landlord_contact_number">Contact Number<span
+                                style="color: #B30000;">*</span></label><br>
+                        <div class="d-flex justify-content-center"
+                            style="position: absolute; width: 80px; height: 49px; border-right: 1px solid #B8B8B8;">
+                            <h2 class="align-self-end numberLabel" style=" font-weight: 400;">+63</h2>
+                        </div>
+                        <input id="landlord_contact_number" name="landlord_contact_number"
+                            class="bodyFont specialFormInput" type="number" placeholder="Contact Number" value = {{lia.last_name}} disabled>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label class="bodyFont formLabel globalSubHeader"
+                            for="landlord_address">Landlady/lord address<span
+                                style="color: #B30000;">*</span></label><br>
+                        <input id="landlord_address" name="landlord_address" class="bodyFont formInput"
+                            type="text" placeholder="Landlady/lord address" value = {{lia.last_name}} disabled>
+                    </div>
+                </div>
+            </div>
 
 
-    <!-- accepts, leads to accept view which redirect to this page -->
-    <form action="">
+            <span class="formTitle titleFont globalHeader">Emergency Contact</span>
+            <div class="row mt-5 mb-3">
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="emergency_name">Name<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="emergency_name" name="emergency_name" class="bodyFont formInput" type="text"
+                        placeholder="Name" value = {{lia.emergency_name}} disabled>
+                </div>
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="emergency_contact_number">Contact
+                        Number<span style="color: #B30000;">*</span></label><br>
+                    <div class="d-flex justify-content-center"
+                        style="position: absolute; width: 80px; height: 49px; border-right: 1px solid #B8B8B8;">
+                        <h2 class="align-self-end numberLabel" style="font-weight: 400;">+63</h2>
+                    </div>
+                    <input id="emergency_contact_number" name="emergency_contact_number"
+                        class="bodyFont specialFormInput" type="number" placeholder="Contact Number" value = {{lia.emergency_contact_num}} disabled>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="bodyFont formLabel globalSubHeader" for="emergency_address">Address<span
+                            style="color: #B30000;">*</span></label><br>
+                    <input id="emergency_address" name="emergency_address" class="bodyFont formInput"
+                        type="text" placeholder="Address" value = {{lia.emergency_address}} disabled>
+                </div>
+            </div>
+            <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
 
-    </form>
+            <div class="row mb-5">
+                <div class="col">
+                    <p>Government ID/Letter of Acknowledgement: <a href="{{lia.government_id_or_letter.url}}"> {{lia.government_id_or_letter.url}}</a> </p>
+                </div>
+            </div>
 
-    <!-- shows modal -->
-    <button>
+            <div class="row mb-5">
+                <div class="col">
+                    <p>Voter's ID: <a href="{{lia.voters_id.url}}"> {{lia.voters_id.url}}</a> </p>
+                </div>
+            </div>
 
-    </button>
+            <!-- Action Buttons -->
+            <div class="row">
+                <div class = "col">
+                               <!-- has to be a modal for confirmation shit! -->
+                <form method="POST"> {% csrf_token %}
+                    <input class="btn btn-secondary" type="submit" value="Reject">
+                </form>
+                </div>
+                
+                <div class= "col">
+                    <!-- FUCKING WORKS!!!!! -->
+                    <form method="POST" action="{% url 'admin_update_status_barangay_id_to_review_completed' pk=lia.pk %}"> {% csrf_token %}
+                        <!-- :) -->
+                        <div class="d-none">
+                            <input name="latest_contributor" type="text" id="latest_contributor">
+                        </div>
+                        <input class="btn btn-secondary" type="submit" value="Update Status to Review Completed">
+                    </form>
+                </div>
+            </div>
+        </div>
 
-    <!-- modal -->
-    <!-- rejects, leads to list -->
-    <form action="">
-
-    </form>
+ 
+    </div>
     {% elif lia.status == "Review Completed" %}
+    <div class="container documentContainer">
+        <h1 class="row headerRowDocument p-3">
+            Document Information
+        </h1>
 
-    <!-- accepts, leads to accept view which redirect to this page -->
-    <form action="">
-
-    </form>
-
+        <div class="dynamicFrame row mt-1 p-5">
+                <!-- Action Buttons -->
+                <div class="row">
+                    <div class = "col">
+                                   <!-- has to be a modal for confirmation shit! -->
+                    <form method="POST"> {% csrf_token %}
+                        <input class="btn btn-secondary" type="submit" value="Reject">
+                    </form>
+                    </div>
+                    <div class= "col">
+                        <!-- FUCKING WORKS!!!!! -->
+                        <form method="POST" action="{% url 'admin_update_status_barangay_id_to_pre_filled_template_verified' pk=lia.pk %}"> {% csrf_token %}
+                            <!-- :) -->
+                            <div class="d-none">
+                                <input name="latest_contributor" type="text" id="latest_contributor">
+                            </div>
+                            <input class="btn btn-secondary" type="submit" value="Update Status to Pre-filled Template Verified">
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
     {% elif lia.status == "Pre-filled Template Verified" %}
     {% if lia.type == "Constituent" %}
     <div class="container documentContainer">
@@ -62,26 +305,26 @@
             <h1 class="mt-5">Instructions</h1>
             <p>Print the document by clicking the PDF. It will open a new tab and start printing from there. Return to
                 this page to UPDATE its status.</p>
-        </div>
 
-        <div class="row">
-            <a href="{% url 'admin_documents_list' %}"> {% csrf_token %}
-                <button class="btn btn-secondary">Back to Documents list</button></a>
-
-
-            <!-- has to be a modal for confirmation shit! -->
-            <form method="POST"> {% csrf_token %}
-                <input class="btn btn-secondary" type="submit" value="Cancel">
-            </form>
-
-            <!-- FUCKING WORKS!!!!! -->
-            <form method="POST" action="{% url 'admin_update_status_barangay_id_to_printed' pk=lia.pk %}"> {% csrf_token %}
-                <!-- :) -->
-                <div class="d-none">
-                    <input name="latest_contributor" type="text" id="latest_contributor">
+                <!-- Action Buttons -->
+                <div class="row">
+                    <div class = "col">
+                                   <!-- has to be a modal for confirmation shit! -->
+                    <form method="POST"> {% csrf_token %}
+                        <input class="btn btn-secondary" type="submit" value="Reject">
+                    </form>
+                    </div>
+                    <div class= "col">
+                        <!-- FUCKING WORKS!!!!! -->
+                        <form method="POST" action="{% url 'admin_update_status_barangay_id_to_printed' pk=lia.pk %}"> {% csrf_token %}
+                            <!-- :) -->
+                            <div class="d-none">
+                                <input name="latest_contributor" type="text" id="latest_contributor">
+                            </div>
+                            <input class="btn btn-secondary" type="submit" value="Update Status to Printed">
+                        </form>
+                    </div>
                 </div>
-                <input class="btn btn-secondary" type="submit" value="Update Status to Printed">
-            </form>
         </div>
     </div>
     {% elif lia.type == "Transient" %}
@@ -96,5 +339,4 @@
         document.getElementById('latest_contributor').value = data
     </script>
 </body>
-
-</html>
+{% endblock %}

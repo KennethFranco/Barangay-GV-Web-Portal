@@ -1,4 +1,5 @@
 from email.policy import default
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -150,9 +151,9 @@ class barangay_id(models.Model):
     )
 
     # Landlord info (for transient)
-    landlord_name = models.CharField(max_length = 100, null=True)
-    landlord_contact_number = models.CharField(max_length = 100, null=True)
-    landlord_address = models.CharField(max_length = 100, null=True)
+    landlord_name = models.CharField(max_length = 100, null=True, default="null")
+    landlord_contact_number = models.CharField(max_length = 100, null=True, default="null")
+    landlord_address = models.CharField(max_length = 100, null=True, default="null")
 
     additional_details = models.CharField(max_length=100, default="null")
     objects = models.Manager()
@@ -207,8 +208,19 @@ class announcement(models.Model):
 
 
 class admin_account(models.Model): 
-    username = models.CharField(max_length = 100, default="null")
-    password = models.CharField(max_length = 100, default="null")
-    last_name = models.CharField(max_length = 100, default="null")
-    first_name = models.CharField(max_length = 100, default="null")
-    objects = models.Manager()
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    age = models.IntegerField(default = 0)
+    birthday = models.DateField(default="2022-01-01")
+    contact_number = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.user)
+
+class user_account(models.Model): 
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    age = models.IntegerField(default = 0)
+    birthday = models.DateTimeField(default="2022-01-01")
+    contact_number = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.user)

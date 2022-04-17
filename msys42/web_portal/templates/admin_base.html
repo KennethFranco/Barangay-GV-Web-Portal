@@ -103,11 +103,12 @@
 <body>
   <nav class="container-fluid navbar navbar-expand-md navbarGV">
     <div class="container">
-      <a href="{% url 'admin_documents_list' %}" style="padding: 0px; margin: 0px;"><img class="mr-2" src="{% static 'logo.png' %}"
-          style="width: 60px; height: 60px; margin-right: 20px" alt=""></a>
+      <a href="{% url 'admin_documents_list' %}" style="padding: 0px; margin: 0px;"><img class="mr-2"
+          src="{% static 'logo.png' %}" style="width: 60px; height: 60px; margin-right: 20px" alt=""></a>
 
       <div class="titleFont">
-        <a href="{% url 'admin_documents_list' %}" class="navbarTitle globalSubHeader" style="text-decoration: none; ">Barangay GV Web
+        <a href="{% url 'admin_documents_list' %}" class="navbarTitle globalSubHeader"
+          style="text-decoration: none; ">Barangay GV Web
           Portal</a>
       </div>
 
@@ -125,10 +126,14 @@
       <div class="collapse navbar-collapse" id="toggleMobileMenu">
         <ul class="navbar-nav ms-auto">
           <li class="mt-2 bodyFont globalBody">
-            <a class="nav-link navbarOption" href="">Home</a>
+            <a class="nav-link navbarOption" href="{% url 'admin_documents_list' %}">Home</a>
           </li>
-          <li class="bodyFont globalBody btn btn-secondary">
-            <a style="margin-right: 0px; color: white; font-weight: 600;" class="nav-link" href="{% url 'admin_login' %}">Log Out</a>
+          <li class="mt-2">
+            <form method='POST'> {% csrf_token %}
+
+              <a style="margin-right: 0px; color: white; font-weight: 600; box-shadow: 0px;"
+                class="nav-link bodyFont globalBody btn btn-secondary" href="{% url 'admin_logout' %}">Log Out</a>
+            </form>
           </li>
         </ul>
       </div>
@@ -183,7 +188,7 @@
       <label for="" style="border-bottom: 1px solid yellow">Account Information</label>
     </div>
 
-    <a href="" class="sidebarButton">
+    <a href="{% url 'admin_account_information' %}" class="sidebarButton">
       <div>
         Account Information
       </div>

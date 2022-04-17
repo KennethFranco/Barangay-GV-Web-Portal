@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
+SMS_BACKEND = 'sms.backends.twilio.SmsBackend'
+TWILIO_ACCOUNT_SID = 'ACab503ab8dea552d21d83e1137db95ea8'
+TWILIO_AUTH_TOKEN = 'abd486fb93e4cc627bb11dede5438320'
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,6 +35,16 @@ SECRET_KEY = 'django-insecure-b1a9ru9esch0v5cy&j$gans!scoskc#-01*3rx&d9ad3hv8xt7
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+# SMTP CONFIGURATION
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'barangayguadalupeviejotest@gmail.com'
+EMAIL_HOST_PASSWORD = 'pbxrvcuvtzhklpxn'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'default from email'
+
 
 
 # Application definition

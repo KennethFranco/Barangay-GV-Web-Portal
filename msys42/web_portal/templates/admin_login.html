@@ -33,26 +33,26 @@
                     <div class="formTitle d-flex justify-content-left">
                         <h1 class="globalTitle">SIGN IN</h1>
                     </div>
-
-                    <!-- :) -->
-                    <p class="d-none" id="helperMessage" style="color: red;">Your username or password is incorrect.</p>
-                    <div class="row" style="display: none;">
-                        <ul id="accounts">
-                            {% for a in accts %}
-                            <li>{{ a.username }}:{{ a.password }}</li>
-                            {% endfor %}
+                    {% if messages %}
+                    <div class="messages text-center">
+                        {% for message in messages %}
+                        <p style="color: rgb(241, 42, 42);">
+                            {{ message }}
+                        </p>
+                        {% endfor %}
                     </div>
+                    {% endif %}
 
-                    <div class="pt-5 d-flex justify-content-center">
-                        <form method="POST" onsubmit="validateUser()" action="{% url 'admin_documents_list' %}"> {% csrf_token %}
+                    <div class="pt-2 d-flex justify-content-center">
+                        <form method="POST" onsubmit="validateUser()" action=""> {% csrf_token %}
                             <div>
                                 <label for="username">Username</label><br>
-                                <input id="username" type="text" , placeholder="Username">
+                                <input id="username" type="text" , placeholder="Username" name="username">
                             </div>
 
                             <div class="pt-3">
                                 <label for="username">Password</label><br>
-                                <input id="password" type="text" , placeholder="Password">
+                                <input id="password" type="text" , placeholder="Password" name="password">
                             </div>
 
                             <div class="pt-5 d-flex justify-content-center">
@@ -77,54 +77,6 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
 
-    <script>
-        acctsDict = []
-        accts = document.getElementById("accounts")
-
-        for (let i = 0; i < accts.children.length; i++) {
-            accountSplit = accts.children[i].innerHTML.split(":")
-
-
-            acctsDict.push({
-                username: accountSplit[0],
-                password: accountSplit[1]
-            });
-        }
-        console.log(acctsDict)
-
-        function validateUser() {
-            usr = document.getElementById("username").value
-            pwd = document.getElementById("password").value
-            helperMsg = document.getElementById("helperMessage")
-
-            isValid = false; 
-
-            for (let i = 0; i < acctsDict.length; i++) {
-                if (usr == acctsDict[i].username) {
-                    if (pwd == acctsDict[i].password) {
-                        isValid = true;
-                        sessionStorage.setItem('username', usr);
-                        break
-                    }
-                    else {
-                        isValid = false;   
-                    }
-                }
-                else if (usr != acctsDict[i].username) {
-                    isValid = false;
-                }
-            }
-
-            if (isValid == true) {
-                return true;
-            }
-            else {
-                helperMsg.className = "";
-                event.preventDefault()
-            }
-        }
-
-    </script>
 </body>
 
 </html>

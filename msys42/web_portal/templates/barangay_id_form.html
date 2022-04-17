@@ -365,8 +365,24 @@
                                 Click or drag a file to this area to upload.</span>
                             <input id="third_file" name="third_file" type="file" name="myFile" class="drop-zone__input">
                         </div>
+                        <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+                        <div>
+                            <h1 class="mb-5">Terms and Conditions</h1>
+                            <div>
+                                <input style="width: 24px; height: 24px" type="checkbox" id="checker1" name="checker1">
+                                <label class="titleFont checkingFont" for="checker1"> I hereby declare that the
+                                    information provided is true and correct.</label>
+                            </div>
+
+                            <div>
+                                <input style="width: 24px; height: 24px" type="checkbox" id="checker2" name="checker2">
+                                <label class="titleFont checkingFont" for="checker2"> I understand that a false
+                                    statement may cancel any
+                                    occurring requests in Barangay Guadalupe Viejo.</label>
+                            </div>
+                        </div>
                         <div class="d-flex justify-content-end">
-                            <input class="btn btn-secondary" id="submit" type="submit" value="Submit">
+                            <input class="btn btn-secondary" id="finalSubmitButton" type="submit" value="submit">
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -413,10 +429,53 @@
     <script src="{% static 'main.js' %}"></script>
 
     <script>
+        function uuidGenerator() {
+            uuid = ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+            uuidArray = uuid.split("-");
+
+
+
+            return uuidArray[0];
+        }
+        document.getElementById("document_id").setAttribute('value', uuidGenerator());
+
+        document.getElementById("finalSubmitButton").disabled = true;
+        var twoCheckers = 0;
+        console.log(twoCheckers);
+        const checker1 = document.getElementById('checker1')
+        const checker2 = document.getElementById('checker2')
+        checker1.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+                twoCheckers += 1;
+                console.log(twoCheckers);
+                if (twoCheckers == 2) {
+                    document.getElementById("finalSubmitButton").disabled = false;
+                }
+            } else {
+                twoCheckers -= 1;
+                console.log(twoCheckers);
+                document.getElementById("finalSubmitButton").disabled = true;
+            }
+        })
+
+        checker2.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+                twoCheckers += 1;
+                console.log(twoCheckers);
+                if (twoCheckers == 2) {
+                    document.getElementById("finalSubmitButton").disabled = false;
+                }
+            } else {
+                twoCheckers -= 1;
+                console.log(twoCheckers);
+                document.getElementById("finalSubmitButton").disabled = true;
+            }
+        })
         var submitting = false
         console.log("SUBMITTING:" + submitting)
-
-        document.getElementById("submit").addEventListener("click", function () {
+        document.getElementById("finalSubmitButton").addEventListener("click", function () {
             submitting = true
             console.log("SUBMITTING:" + submitting)
         })
@@ -434,17 +493,8 @@
 
         };
 
-        function uuidGenerator() {
-            uuid = ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-                (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-            );
-            uuidArray = uuid.split("-");
 
-            
 
-            return uuidArray[0];
-        }
-        document.getElementById("document_id").setAttribute('value',uuidGenerator());
 
     </script>
 </body>
