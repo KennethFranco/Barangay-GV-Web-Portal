@@ -220,7 +220,7 @@ class user_account(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     age = models.IntegerField(default = 0)
     birthday = models.DateTimeField(default="2022-01-01")
-    contact_number = models.IntegerField(default=0)
+    contact_number = models.IntegerField(max_length = 10, default=0)
 
     def __str__(self):
         return str(self.user)

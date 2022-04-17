@@ -51,6 +51,8 @@ def admin_account_information (request):
         age = request.POST.get("age")
         contact_number = request.POST.get("contact_number")
         birthday = request.POST.get("birthday")
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
         if (User.objects.get(id=user.id) == None):
             print("USER ID IS NULL")    
             admin_account.objects.create(
@@ -65,6 +67,9 @@ def admin_account_information (request):
             admin_account.objects.all().filter(user=User.objects.get(id=user.id)).update(contact_number=contact_number)
             admin_account.objects.all().filter(user=User.objects.get(id=user.id)).update(birthday=birthday)
         
+        User.objects.all().filter(id=user.id).update(first_name=first_name)
+        User.objects.all().filter(id=user.id).update(last_name=last_name)
+
         return redirect("/web_portal/account_information")
 
     return render(request, 'admin_account_information.html', context)
@@ -121,7 +126,7 @@ def admin_update_status_barangay_id_to_review_completed(request, pk):
     current_user = request.user
     if (request.method == "POST"):
         barangay_id.objects.all().filter(pk=pk).update(status="Review Completed")
-        latest_contributor = current_user.username
+        latest_contributor = current_user.first_name + " " + current_user.last_name
         barangay_id.objects.all().filter(pk=pk).update(latest_contributor = latest_contributor)
         return redirect("admin_documents_list")
 
@@ -136,7 +141,7 @@ def admin_update_status_barangay_id_to_pre_filled_template_verified(request, pk)
     current_user = request.user
     if (request.method == "POST"):
         barangay_id.objects.all().filter(pk=pk).update(status="Pre-filled Template Verified")
-        latest_contributor = current_user.username
+        latest_contributor = current_user.first_name + " " + current_user.last_name
         barangay_id.objects.all().filter(pk=pk).update(latest_contributor = latest_contributor)
         return redirect("admin_documents_list")
 
@@ -152,7 +157,7 @@ def admin_update_status_barangay_id_to_printed(request, pk):
     if (request.method == "POST"):
         
         barangay_id.objects.all().filter(pk=pk).update(status="Printed, Not Paid")
-        latest_contributor = current_user.username
+        latest_contributor = current_user.first_name + " " + current_user.last_name
         barangay_id.objects.all().filter(pk=pk).update(latest_contributor = latest_contributor)
 
         print(latest_contributor)
@@ -270,11 +275,32 @@ def base(request):
     context = {
         "barangay_id_form": barangay_id.objects.all(),
         "announcements": announcement.objects.all(),
+        "user": request.user
     }
     return render(request, "base.html", context)
 
 def say_hello(request):
     return render(request, "base.html")
+
+def user_logout(request): 
+    print("ENTERING LOGOUT FUNCTION")
+    logout(request)
+    return redirect('/web_portal')
+
+def user_login(request):
+    if (request.method == 'POST'):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None: 
+            login(request, user)
+            print(username)
+            print(password)
+            return redirect('/web_portal/')
+        else: 
+            messages.warning(request, "Username or Password is incorrect")
+
+    return render(request, 'user_login.html')
 
 def create_barangay_certificate(request):
     context = {

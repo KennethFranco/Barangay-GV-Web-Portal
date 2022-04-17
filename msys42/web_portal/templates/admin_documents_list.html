@@ -4,124 +4,121 @@
 
 <body>
     <!-- CONTENT -->
-
-    <div class="main">
-        <div class="container">
-            <div class="adminMainBlock p-5 mt-5" style="background-color: white;">
-                <div class="row">
-                    <h1>Documents</h1>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdownMain" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Current Filter: All Documents
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#" onclick="filterState0()">All Documents</a>
-                            <a class="dropdown-item" href="#" onclick="filterState1()">Barangay IDs</a>
-                            <a class="dropdown-item" href="#" onclick="filterState2()">Barangay Clearances</a>
-                            <a class="dropdown-item" href="#" onclick="filterState3()">Certificates of Indigency</a>
-                            <a class="dropdown-item" href="#" onclick="filterState4()">Barangay Certificates</a>
-                        </div>
+    <div class="container">
+        <div class="adminMainBlock p-5 mt-5" style="background-color: white;">
+            <div class="row">
+                <h1>Documents</h1>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdownMain" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Current Filter: All Documents
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" onclick="filterState0()">All Documents</a>
+                        <a class="dropdown-item" href="#" onclick="filterState1()">Barangay IDs</a>
+                        <a class="dropdown-item" href="#" onclick="filterState2()">Barangay Clearances</a>
+                        <a class="dropdown-item" href="#" onclick="filterState3()">Certificates of Indigency</a>
+                        <a class="dropdown-item" href="#" onclick="filterState4()">Barangay Certificates</a>
                     </div>
                 </div>
-    
-                <div class="row mt-5" id="documentList1">
-                    <h1>Barangay IDs</h1>
-                    <table class="tdl">
-                        <thead>
-                            <tr class="tdlr globalTableCell">
-                                <th class="tdlh">Document Request Number</th>
-                                <th class="tdlh">Date Requested</th>
-                                <th class="tdlh">Current Status of Document</th>
-                                <th class="tdlh">Latest Contributor</th>
-                            </tr>
-    
-                        </thead>
-                        <tbody id="IDRows">
-                            {% for i in ids %}
-                            <tr class="globalTableCell">
-                                <td class="tdld"><a href="{% url 'admin_individual_barangay_id' pk=i.pk %}">{{ i.document_id }}</a>
-                                </td>
-                                <td class="tdld">{{ i.date_submitted}}</td>
-                                <td class="tdld">{{ i.status }}</td>
-                                <td class="tdld">{{ i.latest_contributor }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-    
-                <div class="row mt-5" id="documentList2">
-                    <h1>Barangay Clearances</h1>
-                    <table class="tdl">
-                        <thead>
-                            <tr class="tdlr globalTableCell">
-                                <th class="tdlh">Document Request Number</th>
-                                <th class="tdlh">Date Requested</th>
-                                <th class="tdlh">Current Status of Document</th>
-                                <th class="tdlh">Latest Contributor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for cl in clearances %}
-                            <tr class="globalTableCell">
-                                <td class="tdld"><a href="{% url 'admin_individual_barangay_clearance' pk=cl.pk %}">{{ cl.document_id }}</a></td>
-                                <td class="tdld">{{ cl.date_submitted}}</td>
-                                <td class="tdld">{{ cl.status }}</td>
-                                <td class="tdld">{{ cl.latest_contributor }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-    
-                <div class="row mt-5" id="documentList3">
-                    <h1>Certificates of Indigency</h1>
-                    <table class="tdl">
-                        <thead>
-                            <tr class="tdlr globalTableCell">
-                                <th class="tdlh">Document Request Number</th>
-                                <th class="tdlh">Date Requested</th>
-                                <th class="tdlh">Current Status of Document</th>
-                                <th class="tdlh">Latest Contributor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for ci in cois %}
-                            <tr class="globalTableCell">
-                                <td class="tdld"><a href="{% url 'admin_individual_barangay_clearance' pk=cl.pk %}">{{ ci.pk }}</a></td>
-                                <td class="tdld">{{ ci.date_submitted}}</td>
-                                <td class="tdld">{{ ci.status }}</td>
-                                <td class="tdld">{{ ci.latest_contributor }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-    
-                <div class="row mt-5" id="documentList4">
-                    <h1>Barangay Certificates</h1>
-                    <table class="tdl">
-                        <thead>
-                            <tr class="tdlr globalTableCell">
-                                <th class="tdlh">Document Request Number</th>
-                                <th class="tdlh">Date Requested</th>
-                                <th class="tdlh">Current Status of Document</th>
-                                <th class="tdlh">Latest Contributor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for ce in certificates %}
-                            <tr class="globalTableCell">
-                                <td class="tdld"><a href="{% url 'admin_individual_barangay_certificate' pk=ce.pk %}">{{ ce.pk }}</a></td>
-                                <td class="tdld">{{ ce.date_submitted}}</td>
-                                <td class="tdld">{{ ce.status }}</td>
-                                <td class="tdld">{{ ce.latest_contributor }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+            </div>
+
+            <div class="row mt-5" id="documentList1">
+                <h1>Barangay IDs</h1>
+                <table class="tdl">
+                    <thead>
+                        <tr class="tdlr globalTableCell">
+                            <th class="tdlh">Document Request Number</th>
+                            <th class="tdlh">Date Requested</th>
+                            <th class="tdlh">Current Status of Document</th>
+                            <th class="tdlh">Latest Contributor</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="IDRows">
+                        {% for i in ids %}
+                        <tr class="globalTableCell">
+                            <td class="tdld"><a href="{% url 'admin_individual_barangay_id' pk=i.pk %}">{{ i.document_id }}</a>
+                            </td>
+                            <td class="tdld">{{ i.date_submitted}}</td>
+                            <td class="tdld">{{ i.status }}</td>
+                            <td class="tdld">{{ i.latest_contributor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row mt-5" id="documentList2">
+                <h1>Barangay Clearances</h1>
+                <table class="tdl">
+                    <thead>
+                        <tr class="tdlr globalTableCell">
+                            <th class="tdlh">Document Request Number</th>
+                            <th class="tdlh">Date Requested</th>
+                            <th class="tdlh">Current Status of Document</th>
+                            <th class="tdlh">Latest Contributor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cl in clearances %}
+                        <tr class="globalTableCell">
+                            <td class="tdld"><a href="{% url 'admin_individual_barangay_clearance' pk=cl.pk %}">{{ cl.document_id }}</a></td>
+                            <td class="tdld">{{ cl.date_submitted}}</td>
+                            <td class="tdld">{{ cl.status }}</td>
+                            <td class="tdld">{{ cl.latest_contributor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row mt-5" id="documentList3">
+                <h1>Certificates of Indigency</h1>
+                <table class="tdl">
+                    <thead>
+                        <tr class="tdlr globalTableCell">
+                            <th class="tdlh">Document Request Number</th>
+                            <th class="tdlh">Date Requested</th>
+                            <th class="tdlh">Current Status of Document</th>
+                            <th class="tdlh">Latest Contributor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ci in cois %}
+                        <tr class="globalTableCell">
+                            <td class="tdld"><a href="{% url 'admin_individual_barangay_clearance' pk=cl.pk %}">{{ ci.pk }}</a></td>
+                            <td class="tdld">{{ ci.date_submitted}}</td>
+                            <td class="tdld">{{ ci.status }}</td>
+                            <td class="tdld">{{ ci.latest_contributor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row mt-5" id="documentList4">
+                <h1>Barangay Certificates</h1>
+                <table class="tdl">
+                    <thead>
+                        <tr class="tdlr globalTableCell">
+                            <th class="tdlh">Document Request Number</th>
+                            <th class="tdlh">Date Requested</th>
+                            <th class="tdlh">Current Status of Document</th>
+                            <th class="tdlh">Latest Contributor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ce in certificates %}
+                        <tr class="globalTableCell">
+                            <td class="tdld"><a href="{% url 'admin_individual_barangay_certificate' pk=ce.pk %}">{{ ce.pk }}</a></td>
+                            <td class="tdld">{{ ce.date_submitted}}</td>
+                            <td class="tdld">{{ ce.status }}</td>
+                            <td class="tdld">{{ ce.latest_contributor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

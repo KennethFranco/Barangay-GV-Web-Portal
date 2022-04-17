@@ -56,12 +56,8 @@
             return [year, month, day].join('-');
         }
 
-        
         birthday = '{{ user.admin_account.birthday }}'
-
         var datemilli = Date.parse(birthday);
-        console.log(taskDate(datemilli));
-        console.log(formatDate(taskDate(datemilli)));
         document.getElementById('birthday').value = formatDate(taskDate(datemilli))
     </script>
 
