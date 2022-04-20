@@ -12,6 +12,9 @@ urlpatterns = [
     path("create_barangay_clearance/", views.create_barangay_clearance, name = "create_barangay_clearance"),
     path("create_certificate_of_indigency/", views.create_certificate_of_indigency, name = "create_certificate_of_indigency"),
 
+    # document tracker
+    path("document_tracker/", views.document_tracker, name = "document_tracker"),
+
     # document success page logged out
     path("document_success", views.document_success_page, name="document_success_page"),
 

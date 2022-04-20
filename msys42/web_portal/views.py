@@ -302,6 +302,27 @@ def user_login(request):
 
     return render(request, 'user_login.html')
 
+def document_tracker(request):
+    if (request.method == 'POST'):
+        searched = request.POST.get("searched")
+
+        ids = barangay_id.objects.filter(document_id = searched)
+        clearances = barangay_clearance.objects.filter(document_id = searched)
+        cois = certificate_of_indigency.objects.filter(document_id = searched)
+        certificates = barangay_certificate.objects.filter(document_id = searched)
+
+        print(clearances)
+        context = {
+            "ids": ids,
+            "clearances": clearances,
+            "cois": cois,
+            "certificates": certificates,
+            "searched": searched,
+        }
+        return render(request, 'document_tracker.html', context)
+    else:
+        return render(request, 'document_tracker.html')
+
 def create_barangay_certificate(request):
     context = {
         "ids": barangay_id.objects.all(),

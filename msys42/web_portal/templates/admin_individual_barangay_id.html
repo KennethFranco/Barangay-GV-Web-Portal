@@ -41,7 +41,7 @@
 
     <!-- DYANAMIC FRAME -->
     {% if lia.status == "Submitted for Review"%}
-    <div class="container documentContainer">
+    <div class="container documentContainer" style = "background: white;">
         <h1 class="row headerRowDocument p-3">
             Details
         </h1>
@@ -264,7 +264,7 @@
  
     </div>
     {% elif lia.status == "Review Completed" %}
-    <div class="container documentContainer">
+    <div class="container documentContainer" style = "background: white;">
         <h1 class="row headerRowDocument p-3">
             Document Information
         </h1>
@@ -293,7 +293,7 @@
     </div>
     {% elif lia.status == "Pre-filled Template Verified" %}
     {% if lia.type == "Constituent" %}
-    <div class="container documentContainer">
+    <div class="container documentContainer" style = "background: white;">
         <h1 class="row headerRowDocument p-3">
             Document Information
         </h1>

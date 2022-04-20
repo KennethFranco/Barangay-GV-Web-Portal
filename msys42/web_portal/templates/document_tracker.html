@@ -1,0 +1,82 @@
+{% extends "barangay_id_form.html" %}
+{% load static %}
+
+{% block title %}
+Document Tracker
+{% endblock %}
+
+{% block checkerTitle %}
+Document Tracker
+{% endblock %}
+
+{% block form %}
+<h1>Document Tracker</h1>
+<h1>Kindly put in your document's request # to check on its current status.</h1>
+<form method =POST action = "{% url 'document_tracker' %}">  {% csrf_token %}
+    <input type="search" placeholder = "Search" aria-label="Search" name = "searched">
+    <button type="submit">Search</button>
+
+    {% if searched %}
+        <h1 class = "mb-5">Results for Document Request#{{ searched }}:</h1>
+        {% for id in ids %}
+            <div class = "row">
+                <h1>Document ID Number: {{ id.document_id }}</h1>
+            </div>
+            <div class = "row">
+                <h1>Document Requested: {{ id.document_type }}</h1>
+            </div>
+            <div class = "row">
+                <h1>Current Status of Document: {{ id.status }}</h1>
+            </div>
+            <div class = "row">
+                <h1>Additional Details: {{ id.additional_details }}</h1>
+            </div>
+        {% endfor %}
+
+        {% for clearance in clearances %}
+        <div class = "row">
+            <h1>Document ID Number: {{ clearance.document_id }}</h1>
+        </div>
+        <div class = "row">
+            <h1>Document Requested: {{ clearance.document_type }}</h1>
+        </div>
+        <div class = "row">
+            <h1>Current Status of Document: {{ clearance.status }}</h1>
+        </div>
+        <div class = "row">
+            <h1>Additional Details: {{ clearance.additional_details }}</h1>
+        </div>
+        {% endfor %}
+
+        {% for coi in cois %}
+        <div class = "row">
+            <h1>Document ID Number: {{ coi.document_id }}</h1>
+        </div>
+        <div class = "row">
+            <h1>Document Requested: {{ coi.document_type }}</h1>
+        </div>
+        <div class = "row">
+            <h1>Current Status of Document: {{ coi.status }}</h1>
+        </div>
+        <div class = "row">
+            <h1>Additional Details: {{ coi.additional_details }}</h1>
+        </div>
+        {% endfor %}
+
+        {% for certificate in certificates %}
+        <div class = "row">
+            <h1>Document ID Number: {{ certificate.document_id }}</h1>
+        </div>
+        <div class = "row">
+            <h1>Document Requested: {{ certificate.document_type }}</h1>
+        </div>
+        <div class = "row">
+            <h1>Current Status of Document: {{ certificate.status }}</h1>
+        </div>
+        <div class = "row">
+            <h1>Additional Details: {{ certificate.additional_details }}</h1>
+        </div>
+        {% endfor %}
+    {% endif %}
+</form>
+{% endblock %}
