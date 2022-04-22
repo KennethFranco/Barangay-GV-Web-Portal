@@ -135,13 +135,13 @@
                         - Blk -
                         Street<span style="color: #B30000;">*</span></label><br>
                     <input id="address_first_line" name="address_first_line" class="bodyFont formInput"
-                        type="text" placeholder="House Number - Blk - Street" value = {{lia.street}} disabled>
+                        type="text" placeholder="House Number - Blk - Street" value = '{{lia.street}}' disabled>
                 </div>
                 <div class="col">
                     <label class="bodyFont formLabel globalSubHeader" for="address_city">City<span
                             style="color: #B30000;">*</span></label><br>
                     <input id="address_city" name="address_city" class="bodyFont formInput" type="text"
-                        placeholder="City" value = {{lia.city}} disabled>
+                        placeholder="City" value = '{{lia.city}}' disabled>
                 </div>
             </div>
             <div class="row mb-3">
@@ -149,13 +149,13 @@
                     <label class="bodyFont formLabel globalSubHeader" for="address_barangay">Barangay<span
                             style="color: #B30000;">*</span></label><br>
                     <input id="address_barangay" name="address_barangay" class="bodyFont formInput"
-                        type="text" placeholder="Barangay" value = {{lia.barangay}} disabled>
+                        type="text" placeholder="Barangay" value = '{{lia.barangay}}' disabled>
                 </div>
                 <div class="col">
                     <label class="bodyFont formLabel globalSubHeader" for="address_province">Province<span
                             style="color: #B30000;">*</span></label><br>
                     <input id="address_province" name="address_province" class="bodyFont formInput"
-                        type="text" placeholder="Province" value = {{lia.province}} disabled>
+                        type="text" placeholder="Province" value = '{{lia.province}}' disabled>
                 </div>
                 <div class="col">
                     <label class="bodyFont formLabel globalSubHeader" for="address_zip_code">Zip Code<span
@@ -316,13 +316,23 @@
                     </div>
                     <div class= "col">
                         <!-- FUCKING WORKS!!!!! -->
-                        <form method="POST" action="{% url 'admin_update_status_barangay_id_to_printed' pk=lia.pk %}"> {% csrf_token %}
-                            <!-- :) -->
+                        <!-- <form method="POST" action="{% url 'admin_update_status_barangay_id_to_printed' pk=lia.pk %}"> {% csrf_token %}
                             <div class="d-none">
                                 <input name="latest_contributor" type="text" id="latest_contributor">
                             </div>
                             <input class="btn btn-secondary" type="submit" value="Update Status to Printed">
-                        </form>
+                        </form> -->
+                    <form method="POST" action="{% url 'some_view' %}"> {% csrf_token %}
+                            <div class="d-none">
+                                <input name="latest_contributor" type="text" id="latest_contributor">
+                            </div>
+                            <input name = "lods" type="text" id= "lods">
+                            </input>
+                            <input class="btn btn-secondary" type="submit" value="Update Status to Printed">
+                        </form> 
+                        <!-- <button action = "">
+                            alo
+                        </button> -->
                     </div>
                 </div>
         </div>

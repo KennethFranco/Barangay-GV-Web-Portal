@@ -37,6 +37,37 @@ def admin_login(request):
 
     return render(request, 'admin_login.html')
 
+import io
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from reportlab.platypus import Paragraph, Table, TableStyle, Image
+
+def some_view(request):
+    if (request.method == 'POST'):
+        lods = request.POST.get("lods")
+        # Create a file-like buffer to receive PDF data.
+        buffer = io.BytesIO()
+
+        # Create the PDF object, using the buffer as its "file."
+        p = canvas.Canvas(buffer)
+
+        # Draw things on the PDF. Here's where the PDF generation happens.
+        # See the ReportLab documentation for the full list of functionality.
+        print("LODS")
+        p.drawString(100, 297, lods)
+
+        # a = Image.open("msys42/web_portal/tite.png")
+        p.drawInlineImage("msys42/web_portal/tite.png", 100, 450)
+
+        # Close the PDF object cleanly, and we're done.
+        p.showPage()
+        p.save()
+
+        # FileResponse sets the Content-Disposition header so that browsers
+        # present the option to save the file.
+        buffer.seek(0)
+        return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
+
 @staff_member_required
 def admin_base (request):
     return render(request, 'admin_base.html')

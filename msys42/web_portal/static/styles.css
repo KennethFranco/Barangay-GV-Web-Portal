@@ -230,28 +230,16 @@
     padding-top: 16px;
     border-radius: 10px 10px 0px 0px;
     background-color: white;
-    padding-bottom: 24px;
+    padding-bottom: 8px;
     margin-bottom: -8px;
 }
 
-.registrationHeaderPartial {
-    padding-top: 16px;
-    background-color: #f1f731;
-    padding-bottom: 24px;
-    margin-bottom: -8px;
-}
 
 .registrationHeaderEmpty {
     padding-top: 16px;
+    border-radius: 10px 10px 0px 0px;
     background-color: transparent;
-    padding-bottom: 24px;
-    margin-bottom: -8px;
-}
-
-.registrationHeaderFilled {
-    padding-top: 16px;
-    background-color: white;
-    padding-bottom: 24px;
+    padding-bottom: 8px;
     margin-bottom: -8px;
 }
 
