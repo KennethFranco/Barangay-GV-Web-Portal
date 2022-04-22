@@ -96,7 +96,7 @@
         <div class="container pb-5">
             <div class="row pt-5 justify-content-center">
                 <div class="col-lg-6 col-sm-12 bg-primary cardHeader d-flex justify-content-center">
-                    <p class="cardText globalTitle titleFont" id="checkerTitle" value="Barangay ID (Constituent)">
+                    <p class="cardText globalTitle titleFont" id="checkerTitle">
                         Register an Account
                     </p>
                 </div>
@@ -110,69 +110,231 @@
                 <div class="row">
                     <div class="col-lg-3 col-sm registrationHeaderCurrent" id="personalDetailsHeader">
                         <div>
-                            <p class="globalBody formTitle">01 Personal Details</p>
+                            <p class="globalBody formLabel">01 Personal Details</p>
+                        </div>
+                        <div class="formTitle">
+
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm registrationHeaderEmpty" id="accountInfoHeader">
                         <div>
-                            <p class="globalBody formTitle">02 Account Info</p>
+                            <p class="globalBody formLabel">02 Account Info</p>
+                        </div>
+                        <div class="formTitle">
+
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm registrationHeaderEmpty" id="addressHeader">
                         <div>
-                            <p class="globalBody formTitle">03 Address</p>
+                            <p class="globalBody formLabel">03 Address</p>
+                        </div>
+                        <div class="formTitle">
+
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm registrationHeaderEmpty" id="submitHeader">
                         <div>
-                            <p class="globalBody formTitle">04 Submit</p>
+                            <p class="globalBody formLabel">04 Submit</p>
+                        </div>
+                        <div class="formTitle">
+
                         </div>
                     </div>
                 </div>
                 <div class="row form p-5" if>
                     {% block form %}
-                    <form id="mainForm" method="POST" action="{% url 'create_barangay_id' %}"> {% csrf_token %}
+                    <form id="mainForm" method="POST" action=""> {% csrf_token %}
                         <div id="personal_details">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="last_name">Last Name<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="last_name" name="last_name" class="bodyFont formInput" type="text"
+                                        placeholder="Last Name">
+                                </div>
+                                <div class="col-lg-4 col-sm-6 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="nationality">Nationality<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="nationality" name="nationality" class="bodyFont formInput" type="text"
+                                        placeholder="Nationality">
+                                </div>
+                                <div class="col-lg-2 col-sm-6 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="sex">Sex<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <select id="sex" name="sex" class="bodyFont formInput" type="text"
+                                        placeholder="Sex">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Prefer not to say">Prefer not to say</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="first_name">First Name<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="first_name" name="first_name" class="bodyFont formInput" type="text"
+                                        placeholder="Last Name">
+                                </div>
+                                <div class="col-lg-3 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="civil_status">Civil
+                                        Status<span style="color: #B30000;">*</span></label><br>
+                                    <select id="civil_status" name="civil_status" class="bodyFont formInput" type="text"
+                                        placeholder="Civil Status">
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Widowed">Widowed</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 col-sm-6 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="age">Age<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="age" name="age" class="bodyFont formInput" type="number"
+                                        placeholder="Age">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="middle_name">Middle Name<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="middle_name" name="middle_name" class="bodyFont formInput" type="text"
+                                        placeholder="Middle Name">
+                                </div>
+                                <div class="col-lg-3 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="birthday">Birthday<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="birthday" name="birthday" class="bodyFont formInput" type="date">
+                                </div>
+                                <div class="col-lg-3 mb-4">
 
+                                </div>
+                            </div>
                         </div>
                         <div id="account_info">
-                            
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="username">Username<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="username" name="username" class="bodyFont formInput" type="text"
+                                        placeholder="Username">
+                                </div>
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="contact_number">Contact
+                                        Number<span style="color: #B30000;">*</span></label><br>
+                                    <input id="contact_number" name="contact_number" class="bodyFont formInput"
+                                        type="number" placeholder="9XXXXXXXXX">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="email">Email<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="email" name="email" class="bodyFont formInput" type="text"
+                                        placeholder="Email">
+                                </div>
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="confirm_email">Confirm
+                                        Email<span style="color: #B30000;">*</span></label><br>
+                                    <input id="confirm_email" name="confirm_email" class="bodyFont formInput"
+                                        type="text" placeholder="Confirm Email">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="password">Password<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="password" name="password" class="bodyFont formInput" type="text"
+                                        placeholder="Password">
+                                </div>
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="confirm_password">Confirm
+                                        Password<span style="color: #B30000;">*</span></label><br>
+                                    <input id="confirm_password" name="confirm_password" class="bodyFont formInput"
+                                        type="text" placeholder="Confirm Password">
+                                </div>
+                            </div>
                         </div>
                         <div id="addressPage">
                             <div class="row">
                                 <div class="col-lg-12 col-sm-12 mb-4">
-                                    <label class="bodyFont formLabel globalSubHeader" for="street">House Number - Blk - Street<span
-                                            style="color: #B30000;">*</span></label><br>
+                                    <label class="bodyFont formLabel globalSubHeader" for="street">House Number - Blk -
+                                        Street<span style="color: #B30000;">*</span></label><br>
                                     <input id="street" name="street" class="bodyFont formInput" type="text"
                                         placeholder="House Number - Blk - Street">
                                 </div>
                                 <div class="col-lg-6 spacer">
-                                    
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="province">Province<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="province" name="province" class="bodyFont formInput" type="text"
+                                        placeholder="Province">
+                                </div>
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="city">City<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="city" name="city" class="bodyFont formInput" type="text"
+                                        placeholder="City">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="barangay">Barangay<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="barangay" name="barangay" class="bodyFont formInput" type="text"
+                                        placeholder="Barangay">
+                                </div>
+                                <div class="col-lg-6 col-sm-12 mb-4">
+                                    <label class="bodyFont formLabel globalSubHeader" for="zip_code">Zip Code<span
+                                            style="color: #B30000;">*</span></label><br>
+                                    <input id="zip_code" name="zip_code" class="bodyFont formInput" type="number"
+                                        placeholder="Zip Code">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="submitPage">
+                            <div class="mb-5">
+                                <h1 class="mb-5">Terms and Conditions</h1>
+                                <div>
+                                    <input style="width: 24px; height: 24px" type="checkbox" id="checker1"
+                                        name="checker1">
+                                    <label class="titleFont checkingFont" for="checker1"> I hereby declare that the
+                                        information provided is true and correct.</label>
+                                </div>
+
+                                <div>
+                                    <input style="width: 24px; height: 24px" type="checkbox" id="checker2"
+                                        name="checker2">
+                                    <label class="titleFont checkingFont" for="checker2"> I understand that a false
+                                        statement may cancel any
+                                        occurring requests in Barangay Guadalupe Viejo.</label>
                                 </div>
                             </div>
                         </div>
-                        <div id="submitPage">
 
+                        <div class="d-flex justify-content-end" id="personalDetailsBtnSet">
+                            <div class="btn btn-secondary" id="goToAccountInfo">Next</div>
                         </div>
-
+                        <div class="d-flex justify-content-between" id="accountInfoBtnSet">
+                            <div class="btn btn-secondary" id="backToPersonalDetails" style="display: none;">Back</div>
+                            <div class="btn btn-secondary" id="goToAddress" style="display: none;">Next</div>
+                        </div>
+                        <div class="d-flex justify-content-between" id="addressBtnSet">
+                            <div class="btn btn-secondary" id="backToAccountInfo" style="display: none;">Back</div>
+                            <div class="btn btn-secondary" id="goToSubmit" style="display: none;">Next</div>
+                        </div>
+                        <div class="d-flex justify-content-between" id="submitBtnSet">
+                            <div class="btn btn-secondary" id="backToAddress" style="display: none;">Back</div>
+                            <input type="submit" class="btn btn-secondary" id="submit" style="display: none;">
+                        </div>
                     </form>
 
-                    <div class="d-flex justify-content-end" id="personalDetailsBtnSet">
-                        <button class="btn btn-secondary" id="goToAccountInfo">Next</button>
-                    </div>
-                    <div class="d-flex justify-content-between" id="accountInfoBtnSet">
-                        <button class="btn btn-secondary" id="backToPersonalDetails"
-                            style="display: none;">Back</button>
-                        <button class="btn btn-secondary" id="goToAddress" style="display: none;">Next</button>
-                    </div>
-                    <div class="d-flex justify-content-between" id="addressBtnSet">
-                        <button class="btn btn-secondary" id="backToAccountInfo" style="display: none;">Back</button>
-                        <button class="btn btn-secondary" id="goToSubmit" style="display: none;">Next</button>
-                    </div>
-                    <div class="d-flex justify-content-between" id="submitBtnSet">
-                        <button class="btn btn-secondary" id="backToAddress" style="display: none;">Back</button>
-                        <input type="submit" class="btn btn-secondary" id="submit" style="display: none;">
-                    </div>
+
                     {% endblock%}
                 </div>
             </div>
@@ -196,8 +358,6 @@
         crossorigin="anonymous"></script>
 
     <!-- UUID GENERATOR FOR DOCUMENT AND LEAVING PAGE CONFIRMATION -->
-    <script>
-    </script>
     <!-- DISPLAY ACCOUNT AVATAR -->
     <script>
         avatarSection = document.getElementById('modalButton')

@@ -230,7 +230,7 @@
     padding-top: 16px;
     border-radius: 10px 10px 0px 0px;
     background-color: white;
-    padding-bottom: 8px;
+    padding-bottom: 16px;
     margin-bottom: -8px;
 }
 
@@ -239,7 +239,7 @@
     padding-top: 16px;
     border-radius: 10px 10px 0px 0px;
     background-color: transparent;
-    padding-bottom: 8px;
+    padding-bottom: 16px;
     margin-bottom: -8px;
 }
 
