@@ -287,6 +287,9 @@ def user_logout(request):
     logout(request)
     return redirect('/web_portal')
 
+def user_register(request): 
+    return render(request, 'user_register.html')
+
 def user_login(request):
     if (request.method == 'POST'):
         username = request.POST['username']

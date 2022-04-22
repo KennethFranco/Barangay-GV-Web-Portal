@@ -19,6 +19,40 @@
 
 </head>
 
+<style>
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 80px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0);
+        /* Black w/ opacity */
+    }
+
+    #accountArrow,
+    .avatar,
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
 <body>
     <nav class="container-fluid navbar navbar-expand-md navbarGV">
         <div class="container">
@@ -44,23 +78,50 @@
 
             <div class="collapse navbar-collapse" id="toggleMobileMenu">
                 <ul class="navbar-nav ms-auto">
-                    <li class="bodyFont globalBody">
+                    <li class="bodyFont globalBody p-2">
                         <a class="nav-link navbarOption" href="">Home</a>
                     </li>
-                    <li class="bodyFont globalBody">
+                    <li class="bodyFont globalBody p-2">
                         <a class="nav-link navbarOption" href="">Contact</a>
                     </li>
-                    <li class="bodyFont globalBody">
+                    <li class="bodyFont globalBody p-2">
                         <a class="nav-link navbarOption" href="">About Us</a>
                     </li>
-                    <li class="bodyFont globalBody" id="signin">
+                    <li class="bodyFont globalBody p-2" id="signin">
                         <a class="nav-link navbarOption" href="{% url 'user_login' %}">Sign In</a>
                     </li>
-                    <li class="bodyFont globalBody" id="register">
-                        <a style="margin-right: 0px;" class="nav-link navbarOption" href="">Register</a>
+                    <li class="bodyFont globalBody p-2" id="register">
+                        <a style="margin-right: 0px;" class="nav-link navbarOption" href="{% url 'user_register' %}">Register</a>
                     </li>
                     <li>
-                        <div class="avatar text-center pt-2 globalBody" id="avatar"></div>
+                        <div class="row p-2" id="modalButton" style="border: 1px solid white; border-radius: 20px;">
+                            <div class="col-sm-12 col-lg-12 avatar text-center pt-2 globalBody" id="avatar">
+
+                            </div>
+                            <div class="col-sm col-lg align-self-center">
+                                <p class="p-0 m-0" id="accountArrow" style="color: white;">&#x25BC</p>
+                            </div>
+                        </div>
+
+                        <div class="modal" id="myModal">
+                            <div class="modal-content" style="width: 10%; margin-left: 80%;">
+                                <span class="close d-flex justify-content-end"
+                                    style="margin-right: 10px;">&times;</span>
+                                <a class="content" href="">
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <p class="globalTableCell">My Account</p>
+                                    </div>
+                                </a>
+
+                                <a class="content" href="{% url 'user_logout' %}">
+                                    <div class="d-flex justify-content-center">
+                                        <p class="globalTableCell">Sign Out</p>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+
                     </li>
                 </ul>
             </div>
@@ -75,7 +136,8 @@
                         <div class="hero">
                             <h1 class="bodyFont heroBody globalTitle m-5" style="padding-left: 25px;">Welcome to
                                 <br><span class="titleFont heroTitle">Guadalupe
-                                    Viejo!</span></h1>
+                                    Viejo!</span>
+                            </h1>
                         </div>
                     </div>
 
@@ -132,6 +194,8 @@
                             </div>
                         </button>
                         <div class="contentBlock">
+                            <div class="pt-3 spacer">
+                            </div>
                             <a href="{% url 'create_barangay_id' %}" style="text-decoration: none;" onclick="
                             function hi(){
                                 localStorage.setItem('barangay_id_choice', 'Constituent');
@@ -172,6 +236,8 @@
 
                         </button>
                         <div class="contentBlock">
+                            <div class="pt-3 spacer">
+                            </div>
                             <a href="{% url 'create_barangay_clearance' %}" style="text-decoration: none;" onclick="
                             function hi(){
                                 localStorage.setItem('barangay_clearance_choice', 'Bonafide');
@@ -226,6 +292,8 @@
                             </div>
                         </button>
                         <div class="contentBlock">
+                            <div class="pt-3 spacer">
+                            </div>
                             <a href="{% url 'create_barangay_certificate' %}" style="text-decoration: none;" onclick="function hi(){
                                 localStorage.setItem('barangay_certificate_choice', 'Bonafide');
                                 localStorage.setItem('currentForm', 'barangay_certificate');
@@ -254,8 +322,8 @@
                             <a href="{% url 'document_tracker' %}" style="text-decoration: none; color: white;">
                                 <p class="pt-2 titleFont servicesTitle globalSubHeader">Check Ongoing Request</p>
                             </a>
-            
-                           
+
+
                         </div>
                     </div>
                 </div>
@@ -268,6 +336,7 @@
         crossorigin="anonymous"></script>
 
     <script>
+        avatarSection = document.getElementById('modalButton')
         avatar = document.getElementById('avatar')
         signin = document.getElementById('signin')
         register = document.getElementById('register')
@@ -275,7 +344,7 @@
         userArray = '{{ user }}'.split("");
 
         console.log('{{ user }}')
-        
+
         if ('{{ user }}' != "AnonymousUser" && '{{ user }}' != "") {
             signin.style.display = "none"
             register.style.display = "none"
@@ -286,6 +355,7 @@
             signin.style.display = "block"
             register.style.display = "block"
             avatar.style.display = "none"
+            avatarSection.style.display = "none"
         }
 
         var coll = document.getElementsByClassName("collapsible");
@@ -298,14 +368,38 @@
                 var content = this.nextElementSibling;
                 var symbol = this.lastElementChild.lastElementChild.lastElementChild;
                 console.log(symbol);
-                if (content.style.display === "block") {
-                    content.style.display = "none";
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
                     symbol.innerHTML = "&#x25BC";
                 } else {
-                    content.style.display = "block";
+                    content.style.maxHeight = content.scrollHeight + "px";
                     symbol.innerHTML = "&#x25B2";
                 }
             });
+        }
+    </script>
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("modalButton");
+        var span = document.getElementsByClassName("close")[0];
+        var arrow = document.getElementById("accountArrow")
+        modal.style.display = 'none'
+
+        btn.onclick = function () {
+            modal.style.display = "block";
+            arrow.innerHTML = "&#x25B2"
+        }
+        span.onclick = function () {
+            modal.style.display = "none";
+            arrow.innerHTML = "&#x25BC"
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                arrow.innerHTML = "&#x25BC"
+            }
         }
     </script>
     <!-- <script src="{% static 'main.js' %}"></script> -->

@@ -218,9 +218,30 @@ class admin_account(models.Model):
 
 class user_account(models.Model): 
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+
+    # Personal Details
+    middle_name = models.CharField(max_length=100, default='')
     age = models.IntegerField(default = 0)
     birthday = models.DateTimeField(default="2022-01-01")
+    nationality = models.CharField(max_length = 100, default="null")
+    civil_status = models.CharField(max_length = 100, default="null")
+    sex = models.CharField(
+        max_length = 100,
+        choices =  [('Male', 'Male'), ('Female', 'Female'), ('Prefer not to say', 'Prefer not to say')], 
+        default="null"
+    )
+    personal_photo = models.FileField(default="null")
+
+    # Account Info
+    email = models.CharField(max_length = 100, default="null")
     contact_number = models.IntegerField(max_length = 10, default=0)
+
+    # Address 
+    street = models.CharField(max_length = 100, default="null")
+    city = models.CharField(max_length = 100, default="null")
+    barangay = models.CharField(max_length = 100, default="null")
+    province = models.CharField(max_length = 100, default="null")
+    zip_code = models.CharField(max_length = 100, default="null")
 
     def __str__(self):
         return str(self.user)

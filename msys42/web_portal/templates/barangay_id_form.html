@@ -21,6 +21,40 @@
         rel="stylesheet">
 </head>
 
+<style>
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 80px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0);
+        /* Black w/ opacity */
+    }
+
+    #accountArrow,
+    .avatar,
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
 <body>
     <nav class="container-fluid navbar navbar-expand-md navbarGV">
         <div class="container">
@@ -46,20 +80,47 @@
 
             <div class="collapse navbar-collapse" id="toggleMobileMenu">
                 <ul class="navbar-nav ms-auto">
-                    <li class="bodyFont globalBody">
-                        <a class="nav-link navbarOption" href="">Home</a>
+                    <li class="bodyFont globalBody p-2">
+                        <a class="nav-link navbarOption" href="{% url 'base' %}">Home</a>
                     </li>
-                    <li class="bodyFont globalBody">
+                    <li class="bodyFont globalBody p-2">
                         <a class="nav-link navbarOption" href="">Contact</a>
                     </li>
-                    <li class="bodyFont globalBody">
+                    <li class="bodyFont globalBody p-2">
                         <a class="nav-link navbarOption" href="">About Us</a>
                     </li>
-                    <li class="bodyFont globalBody">
-                        <a class="nav-link navbarOption" href="">Sign In</a>
+                    <li class="bodyFont globalBody p-2" id="signin">
+                        <a class="nav-link navbarOption" href="{% url 'user_login' %}">Sign In</a>
                     </li>
-                    <li class="bodyFont globalBody">
+                    <li class="bodyFont globalBody p-2" id="register">
                         <a style="margin-right: 0px;" class="nav-link navbarOption" href="">Register</a>
+                    </li>
+                    <li>
+                        <div class="row p-2" id="modalButton" style="border: 1px solid white; border-radius: 20px;">
+                            <div class="col-lg-12 col-sm-12 avatar text-center pt-2 globalBody" id="avatar">
+
+                            </div>
+                            <div class="col-sm col-lg align-self-center">
+                                <p class="p-0 m-0" id="accountArrow" style="color: white;">&#x25BC</p>
+                            </div>
+                        </div>
+
+                        <div class="modal" id="myModal">
+                            <div class="modal-content" style="width: 10%; margin-left: 80%;">
+                                <span class="close d-flex justify-content-end"
+                                    style="margin-right: 10px;">&times;</span>
+                                <div class="d-flex justify-content-center mt-2">
+                                    <p class="globalTableCell">My Account</p>
+                                </div>
+                                <a href="{% url 'user_logout' %}">
+                                    <div class="d-flex justify-content-center">
+                                        <p class="globalTableCell">Sign Out</p>
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+
                     </li>
                 </ul>
             </div>
@@ -428,6 +489,8 @@
         crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>
 
+
+    <!-- UUID GENERATOR FOR DOCUMENT AND LEAVING PAGE CONFIRMATION -->
     <script>
         function uuidGenerator() {
             uuid = ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
@@ -489,13 +552,52 @@
                 console.log("SUBMITTING THE THING POLEASEEEEEEEEEEEEE :" + submitting)
                 return;
             }
-
-
         };
+    </script>
+    <!-- DISPLAY ACCOUNT AVATAR -->
+    <script>
+        avatarSection = document.getElementById('modalButton')
+        avatar = document.getElementById('avatar')
+        signin = document.getElementById('signin')
+        register = document.getElementById('register')
 
+        userArray = '{{ user }}'.split("");
 
+        console.log('{{ user }}')
 
+        if ('{{ user }}' != "AnonymousUser" && '{{ user }}' != "") {
+            signin.style.display = "none"
+            register.style.display = "none"
+            avatar.style.display = "block"
+            avatar.innerHTML = userArray[0]
+        }
+        else if ('{{ user }}' == "AnonymousUser") {
+            signin.style.display = "block"
+            register.style.display = "block"
+            avatar.style.display = "none"
+            avatarSection.style.display = "none"
+        }
+    </script>
+    <!-- DISPLAY MODAL FOR ACCOUNT AVATAR -->
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("modalButton");
+        var span = document.getElementsByClassName("close")[0];
+        modal.style.display = 'none'
 
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>
 
