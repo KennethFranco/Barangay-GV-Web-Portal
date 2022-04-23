@@ -143,7 +143,7 @@
                 </div>
                 <div class="row form p-5" if>
                     {% block form %}
-                    <form id="mainForm" method="POST" action=""> {% csrf_token %}
+                    <form class="needs-validation" id="mainForm" method="POST" action="" novalidate> {% csrf_token %}
                         <div id="personal_details">
                             <div class="row">
                                 <div class="col-lg-6 col-sm-12 mb-4">
@@ -317,6 +317,7 @@
                             </div>
                         </div>
 
+                        <!-- BUTTON SET -->
                         <div class="d-flex justify-content-end" id="personalDetailsBtnSet">
                             <div class="btn btn-secondary" id="goToAccountInfo">Next</div>
                         </div>
@@ -358,6 +359,27 @@
         crossorigin="anonymous"></script>
 
     <!-- UUID GENERATOR FOR DOCUMENT AND LEAVING PAGE CONFIRMATION -->
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+                })
+            })()
+    </script>
     <!-- DISPLAY ACCOUNT AVATAR -->
     <script>
         avatarSection = document.getElementById('modalButton')

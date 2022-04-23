@@ -130,9 +130,9 @@ class barangay_id(models.Model):
     emergency_address = models.CharField(max_length = 100, default="null")
 
     # Files
-    personal_photo = models.FileField(default="null")
-    government_id_or_letter = models.FileField(null = True)
-    voters_id = models.FileField(default="null")
+    personal_photo = models.FileField(default="null", upload_to='barangay_id')
+    government_id_or_letter = models.FileField(null = True, upload_to='barangay_id')
+    voters_id = models.FileField(default="null", upload_to='barangay_id')
 
     # Status
     date_submitted = models.DateField(default="2022-01-01")

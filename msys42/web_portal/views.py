@@ -593,9 +593,9 @@ def create_barangay_id(request):
         emergency_address = request.POST.get("emergency_address")
 
         
-        government_id_or_letter = request.POST.get("first_file")
-        voters_id = request.POST.get("second_file")
-        personal_photo = request.POST.get("third_file")
+        government_id_or_letter = request.POST.get("government_id_or_letter")
+        voters_id = request.POST.get("voters_id")
+        personal_photo = request.POST.get("personal_photo")
 
         type = request.POST.get("barangay_id_type")
 
@@ -658,29 +658,6 @@ def create_barangay_id(request):
             [email],
             fail_silently=False,
         )
-
-        account_sid = 'ACab503ab8dea552d21d83e1137db95ea8'
-        auth_token = 'abd486fb93e4cc627bb11dede5438320'
-        client = Client(account_sid, auth_token)
-
-
-        messageBody = "Hello, this is to confirm that your document request #" + current_document_id + " has been submitted. Please regularly check on it."
-        number = '+63' + contact_num
-
-        message = client.messages.create(
-        body= messageBody,
-        from_='+19124913021',
-        to= '+639088178530'
-        )
-
-        # send_sms(
-        #     messageBody,
-        #     '+639088178530',
-        #     [number],
-        #     fail_silently=False
-        # )
-
-        print(message.sid)
         return redirect("document_success_page")
     else:
         return render(request, "barangay_id_form.html", context)
