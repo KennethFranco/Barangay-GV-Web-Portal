@@ -1,0 +1,16 @@
+{% extends "barangay_id_form.html" %}
+{% load static %}
+
+{% block checkerTitle %}
+Success
+{% endblock %}
+
+{% block title %}
+Success
+{% endblock %}
+
+{% block form %}
+<h1 class = "titleFont globalSubHeader">Thank you for submitting your payment for Document Request#<b>{{ document_id }}</b>.</h1>
+<p class = "bodyFont globalBody mt-5">An email will be sent to you soon once your payment has been verified by our staff.</p>
+<p class = "bodyFont globalBody">Please regularly check on your document's status at URL.</p>
+{% endblock %}

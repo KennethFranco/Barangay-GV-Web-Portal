@@ -1,0 +1,966 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block headTitle %}
+<title>Document #{{ lia.document_id }}</title>
+{% endblock %}
+
+
+{% block content %}
+<body>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title globalSubHeader titleFont" id="exampleModalLabel">Document Rejection Confirmation</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class = "globalBody bodyFont">Are you sure you want to proceed with this rejection? This cannot be undone.</p>
+              <form action="{% url 'admin_update_status_barangay_clearance_to_rejected' pk=lia.pk %}" method= 'post'> {% csrf_token %}
+                <div class="form-group mb-5">
+                    <label class="bodyFont formLabel globalSubHeader" for="reason_for_rejection">Reason for Rejection<span style="color: #B30000;">*</span></label></label>
+                    <input name = "reason_for_rejection" type="text" class="bodyFont formInput form-control" id="reason_for_rejection" placeholder="Reason for Rejection" required>
+                </div>
+                <button type="submit" class="btn btn-secondary">Reject</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- FIRST FRAME -->
+    <div class = "container mt-5 mb-5 p-5" style = "background-color: white; border: 3px solid #0F2456;">
+        <div class = "row mb-5">
+            <a href="javascript: history.go(-1)" > {% csrf_token %}
+                <button class="btn btn-secondary">Back</button>
+            </a>
+        </div>
+        <div class = "row">
+            <div class = "col">
+                <h1 class = "titleFont globalSubHeader">Document #<b>{{ lia.document_id }}</b></h1>
+            </div>
+        </div>
+
+        <div class = "row mt-5">
+            <div class = "col">
+                <p class = "bodyFont globalBody">Document Requested: <b>{{ lia.document_type }} - {{ lia.type }}</b></p>
+            </div>
+
+            <div class = "col">
+                <p class = "bodyFont globalBody">Document Requested: <b>{{ lia.status }}</b></p>
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class = "col">
+                <p class = "bodyFont globalBody">Latest Contributor: <b>{{ lia.latest_contributor }}</b></p>
+            </div>
+
+            <div class = "col">
+                <p class = "bodyFont globalBody">Additional Details: <b>{{ lia.additional_details }}</b></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- DYANAMIC FRAME -->
+    {% if lia.status == "Submitted for Review" %}
+    <form action = "{% url 'admin_update_status_barangay_clearance_to_review_completed' pk=lia.pk %}"  style =  "background-color: white; border: 3px solid #0F2456;" class = "container needs-validation p-5" id="mainForm" method="POST" novalidate> {% csrf_token %}
+                <input id="document_id" name="document_id" type="text" style="display: none;">
+                <div class="row">
+                    <p class="bodyFont formLabel globalSubHeader"><span style="color: #B30000;">*</span> Required fields</p>
+                </div>
+                <div class="row">
+                    <div class="col d-flex justify-content-between">
+                        <span class="formTitle titleFont globalHeader mb-5">Personal Details</span>
+                        <div id = "editDiv">
+                            <svg style = "cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16" onclick="toggleForm()">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                            </svg>
+                            <p class="bodyFont globalBody mt-2">Edit</p>
+                        </div>
+
+                        <div id = "finishDiv" style = "display: none;">
+                            <svg style = "cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16" onclick="finishForm()">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                            </svg>
+                            <p class="bodyFont globalBody mt-2">Finish</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mt-5 mb-3">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="last_name">Last Name<span style="color: #B30000;">*</span></label></label>
+                            <input value = "{{ lia.last_name }}" name = "last_name" type="text" class="bodyFont formInput form-control" id="last_name" placeholder="Last Name" required readonly>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid Last Name.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="first_name">First Name<span style="color: #B30000;">*</span></label></label>
+                            <input value = "{{ lia.first_name }}" name = "first_name" type="text" class="bodyFont formInput form-control" id="first_name" placeholder="First Name" required readonly >
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid First Name.</p>
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="middle_name">Middle Name<span style="color: #B30000;">*</span></label></label>
+                            <input value = "{{ lia.middle_name }}" name = "middle_name" type="text" class="bodyFont formInput form-control" id="middle_name" placeholder="Middle Name" required readonly>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid Middle Name.</p>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="birthday">Birthday<span style="color: #B30000;">*</span></label></label>
+                            <input name = "birthday" type="date" class="bodyFont formInput form-control" id="birthday" placeholder="Birthday" required  readonly>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid Birthday. (Minimum Age: 18 Years Old)</p>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="age">Age<span style="color: #B30000;">*</span></label></label>
+                            <input value = "{{ lia.age }}" name = "age" type="number" class="bodyFont formInput form-control" id="age" placeholder="age" required readonly  readonly>
+                            
+                        </div>   
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="sex" aria-label="Default select example">Sex<span style="color: #B30000;">*</span></label></label>
+                            <select id="sex" name="sex"  class="form-select" required  disabled style = "border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid Sex.</p>
+                            </div>
+                        </div>    
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="nationality">Nationality<span style="color: #B30000;">*</span></label></label>
+                            <input value = "{{ lia.nationality }}" name = "nationality" type="text" class="bodyFont formInput form-control" id="nationality" placeholder="Nationality" required  readonly>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid Nationality.</p>
+                            </div>
+                        </div>   
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="civil_status">Civil Status<span
+                                style="color: #B30000;">*</span></label></label>
+                            <select id="civil_status" name="civil_status" class="form-select" required disabled
+                                style="border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Separated">Separated</option>
+                                <option value="Widowed">Widowed</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid Civil Status.</p>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="email">Email<span style="color: #B30000;">*</span></label>
+                            <input value = "{{ lia.email }}" name = "email" type="email" class="bodyFont formInput form-control" id="email" placeholder="someone@email.com" required readonly>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid Email. (someone@email.com)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="contact_number">Mobile Number<span style="color: #B30000;">*</span></label>
+                            <input value = "{{ lia.contact_num }}" name = "contact_number" type="tel" class="bodyFont formInput form-control" id="contact_number" pattern = "[9]{1}[0-9]{9}" placeholder="9XXXXXXXXX" required  readonly>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a Mobile Number. (9XXXXXXXXX)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="formTitle titleFont globalHeader">Address</span>
+                <div class="row mt-5 mb-3">
+                    <div class="col">
+                        <div class = "form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="address_province" aria-label="Default select example">Province<span style="color: #B30000;">*</span></label></label>
+                            <select id="address_province" name="address_province"  class="form-select" required disabled style = "border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                            </select>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid Province.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class = "form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="address_city">City<span style="color: #B30000;">*</span></label></label>
+                            <!-- <input name = "address_city" type="text" class="bodyFont formInput form-control" id="address_city" placeholder="City" required>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid City.</p>
+                            </div> -->
+                            <select id="address_city" name="address_city"  class="form-select" required disabled style = "border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class = "form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="address_barangay">Barangay<span style="color: #B30000;">*</span></label></label>
+                            <select id="address_barangay" name="address_barangay"  class="form-select" required disabled style = "border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                            </select>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid Barangay.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "row mb-3">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="address_first_line">House Number - Blk - Street<span style="color: #B30000;">*</span></label></label>
+                            <input value = "{{ lia.street }}" name = "address_first_line" type="text" class="bodyFont formInput form-control" id="address_first_line" placeholder="House Number - Blk - Street" required readonly>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid House Number - Blk - Street.</p>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="address_zip_code">Zip Code<span style="color: #B30000;">*</span></label>
+                            <input value = "{{ lia.zip_code }}" name = "address_zip_code" type="tel" class="bodyFont formInput form-control" id="address_zip_code" pattern = "[0-9]{4}" placeholder="XXXX" required readonly>
+                            <div class="invalid-feedback">
+                                <p class="bodyFont globalBody">Please enter a valid Zip Code. (XXXX)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+
+                <div class="row mb-5">
+                    <div class="col">
+                        <div class = "form-group">
+                            <label class="bodyFont formLabel globalSubHeader" for="first_choice" aria-label="Default select example">First File Choice<span style="color: #B30000;">*</span></label></label>
+                            <select id="first_choice" name="first_choice"  class="form-select" required disabled style = "border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                                <option value="govt">Government ID</option>
+                                <option value="letter">Letter of Acknowledgement</option>
+                            </select>
+                        </div>
+                        <p class="bodyFont globalBody mt-2" id = "first_file_accepted">Accepted files: .jpeg, .jpg, .png</p>
+                        <p id = "firstFileExtension"class = "bodyFont globalBody"><a id = "govtloaLink" href="" target="_blank">Government ID or Letter of Acknowledgement Link</a></p>
+                    </div>
+                </div>
+
+                <div class="row mt-5 mb-4">
+                    <div>
+                        <label for="personal_photo" class="form-label bodyFont formLabel globalSubHeader">Most recent 1x1 photo<span style="color: #B30000;">*</span></label>
+                        <p class="bodyFont globalBody">Accepted files: .jpeg, .jpg, .png</p>
+                        <p class = "bodyFont globalBody"><a id = "personalPhotoLink" href="" target="_blank">Personal Photo Link</a></p>
+                    </div>
+                </div>
+                <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+                <div class="row d-flex justify-content-between">
+                    <div class="d-none">
+                        <input name="latest_contributor" type="text" id="latest_contributor">
+                    </div>
+                    <div class="col">
+                        <div class = "btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                            Reject
+                        </div>
+                    </div>
+                    <div class="col">
+
+                    </div>
+                    <div class="col d-flex justify-content-end">
+
+                        <input class = "btn btn-secondary" onclick = "checkSubmit()" type="submit" value = "Update Status to Review Completed">
+                    </div>
+                </div>
+    </form>
+    {% elif lia.status == "Review Completed" %}
+        {% if lia.type == "Bonafide" %}
+            <div class = "container p-5" style =  "background-color: white; border: 3px solid #0F2456;">
+                <p class = "bodyFont globalBody" style ="text-align: center;">OFFICE OF THE BARANGAY CHAIRMAN</p>
+                <p class = "bodyFont globalBody"><b>TO WHOM IT MAY CONCERN:</b></p>
+                <p class = "bodyFont globalBody"><b>&emsp;&emsp;&emsp;THIS IS TO CERTIFY THAT</b> {{ lia.last_name }}, {{ lia.first_name}} {{lia.middle_name}} is a bonafide resident with postal or business address at {{ lia.street }}, {{ lia.province }}, {{ lia.city }}, {{ lia.barangay }}, {{ lia.zip_code }} has been issued this Barangay Permit/Clearance for their own needed purpose.</p>
+                <p class = "bodyFont globalBody">&emsp;&emsp;&emsp;Given this ____th of ____, 2022 at Barangay Hall, Barangay Guadalupe Viejo, Makati City</p>
+                <p class = "bodyFont globalBody mt-5" style = "text-align: right;"><b>HENRICH THADDEUS M. ANGELES</b></p>
+                <p class = "bodyFont globalBody" style = "text-align: right;">Barangay Captain</p>
+                <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+                <div class="row d-flex justify-content-between mt-5">
+                    <div class="d-none">
+                        <input name="latest_contributor" type="text" id="latest_contributor">
+                    </div>
+                    <div class="col-lg-6 col-sm-6 mb-4">
+                        <form action="{% url  'admin_update_status_barangay_clearance_back_to_submitted_for_review' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                            <input class = "btn btn-secondary" type="submit" value = "Revert Status back to Submitted for Review">
+                        </form>
+                    </div>
+    
+                    <div class="col-lg-6 col-sm-6">
+                        <form action="{% url  'admin_update_status_barangay_clearance_to_pre_filled_template_verified' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                            <input class = "btn btn-secondary" type="submit" value = "Update Status to Pre-filled Template Verified">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% elif lia.type == "Transient" %}
+        <div class = "container p-5" style =  "background-color: white; border: 3px solid #0F2456;">
+            <p class = "bodyFont globalBody" style ="text-align: center;">OFFICE OF THE BARANGAY CHAIRMAN</p>
+            <p class = "bodyFont globalBody"><b>TO WHOM IT MAY CONCERN:</b></p>
+            <p class = "bodyFont globalBody"><b>&emsp;&emsp;&emsp;THIS IS TO CERTIFY THAT</b> {{ lia.last_name }}, {{ lia.first_name}} {{lia.middle_name}}, a transient with postal or business address at {{ lia.street }}, {{ lia.province }}, {{ lia.city }}, {{ lia.barangay }}, {{ lia.zip_code }} has been issued this Barangay Permit/Clearance for their own needed purpose.</p>
+            <p class = "bodyFont globalBody">&emsp;&emsp;&emsp;Given this ____th of ____, 2022 at Barangay Hall, Barangay Guadalupe Viejo, Makati City</p>
+            <p class = "bodyFont globalBody mt-5" style = "text-align: right;"><b>HENRICH THADDEUS M. ANGELES</b></p>
+            <p class = "bodyFont globalBody" style = "text-align: right;">Barangay Captain</p>
+            <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+            <div class="row d-flex justify-content-between mt-5">
+                <div class="d-none">
+                    <input name="latest_contributor" type="text" id="latest_contributor">
+                </div>
+                <div class="col-lg-6 col-sm-12 mb-4">
+                    <form action="{% url  'admin_update_status_barangay_clearance_back_to_submitted_for_review' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                        <input class = "btn btn-secondary" type="submit" value = "Revert Status back to Review Completed">
+                    </form>
+                </div>
+
+                <div class="col-lg-6 col-sm-12">
+                    <form action="{% url  'admin_update_status_barangay_clearance_to_pre_filled_template_verified' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                        <input class = "btn btn-secondary" type="submit" value = "Update Status to Pre-filled Template Verified">
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% elif lia.status == "Pre-filled Template Verified" %}
+        {% if lia.type == "Bonafide" %}
+            <div class = "container p-5" style =  "background-color: white; border: 3px solid #0F2456;">
+                <p class = "bodyFont globalBody">
+                Please print the Pre-filled Template. Update its Status to Printed once done.
+                </p>
+                <form method = 'post' action ="{% url 'admin_print_barangay_clearance_bonafide' pk=lia.pk%}"> {% csrf_token %}
+                    <input type="submit" class = "btn btn-secondary" value = "Print Document">
+                </form>
+
+                <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+                <div class="row d-flex justify-content-between mt-5">
+                    <div class="col-6">
+                        <form action="{% url  'admin_update_status_barangay_clearance_back_to_review_completed' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                            <div class="d-none">
+                                <input name="latest_contributor" type="text" id="latest_contributor">
+                            </div>
+                            <input class = "btn btn-secondary" type="submit" value = "Revert Status back to Review Completed">
+                        </form>
+                    </div>
+
+                    <div class="col">
+
+                    </div>
+
+                    <div class="col d-flex justify-content-end">
+                        <form action="{% url  'admin_update_status_barangay_clearance_to_printed' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                            <div class="d-none">
+                                <input name="latest_contributor" type="text" id="latest_contributor">
+                            </div>
+                            <input class = "btn btn-secondary" type="submit" value = "Update Status to Printed">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% elif lia.type == "Transient" %}
+            <div class = "container p-5" style =  "background-color: white; border: 3px solid #0F2456;">
+                <p class = "bodyFont globalBody">
+                Please print the Pre-filled Template. Update its Status to Printed once done.
+                </p>
+                <form method = 'post' action ="{% url 'admin_print_barangay_clearance_transient' pk=lia.pk%}"> {% csrf_token %}
+                    <input type="submit" class = "btn btn-secondary" value = "Print Document">
+                </form>
+
+                <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+                <div class="row d-flex justify-content-between mt-5">
+                    <div class="col-6">
+                        <form action="{% url  'admin_update_status_barangay_clearance_back_to_review_completed' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                            <div class="d-none">
+                                <input name="latest_contributor" type="text" id="latest_contributor">
+                            </div>
+                            <input class = "btn btn-secondary" type="submit" value = "Revert Status back to Review Completed">
+                        </form>
+                    </div>
+
+                    <div class="col">
+
+                    </div>
+
+                    <div class="col d-flex justify-content-end">
+                        <form action="{% url  'admin_update_status_barangay_clearance_to_printed' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                            <div class="d-none">
+                                <input name="latest_contributor" type="text" id="latest_contributor">
+                            </div>
+                            <input class = "btn btn-secondary" type="submit" value = "Update Status to Printed">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% elif lia.status == "Printed, Not Paid" %}
+        <div class = "container p-5" style = "background-color: white; border: 3px solid #0F2456;">
+            <p class = "bodyFont globalBody">
+                Please check if the user has settled their payment by verifying the validity of the proof of payment uploaded below (if already uploaded):
+            </p>
+            <div>
+                <label for="voters_id" class="form-label bodyFont formLabel globalSubHeader mt-5">Proof of Payment<span style="color: #B30000;">*</span></label>
+                <p class="bodyFont globalBody">Accepted files: .jpeg, .jpg, .png</p>
+                <a class = "bodyFont globalBody" id = "proofOfPaymentLink" href="" target="_blank">Proof of Payment Link</a>
+                <p class = "bodyFont globalBody" id = "noProofOfPayment" style = "display: none;">None provided yet.</p>
+            </div>
+            <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+            <div class="row d-flex justify-content-between mt-5">
+                <div class="col-6">
+                    <form action="{% url  'admin_update_status_barangay_clearance_back_to_pre_filled_template_verified' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                        <div class="d-none">
+                            <input name="latest_contributor" type="text" id="latest_contributor">
+                        </div>
+                        <input class = "btn btn-secondary" type="submit" value = "Revert Status back to Pre-filled Template Verified">
+                    </form>
+                </div>
+
+                <div class="col">
+
+                </div>
+
+                <div class="col d-flex justify-content-end">
+                    <form action="{% url  'admin_update_status_barangay_clearance_to_paid' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                        <div class="d-none">
+                            <input name="latest_contributor" type="text" id="latest_contributor">
+                        </div>
+                        <input class = "btn btn-secondary" type="submit" value = "Update Status to Printed, Paid">
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% elif lia.status == "Printed, Paid" %}
+        {% if lia.type == "Bonafide" %}
+        <div class = "container p-5" style =  "background-color: white; border: 3px solid #0F2456;">
+            <form method = 'post' action ="{% url 'admin_print_barangay_clearance_bonafide' pk=lia.pk%}"> {% csrf_token %}
+                <input type="submit" class = "btn btn-secondary" value = "View Document">
+            </form>
+            <div>
+                <label for="voters_id" class="form-label bodyFont formLabel globalSubHeader mt-5">Proof of Payment<span style="color: #B30000;">*</span></label>
+                <a class = "bodyFont globalBody" id = "proofOfPaymentLink" href="" target="_blank">Proof of Payment Link</a>
+                <p class = "bodyFont globalBody" id = "noProofOfPayment" style = "display: none;">None provided yet.</p>
+            </div>
+            <!-- ACTION BUTTONS -->
+            <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+            <div class="row d-flex justify-content-between mt-5">
+                <div class="d-none">
+                    <input name="latest_contributor" type="text" id="latest_contributor">
+                </div>
+                <div class="col-6">
+                    <form action="{% url  'admin_update_status_barangay_clearance_back_to_printed' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                        <input class = "btn btn-secondary" type="submit" value = "Revert Status back to Printed, Not Paid">
+                    </form>
+                </div>
+
+                <div class="col">
+
+                </div>
+
+                <div class="col d-flex justify-content-end">
+                    <form action="{% url  'admin_update_status_barangay_clearance_to_out_for_delivery' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                        <input class = "btn btn-secondary" type="submit" value = "Update Status to Printed, Out for Delivery/Ready for Pickup">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    
+        {% elif lia.type == "Transient" %}
+        <div class = "container p-5" style =  "background-color: white; border: 3px solid #0F2456;">
+            <form method = 'post' action ="{% url 'admin_print_barangay_clearance_transient' pk=lia.pk%}"> {% csrf_token %}
+                <input type="submit" class = "btn btn-secondary" value = "View Document">
+            </form>
+            <div>
+                <label for="voters_id" class="form-label bodyFont formLabel globalSubHeader mt-5">Proof of Payment<span style="color: #B30000;">*</span></label>
+                <a class = "bodyFont globalBody" id = "proofOfPaymentLink" href="" target="_blank">Proof of Payment Link</a>
+                <p class = "bodyFont globalBody" id = "noProofOfPayment" style = "display: none;">None provided yet.</p>
+            </div>
+            <!-- ACTIONS BUTTONS -->
+            <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+            <div class="row d-flex justify-content-between mt-5">
+                <div class="d-none">
+                    <input name="latest_contributor" type="text" id="latest_contributor">
+                </div>
+                <div class="col-6">
+                    <form action="{% url  'admin_update_status_barangay_clearance_back_to_printed' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                        <input class = "btn btn-secondary" type="submit" value = "Revert Status back to Printed, Not Paid">
+                    </form>
+                </div>
+
+                <div class="col">
+
+                </div>
+
+                <div class="col d-flex justify-content-end">
+                    <form action="{% url  'admin_update_status_barangay_clearance_to_out_for_delivery' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                        <input class = "btn btn-secondary" type="submit" value = "Update Status to Printed, Out for Delivery/Ready for Pickup">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+    {% elif lia.status == "Printed, Out for Delivery/Ready for Pickup" %}
+        <div class = "container p-5" style = "background-color: white; border: 3px solid #0F2456;">
+            <p class = "bodyFont globalBody">The document is now finalized and can now be delivered/picked-up. Once acquired by the resident, please indicate the receipt date below and update the status of this document accordingly.</p>
+            <!-- ACTIONS BUTTONS -->
+            <form action="{% url  'admin_update_status_barangay_clearance_to_delivered' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                <div class="form-group">
+                    <label class="bodyFont formLabel globalSubHeader" for="receipt_date">Receipt Date<span
+                            style="color: #B30000;">*</span></label></label>
+                    <input name="receipt_date" type="date" class="bodyFont formInput form-control"
+                        id="receipt_date" placeholder="receipt_date" required>
+                </div>
+                <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+                <div class="row d-flex justify-content-between">
+                    <div class="d-none">
+                        <input name="latest_contributor" type="text" id="latest_contributor">
+                    </div>
+
+                    <div class="col">
+
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <input class = "btn btn-secondary" type="submit" value = "Update Status to Delivered/Picked-up">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    {% elif lia.status == "Delivered/Picked-up" %}
+        {% if lia.type == "Constituent" %}
+        {% elif lia.type == "Transient" %}
+        {% endif %}
+    {% endif %}
+    <script>
+        try{
+            var initialPhotoLink = `{{ lia.personal_photo.url }}`;
+            initialPhotoLink = initialPhotoLink.split("&")[0];
+            document.getElementById("personalPhotoLink").setAttribute("href", initialPhotoLink);
+        }
+        catch {
+            
+        }
+
+        try {   
+            var initialGovtloaLink = `{{ lia.government_id_or_letter.url }}`;
+            initialGovtloaLink = initialGovtloaLink.split("&")[0];
+            document.getElementById("govtloaLink").setAttribute("href", initialGovtloaLink);
+        }
+
+        catch {
+
+        }
+
+        try {
+            var initialProofOfPaymentLink = `{{ lia.proof_of_payment.url }}`;
+            console.log("hello");
+            console.log(initialProofOfPaymentLink);
+
+            if (initialProofOfPaymentLink.includes("null") || initialProofOfPaymentLink.includes("None")){
+                document.getElementById("noProofOfPayment").style.display = "";
+                document.getElementById("proofOfPaymentLink").style.display = "none";
+            }
+            else {
+                initialProofOfPaymentLink = initialProofOfPaymentLink.split("&")[0];
+                console.log(initialProofOfPaymentLink);
+                document.getElementById("proofOfPaymentLink").textContent = "Proof of Payment Link";
+                document.getElementById("proofOfPaymentLink").setAttribute("href", initialProofOfPaymentLink);
+                document.getElementById("noProofOfPayment").style.display = "none";
+                document.getElementById("proofOfPaymentLink").style.display = "";
+            }
+        }
+
+        catch {
+
+        }
+    </script>
+    <script>
+        function checkSubmit(){
+            document.getElementById("sex").disabled = false;
+            document.getElementById("address_province").disabled = false;
+            document.getElementById("address_city").disabled = false;
+            document.getElementById("address_barangay").disabled = false;
+            document.getElementById("first_choice").disabled = false;
+            document.getElementById("civil_status").disabled = false; 
+        }
+
+        function toggleForm(){
+            console.log("TOGGLIGN");
+            document.getElementById("last_name").readOnly = false;
+            document.getElementById("first_name").readOnly = false;
+            document.getElementById("middle_name").readOnly = false;
+            document.getElementById("birthday").readOnly = false;
+            document.getElementById("sex").disabled = false;
+            document.getElementById("nationality").readOnly = false;
+            document.getElementById("email").readOnly = false;
+            document.getElementById("contact_number").readOnly = false;
+            document.getElementById("address_province").disabled = false;
+            document.getElementById("address_city").disabled = false;
+            document.getElementById("address_barangay").disabled = false;
+            document.getElementById("address_first_line").readOnly = false;
+            document.getElementById("address_zip_code").readOnly = false;
+            document.getElementById("first_choice").disabled = false;
+            document.getElementById("civil_status").disabled = false;
+
+            try{
+                document.getElementById("landlord_name").readOnly = false;
+                document.getElementById("landlord_contact_number").readOnly = false;
+                document.getElementById("landlord_address").readOnly = false;
+            } catch(error){
+                console.log(error);
+            }
+
+            document.getElementById("editDiv").style.display = "none";
+            document.getElementById("finishDiv").style.display = "";
+        }
+
+        function finishForm(){
+            document.getElementById("last_name").readOnly = true;
+            document.getElementById("first_name").readOnly = true;
+            document.getElementById("middle_name").readOnly = true;
+            document.getElementById("birthday").readOnly = true;
+            document.getElementById("sex").disabled = true;
+            document.getElementById("nationality").readOnly = true;
+            document.getElementById("email").readOnly = true;
+            document.getElementById("contact_number").readOnly = true;
+            document.getElementById("address_province").disabled = true;
+            document.getElementById("address_city").disabled = true;
+            document.getElementById("address_barangay").disabled = true;
+            document.getElementById("address_first_line").readOnly = true;
+            document.getElementById("address_zip_code").readOnly = true;
+            document.getElementById("first_choice").disabled = true;
+            document.getElementById("civil_status").disabled = true;
+
+            try{
+                document.getElementById("landlord_name").readOnly = true;
+                document.getElementById("landlord_contact_number").readOnly = true;
+                document.getElementById("landlord_address").readOnly = true;
+            } catch(error){
+                console.log(error);
+            }
+
+            document.getElementById("editDiv").style.display = "";
+            document.getElementById("finishDiv").style.display = "none";
+        }
+    </script>
+
+    <script>
+        let data = sessionStorage.getItem('username');
+
+        document.getElementById('latest_contributor').value = data
+    </script>
+    <script>
+        function taskDate(dateMilli) {
+            var d = (new Date(dateMilli) + '').split(' ');
+            d[2] = d[2] + ',';
+
+            return [d[0], d[1], d[2], d[3]].join(' ');
+        }
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        birthday = '{{ lia.birthday }}'
+        var datemilli = Date.parse(birthday);
+        document.getElementById('birthday').value = formatDate(taskDate(datemilli))
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <script>
+        var finalData = [];
+        var result = "";
+        var result2 = "";
+        const provinceSelect = document.getElementById("address_province");
+        const citySelect = document.getElementById("address_city");
+        const barangaySelect = document.getElementById("address_barangay");
+        const firstFileSelect = document.getElementById("first_choice");
+        const sexSelect = document.getElementById("sex");
+        const civilStatusSelect = document.getElementById("civil_status");
+
+        // INITIAL FILL
+        fetch("{% static 'locations.json' %}")
+        .then(res => res.json())
+        .then(data => {
+
+            finalData.push(data);
+            console.log(finalData);
+
+            initialProvince = `{{ lia.province }}`;
+            initialCity = `{{ lia.city }}`;
+            initialBarangay = `{{ lia.barangay }}`;
+            initialFirstChoice = document.getElementById("firstFileExtension").textContent;
+            initialFirstChoice = initialFirstChoice.split(".").at(-1)
+            initialSex = `{{ lia.sex }}`;
+            console.log(initialFirstChoice);
+
+            
+            initialCivilStatus = `{{ lia.civil_status }}`;
+                if (initialCivilStatus == "Single"){
+                    civilStatusSelect.options[0].selected = true;
+                }
+                else if (initialCivilStatus == "Married"){
+                    civilStatusSelect.options[1].selected = true;
+                }
+                else if (initialCivilStatus == "Divorced"){
+                    civilStatusSelect.options[1].selected = true;
+                }
+                else if (initialCivilStatus == "Separated"){
+                    civilStatusSelect.options[1].selected = true;
+                }
+                else if (initialCivilStatus == "Widowed"){
+                    civilStatusSelect.options[1].selected = true;
+                }
+
+            for (var i=0; i<data.length; i++){
+                var opt = document.createElement('option');
+                opt.value = finalData[0][i].Province;
+                opt.innerHTML = finalData[0][i].Province;
+                if (opt.value == initialProvince){
+                    opt.selected =true;
+                }
+                document.getElementById("address_province").appendChild(opt);
+            }
+            
+            result = finalData[0].find( ({ Province }) => Province === initialProvince );
+            result2 = result.Cities.find( ({ City }) => City === initialCity )
+
+            for (var i = 0; i < result.Cities.length; i++){
+                console.log(result.Cities[i]);
+                var opt = document.createElement('option');
+                opt.value = result.Cities[i].City;
+                opt.innerHTML = result.Cities[i].City;
+                if (opt.value == initialCity){
+                    opt.selected =true;
+                }
+                document.getElementById("address_city").appendChild(opt);
+            }
+
+            for (var i=0; i < result2.Barangays.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result2.Barangays[i];
+                opt.innerHTML = result2.Barangays[i];
+                if (opt.value == initialBarangay){
+                    opt.selected =true;
+                }
+                document.getElementById("address_barangay").appendChild(opt);
+            }
+
+            console.log(firstFileSelect.options);
+            if(initialFirstChoice == "pdf" || initialFirstChoice == "docx"){
+                firstFileSelect.options[1].selected = true;
+                document.getElementById("first_file_accepted").textContent = "Accepted files: .docx, .pdf";
+            } 
+            else if (initialFirstChoice == "jpeg" || initialFirstChoice == "jpg" || initialFirstChoice == "png"){
+                firstFileSelect.options[0].selected = true;
+                document.getElementById("first_file_accepted").textContent = "Accepted files: .jpeg, .jpg, .png";
+            }
+
+            if(initialSex == "Male"){
+                sexSelect.options[0].selected = true;
+            } 
+            else if (initialSex == "Female"){
+                sexSelect.options[1].selected = true;
+            }
+            else if (initialSex == "Prefer not to say"){
+                sexSelect.options[2].selected = true;
+            }
+
+
+        }   
+        )
+
+
+
+
+        
+        // PROVINCE CHANGE
+        provinceSelect.addEventListener('change', (event) => {
+            while (citySelect.options.length > 0){
+                citySelect.remove(0);
+            }
+            
+            while (barangaySelect.options.length > 0){
+                barangaySelect.remove(0);
+            }
+
+            var provinceChosen = provinceSelect.value;
+            console.log(provinceChosen);
+
+            // FIND CITIES
+            result = finalData[0].find( ({ Province }) => Province === provinceChosen );
+            console.log("CITIES:");
+            console.log(result.Cities);
+            for (var i = 0; i < result.Cities.length; i++){
+                console.log(result.Cities[i]);
+                var opt = document.createElement('option');
+                opt.value = result.Cities[i].City;
+                opt.innerHTML = result.Cities[i].City;
+                if (i==0){
+                    opt.selected = true;
+                }
+                document.getElementById("address_city").appendChild(opt);
+            }
+
+            var cityChosen = citySelect.value;
+            console.log("City Chosen: " + cityChosen);
+
+            var result2 = result.Cities.find( ({ City }) => City === cityChosen );
+            console.log(result2);
+
+            for (var i=0; i < result2.Barangays.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result2.Barangays[i];
+                opt.innerHTML = result2.Barangays[i];
+                if (i==0){
+                    opt.selected =true;
+                }
+                document.getElementById("address_barangay").appendChild(opt);
+            }
+        })
+
+        citySelect.addEventListener('change', (event) => {
+            while (barangaySelect.options.length > 0){
+                barangaySelect.remove(0);
+            }
+
+            var cityChosen = citySelect.value;
+            console.log(cityChosen);
+            console.log("HERE");
+
+            var result2 = result.Cities.find( ({ City }) => City === cityChosen );
+            console.log(result2);
+
+            for (var i=0; i < result2.Barangays.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result2.Barangays[i];
+                opt.innerHTML = result2.Barangays[i];
+                if (i==0){
+                    opt.selected =true;
+                }
+                document.getElementById("address_barangay").appendChild(opt);
+            }
+        })
+
+        
+    </script>
+
+    <!-- SUBMISSION HANDLER -->
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    alert("There are some fields that may have been left blank or have invalid inputs. Please go through your form again to correct these.");
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+                })
+            })()
+    </script>
+    <!-- FIRST FILE  -->
+    <script>
+        const element = document.getElementById("first_choice");
+
+        element.addEventListener('change', (event) => {
+            if(element.value == "govt"){
+                document.getElementById("first_file_accepted").textContent = "Accepted files: .jpeg, .jpg, .png";
+                document.getElementById("government_id_or_letter").accept = ".jpeg, .jpg, .png";
+            }
+            else if(element.value == "letter"){
+                document.getElementById("first_file_accepted").textContent = "Accepted files: .docx, .pdf";
+                document.getElementById("government_id_or_letter").accept = ".docx, .pdf";
+            }
+
+        })
+    </script>
+
+    <script>
+        // SET MIN AND MAX DATES
+        date2 = new Date();
+        date2.setFullYear(date2.getFullYear()-120);
+        var date2String = moment(date2).format("YYYY-MM-DD");
+        document.getElementById("birthday").min = date2String;
+
+        date = new Date();
+        date.setFullYear(date.getFullYear()-18);
+        var dateString = moment(date).format("YYYY-MM-DD");
+        document.getElementById("birthday").max = dateString;
+    </script>
+    <!-- GET AGE -->
+    <script>
+        const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10)
+
+        const selectElement = document.getElementById("birthday");
+        console.log(selectElement);
+        selectElement.addEventListener('change', (event) => {   
+            var bday = document.getElementById("birthday").value;
+            if (bday == document.getElementById("birthday").max){
+                document.getElementById("age").value = 18;
+            }
+            else {
+                var age = getAge(bday);
+                document.getElementById("age").value = age;
+            }
+        }); 
+    </script>
+</body>
+{% endblock %}
+
+

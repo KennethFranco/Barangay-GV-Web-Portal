@@ -1,0 +1,30 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class = "container mt-5 mb-5 p-5" style = "background-color: white; border: 3px solid #0F2456">
+        <div>
+            <a href="{% url 'admin_manage_announcements' %}">
+                <button class="btn btn-secondary">Back</button>
+            </a>
+        </div>
+        <div class = "row mt-5">
+            <h1 class = "titleFont globalSubHeader">Announcement#{{ lia.pk }}</h1>
+        </div>
+        <div class="row mt-5" id="documentList1">
+            <form action="{% url 'admin_individual_announcement' pk=lia.pk %}" method = "post"> {% csrf_token %}
+                <div class="form-group">
+                    <label class="bodyFont formLabel globalSubHeader" for="title">Title<span style="color: #B30000;">*</span></label></label>
+                    <input value = "{{ lia.title }}" name = "title" type="text" class="bodyFont formInput form-control" id="title" placeholder="Title" required>
+                </div>
+                <div class="form-group mt-5">
+                    <label class="bodyFont formLabel globalSubHeader" for="content">Content<span style="color: #B30000;">*</span></label></label>
+                    <input value = "{{ lia.content }}" name = "content" type="text" class="bodyFont formInput form-control" id="content" placeholder="Content" style = "height: 30vh" required>
+                </div>
+                <button class = "btn btn-secondary mt-5" type = "submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}

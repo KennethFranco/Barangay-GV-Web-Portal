@@ -1,0 +1,266 @@
+{% extends "barangay_id_form.html" %}
+{% load static %}
+
+
+{% block checkerTitle %}
+Barangay Certificate (Bonafide)
+{% endblock %}
+
+{% block title %}
+Barangay Certificate (Bonafide)
+{% endblock %}
+
+{% block form %}
+
+{% if messages %}
+    <div class="messages text-left mt-3">
+        {% for message in messages %}
+        <p class="globalBody bodyFont" style="color: rgb(241, 42, 42);">
+            {{ message }}
+        </p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form enctype="multipart/form-data" class = "needs-validation" id="mainForm" method="POST" action="{% url 'create_barangay_certificate' %}" novalidate> {% csrf_token %}
+    <input id="document_id" name="document_id" type="text" style="display: none;">
+    <div class="row">
+        <p class="bodyFont formLabel globalSubHeader"><span style="color: #B30000;">*</span> Required fields</p>
+    </div>
+    <div class="row">
+        <div class="col">
+            <span class="formTitle titleFont globalHeader mb-5">Personal Details</span>
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-3">
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="last_name">Last Name<span style="color: #B30000;">*</span></label></label>
+                <input name = "last_name" type="text" class="bodyFont formInput form-control" id="last_name" placeholder="Last Name" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Last Name.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="first_name">First Name<span style="color: #B30000;">*</span></label></label>
+                <input name = "first_name" type="text" class="bodyFont formInput form-control" id="first_name" placeholder="First Name" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid First Name.</p>
+                </div>
+            </div>    
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="middle_name">Middle Name<span style="color: #B30000;">*</span></label></label>
+                <input name = "middle_name" type="text" class="bodyFont formInput form-control" id="middle_name" placeholder="Middle Name" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Middle Name.</p>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="birthday">Birthday<span style="color: #B30000;">*</span></label></label>
+                <input name = "birthday" type="date" class="bodyFont formInput form-control" id="birthday" placeholder="Birthday" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Birthday. (Minimum Age: 18 Years Old)</p>
+                </div>
+            </div>   
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="age">Age<span style="color: #B30000;">*</span></label></label>
+                <input name = "age" type="number" class="bodyFont formInput form-control" id="age" placeholder="age" required readonly>
+                
+            </div>   
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="sex" aria-label="Default select example">Sex<span style="color: #B30000;">*</span></label></label>
+                <select id="sex" name="sex"  class="form-select" required style = "border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Sex.</p>
+                </div>
+            </div>    
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="nationality">Nationality<span style="color: #B30000;">*</span></label></label>
+                <input name = "nationality" type="text" class="bodyFont formInput form-control" id="nationality" placeholder="Nationality" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Nationality.</p>
+                </div>
+            </div>   
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="civil_status">Civil Status<span
+                    style="color: #B30000;">*</span></label></label>
+                <select id="civil_status" name="civil_status" class="form-select" required
+                    style="border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Separated">Separated</option>
+                    <option value="Widowed">Widowed</option>
+                </select>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Civil Status.</p>
+                </div>
+            </div>   
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="email">Email<span style="color: #B30000;">*</span></label>
+                <input name = "email" type="email" class="bodyFont formInput form-control" id="email" placeholder="someone@email.com" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Email. (someone@email.com)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <!-- <label class="bodyFont formLabel globalSubHeader" for="contact_number">Contact
+                Number<span style="color: #B30000;">*</span></label><br>
+            <div class="d-flex justify-content-center"
+                style="position: absolute; width: 80px; height: 49px; border-right: 1px solid #B8B8B8;">
+                <h2 class="align-self-end numberLabel numberLabel" style="font-weight: 400;">+63
+                </h2>
+            </div>
+            <input id="contact_number" name="contact_number" class="bodyFont specialFormInput"
+                type="number" placeholder="Contact Number"> -->
+
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="contact_number">Mobile Number<span style="color: #B30000;">*</span></label>
+                <input name = "contact_number" type="tel" class="bodyFont formInput form-control" id="contact_number" pattern = "[9]{1}[0-9]{9}" placeholder="9XXXXXXXXX" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Mobile Number. (9XXXXXXXXX)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span class="formTitle titleFont globalHeader">Address</span>
+    <div class="row mt-5 mb-3">
+        <div class="col">
+            <div class = "form-group">
+                <!-- <label class="bodyFont formLabel globalSubHeader" for="address_province">Province<span style="color: #B30000;">*</span></label></label>
+                <input name = "address_province" type="text" class="bodyFont formInput form-control" id="address_province" placeholder="Province" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Province.</p>
+                </div> -->
+
+                <label class="bodyFont formLabel globalSubHeader" for="address_province" aria-label="Default select example">Province<span style="color: #B30000;">*</span></label></label>
+                <select id="address_province" name="address_province"  class="form-select" required style = "border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                </select>
+                  <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Province.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class = "form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="address_city">City<span style="color: #B30000;">*</span></label></label>
+                <!-- <input name = "address_city" type="text" class="bodyFont formInput form-control" id="address_city" placeholder="City" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid City.</p>
+                </div> -->
+                <select id="address_city" name="address_city"  class="form-select" required style = "border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class = "form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="address_barangay">Barangay<span style="color: #B30000;">*</span></label></label>
+                <select id="address_barangay" name="address_barangay"  class="form-select" required style = "border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                </select>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Barangay.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "row mb-3">
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="address_first_line">House Number - Blk - Street<span style="color: #B30000;">*</span></label></label>
+                <input name = "address_first_line" type="text" class="bodyFont formInput form-control" id="address_first_line" placeholder="House Number - Blk - Street" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid House Number - Blk - Street.</p>
+                </div>
+            </div>   
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="address_zip_code">Zip Code<span style="color: #B30000;">*</span></label>
+                <input name = "address_zip_code" type="tel" class="bodyFont formInput form-control" id="address_zip_code" pattern = "[0-9]{4}" placeholder="XXXX" required>
+                <div class="invalid-feedback">
+                    <p class="bodyFont globalBody">Please enter a valid Zip Code. (XXXX)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+
+    <div class="row mb-5">
+        <div class="col">
+            <div class = "form-group">
+                <label class="bodyFont formLabel globalSubHeader" for="first_choice" aria-label="Default select example">First File Choice<span style="color: #B30000;">*</span></label></label>
+                <select id="first_choice" name="first_choice"  class="form-select" required style = "border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                    <option value="govt">Government ID</option>
+                    <option value="letter">Letter of Acknowledgement</option>
+                </select>
+            </div>
+            <p class="bodyFont globalBody mt-2" id = "first_file_accepted">Accepted files: .jpeg, .jpg, .png</p>
+            <input name = "government_id_or_letter" class="form-control form-control-lg" id="government_id_or_letter" type="file" accept = ".jpeg, .jpg, .png" required>
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-4">
+        <div>
+            <label for="personal_photo" class="form-label bodyFont formLabel globalSubHeader">Most recent 1x1 photo<span style="color: #B30000;">*</span></label>
+            <p class="bodyFont globalBody">Accepted files: .jpeg, .jpg, .png</p>
+            <input name = "personal_photo" class="form-control form-control-lg" id="personal_photo" type="file" accept = ".jpeg, .jpg, .png" required>
+        </div>
+    </div>
+    <hr style="height: 5px; background-color: #ECC66E; border: none;" class="mt-5 mb-5">
+    <div>
+        <h1 class="mb-5">Terms and Conditions</h1>
+        <div>
+            <input style="width: 24px; height: 24px" type="checkbox" id="checker1" name="checker1">
+            <label class="bodyFont globalBody" for="checker1"> I hereby declare that the
+                information provided is true and correct.</label>
+        </div>
+
+        <div>
+            <input style="width: 24px; height: 24px" type="checkbox" id="checker2" name="checker2">
+            <label class="bodyFont globalBody" for="checker2"> I understand that a false
+                statement may cancel any
+                occurring requests in Barangay Guadalupe Viejo.</label>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <input class="btn btn-secondary" id="finalSubmitButton" type="submit" value="submit">
+    </div>
+</form>
+{% endblock %}

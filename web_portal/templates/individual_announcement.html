@@ -1,0 +1,18 @@
+{% extends "barangay_id_form.html" %}
+{% load static %}
+
+
+{% block checkerTitle %}
+Announcement # {{ lia.pk }}
+{% endblock %}
+
+{% block title %}
+Announcement # {{ lia.pk }}
+{% endblock %}
+
+{% block form %}
+    <div>
+        <h1 class = "titleFont globalHeader">{{ lia.title }}</h1>
+        <p class = "bodyFont globalBody">{{ lia.content }}</p>
+    </div>
+{% endblock %}

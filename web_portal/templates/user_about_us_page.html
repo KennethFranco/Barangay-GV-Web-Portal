@@ -1,0 +1,242 @@
+{% extends "barangay_id_form.html" %}
+{% load static %}
+
+
+{% block checkerTitle %}
+About Us
+{% endblock %}
+
+{% block title %}
+About Us
+{% endblock %}
+
+{% block form %}
+    <div class = "container">   
+        <h1 class = "globalSubHeader titleFont">About Barangay Guadalupe Viejo</h1>
+        <p class = "mt-5 globalBody bodyFont">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed risus pretium quam vulputate. Blandit massa enim nec dui nunc mattis enim. Id faucibus nisl tincidunt eget nullam non. Nunc sed blandit libero volutpat. Dignissim sodales ut eu sem integer vitae justo eget magna. Tellus rutrum tellus pellentesque eu tincidunt. Integer quis auctor elit sed vulputate mi sit amet mauris. Aliquet bibendum enim facilisis gravida neque. Amet mattis vulputate enim nulla aliquet porttitor lacus.
+        </p>
+    </div>
+{% endblock %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay Guadalupe Viejo</title>
+    <link rel="shortcut icon" href="{% static 'logo.png' %}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="jquery-3.5.1.min.js"></script>
+
+</head>
+
+<style>
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        padding-top: 80px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0);
+        /* Black w/ opacity */
+    }
+
+    #accountArrow,
+    .avatar,
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <nav class="container-fluid navbar navbar-expand-md navbarGV">
+        <div class="container">
+            <a href="{% url 'base' %}" style="padding: 0px; margin: 0px;"><img class="mr-2"
+                    src="{% static 'logo.png' %}" style="width: 60px; height: 60px; margin-right: 20px" alt=""></a>
+
+            <div class="titleFont">
+                <a href="{% url 'base' %}" class="navbarTitle globalSubHeader" style="text-decoration: none; ">Barangay
+                    GV Web
+                    Portal</a>
+            </div>
+
+            <button class="navbar-toggler btn-secondary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#toggleMobileMenu" aria-controls="toggleMobileMenu" aria-expanded="false"
+                aria-lable="Toggle navigation">
+                <div class="navBarDrawer">
+                </div>
+                <div class="navBarDrawer">
+                </div>
+                <div class="navBarDrawer">
+                </div>
+            </button>
+
+            <div class="collapse navbar-collapse" id="toggleMobileMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="bodyFont globalBody p-2">
+                        <a class="nav-link navbarOption" href="/">Home</a>
+                    </li>
+                    <li class="bodyFont globalBody p-2">
+                        <a class="nav-link navbarOption" href="{% url 'contact_us_page' %}">Contact</a>
+                    </li>
+                    <li class="bodyFont globalBody p-2">
+                        <a class="nav-link navbarOption" href="{% url 'user_about_us_page' %}">About Us</a>
+                    </li>
+                    <li class="bodyFont globalBody p-2" id="signin">
+                        <a class="nav-link navbarOption" href="{% url 'user_login' %}">Sign In</a>
+                    </li>
+                    <li class="bodyFont globalBody p-2" id="register">
+                        <a style="margin-right: 0px;" class="nav-link navbarOption" href="{% url 'user_register' %}">Register</a>
+                    </li>
+                    <li>
+                        <div class="dropdown" id="modalButton">
+                            <div class="dropbtn row p-2">
+                                <div class="col-sm-12 col-lg-12 avatar text-center pt-2 globalBody" id="avatar">
+
+                                </div>
+                                <div class="col-sm col-lg align-self-center">
+                                    <p class="p-0 m-0" id="accountArrow" style="color: white;">&#x25BC</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-content">
+                                <a class="content" href="{% url 'user_account_information' %}">
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <p class="globalTableCell">My Account</p>
+                                    </div>
+                                </a>
+                                <a class="content" href="{% url 'user_logout' %}">
+                                    <div class="d-flex justify-content-center">
+                                        <p class="globalTableCell">Sign Out</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+
+<script>
+    avatarSection = document.getElementById('modalButton')
+    avatar = document.getElementById('avatar')
+    signin = document.getElementById('signin')
+    register = document.getElementById('register')
+    allRequests = document.getElementById('allRequests')
+
+    userArray = '{{ user }}'.split("");
+
+    console.log('{{ user }}')
+
+    if ('{{ user }}' != "AnonymousUser" && '{{ user }}' != "") {
+        signin.style.display = "none"
+        register.style.display = "none"
+        avatar.style.display = "block"
+        avatar.innerHTML = userArray[0]
+        allRequests.style.display = "block"
+        
+    }
+    else if ('{{ user }}' == "AnonymousUser") {
+        signin.style.display = "block"
+        register.style.display = "block"
+        avatar.style.display = "none"
+        avatarSection.style.display = "none"
+        allRequests.style.display = "none"
+        
+    }
+
+    var coll = document.getElementsByClassName("collapsible");
+
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            var symbol = this.lastElementChild.lastElementChild.lastElementChild;
+            console.log(symbol);
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                symbol.innerHTML = "&#x25BC";
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                symbol.innerHTML = "&#x25B2";
+            }
+        });
+    }
+</script>
+<script>
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("modalButton");
+    var span = document.getElementsByClassName("close")[0];
+    var arrow = document.getElementById("accountArrow")
+    modal.style.display = 'none'
+
+    btn.onclick = function () {
+        modal.style.display = "block";
+        arrow.innerHTML = "&#x25B2"
+    }
+    span.onclick = function () {
+        modal.style.display = "none";
+        arrow.innerHTML = "&#x25BC"
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            arrow.innerHTML = "&#x25BC"
+        }
+    }
+</script>

@@ -1,0 +1,18 @@
+{% extends "barangay_id_form.html" %}
+{% load static %}
+
+{% block checkerTitle %}
+Success
+{% endblock %}
+
+{% block title %}
+Success
+{% endblock %}
+
+{% block form %}
+<h1 class = "titleFont globalSubHeader">Thank you for submitting your document request to Guadalupe Viejo.</h1>
+<p class = "bodyFont globalBody mt-5">The information below will serve as your document's identification number.</p>
+<p class = "bodyFont globalBody">An email has also been sent, please expect that the Barangay will also send emails for the following scenarios: if your document is rejected, once your document is due for payment, once payment has been received, and once it is ready for delivery/pick-up.</p>
+<p class = "bodyFont globalBody">Please regularly check on your document's status at https://www.guadalupeviejo.com/web_portal/document_tracker/</p>
+<h1 style = "text-align: center;" class = "titleFont globalSubHeader mt-5"><b>{{ document_id }}</b></h1>
+{% endblock %}

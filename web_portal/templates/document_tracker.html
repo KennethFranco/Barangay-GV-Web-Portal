@@ -1,0 +1,138 @@
+{% extends "barangay_id_form.html" %}
+{% load static %}
+
+{% block title %}
+Document Tracker
+{% endblock %}
+
+{% block checkerTitle %}
+Document Tracker
+{% endblock %}
+
+{% block form %}
+<h1 class = "titleFont globalHeader">Kindly put in your document's request # to check on its current status.</h1>
+<form enctype="multipart/form-data" method =POST action = "{% url 'document_tracker' %}">  {% csrf_token %}
+    <input class = "bodyFont formInput" type="search" placeholder = "Search" aria-label="Search" name = "searched" required>
+    <div class="d-flex justify-content-end mt-5">
+        <button class = "btn btn-secondary" type="submit">Search</button>
+    </div>
+</form>
+    {% if searched %}
+        <h1 class = "titleFont globalSubHeader mt-5">Results for Document Request #{{ searched }}:</h1>
+        {% for id in ids %}
+            <div class = "row">
+                <p class = "bodyFont globalBody">Document ID Number: <b>{{ id.document_id }}</b></p>
+            </div>
+            <div class = "row">
+                <p class = "bodyFont globalBody">Document Type: <b>{{ id.document_type }} - {{ id.type }}</b></p>
+            </div>
+            <div class = "row">
+                <p class = "bodyFont globalBody">Current Status: <b>{{ id.status }}</b></p>
+            </div>
+            <div class = "row">
+                <p class = "bodyFont globalBody">Additional Details: <b>{{ id.additional_details }}</b></p>
+            </div>
+            {% if id.status == "Printed, Not Paid" %}
+            <form enctype="multipart/form-data" class ="mt-5" action="{% url 'upload_proof_of_payment_barangay_id' pk=id.pk %}" method = "POST"> {% csrf_token %}
+                <p class="bodyFont globalBody mt-5">Your document is now due for payment. Please settle it through your preferred payment method and upload the proof of payment here.</p>
+                <div>
+                    <label for="proof_of_payment" class="form-label bodyFont formLabel globalSubHeader">Proof of Payment<span style="color: #B30000;">*</span></label>
+                    <p class="bodyFont globalBody">Accepted files: .jpeg, .jpg, .png, .docx, .pdf</p>
+                    <input name="proof_of_payment" class="form-control form-control-lg" id="proof_of_payment" type="file" accept=".jpeg, .jpg, .png, .docx, .pdf" required>
+                    <div class="d-flex justify-content-end mt-5">
+                        <input class="btn btn-secondary" type="submit" value="submit">
+                    </div>
+                </div>
+            </form>
+            {% endif %}
+        {% endfor %}
+
+        {% for clearance in clearances %}
+        <div class = "row">
+            <p class = "bodyFont globalBody">Document ID Number: <b>{{ clearance.document_id }}</b></p>
+        </div>
+        <div class = "row">
+            <p class = "bodyFont globalBody">Document Type: <b>{{ clearance.document_type }} - {{ clearance.type }}</b></p>
+        </div>
+        <div class = "row">
+            <p class = "bodyFont globalBody">Current Status: <b>{{ clearance.status }}</b></p>
+        </div>
+        <div class = "row">
+            <p class = "bodyFont globalBody">Additional Details: <b>{{ clearance.additional_details }}</b></p>
+        </div>
+        {% if clearance.status == "Printed, Not Paid" %}
+        <form enctype="multipart/form-data" class ="mt-5" action="{% url 'upload_proof_of_payment_barangay_clearance' pk=clearance.pk %}" method = "post"> {% csrf_token %}
+            <p class="bodyFont globalBody mt-5">Your document is now due for payment. Please settle it through your preferred payment method and upload the proof of payment here.</p>
+            <div>
+                <label for="proof_of_payment" class="form-label bodyFont formLabel globalSubHeader">Proof of Payment<span style="color: #B30000;">*</span></label>
+                <p class="bodyFont globalBody">Accepted files: .jpeg, .jpg, .png, .docx, .pdf</p>
+                <input name="proof_of_payment" class="form-control form-control-lg" id="proof_of_payment" type="file"
+                    accept=".jpeg, .jpg, .png, .docx, .pdf" required>
+                <div class="d-flex justify-content-end mt-5">
+                    <input class="btn btn-secondary" type="submit" value="submit">
+                </div>
+            </div>
+        </form>
+        {% endif %}
+        {% endfor %}
+
+        {% for coi in cois %}
+        <div class = "row">
+            <p class = "bodyFont globalBody">Document ID Number: <b>{{ coi.document_id }}</b></p>
+        </div>
+        <div class = "row">
+            <p class = "bodyFont globalBody">Document Type: <b>{{ coi.document_type }} - {{ coi.type }}</b></p>
+        </div>
+        <div class = "row">
+            <p class = "bodyFont globalBody">Current Status: <b>{{ coi.status }}</b></p>
+        </div>
+        <div class = "row">
+            <p class = "bodyFont globalBody">Additional Details: <b>{{ coi.additional_details }}</b></p>
+        </div>
+        {% if coi.status == "Printed, Not Paid" %}
+        <form enctype="multipart/form-data" class ="mt-5" action="{% url 'upload_proof_of_payment_certificate_of_indigency' pk=coi.pk %}" method = "post"> {% csrf_token %}
+            <p class="bodyFont globalBody mt-5">Your document is now due for payment. Please settle it through your preferred payment method and upload the proof of payment here.</p>
+            <div>
+                <label for="proof_of_payment" class="form-label bodyFont formLabel globalSubHeader">Proof of Payment<span style="color: #B30000;">*</span></label>
+                <p class="bodyFont globalBody">Accepted files: .jpeg, .jpg, .png, .docx, .pdf</p>
+                <input name="proof_of_payment" class="form-control form-control-lg" id="proof_of_payment" type="file"
+                    accept=".jpeg, .jpg, .png, .docx, .pdf" required>
+                <div class="d-flex justify-content-end mt-5">
+                    <input class="btn btn-secondary" type="submit" value="submit">
+                </div>
+            </div>
+        </form>
+        {% endif %}
+        {% endfor %}
+
+        {% for certificate in certificates %}
+        <div class = "row">
+            <p class = "bodyFont globalBody">Document ID Number: <b>{{ certificate.document_id }}</b></p>
+        </div>
+        <div class = "row">
+            <p class = "bodyFont globalBody">Document Type: <b>{{ certificate.document_type }} - {{ certificate.type }}</b></p>
+        </div>
+        <div class = "row">
+            <p class = "bodyFont globalBody">Current Status: <b>{{ certificate.status }}</b></p>
+        </div>
+        <div class = "row">
+            <p class = "bodyFont globalBody">Additional Details: <b>{{ certificate.additional_details }}</b></p>
+        </div>
+        {% if certificate.status == "Printed, Not Paid" %}
+        <form enctype="multipart/form-data" class ="mt-5" action="{% url 'upload_proof_of_payment_barangay_certificate' pk=certificate.pk %}" method = "post"> {% csrf_token %}
+            <p class="bodyFont globalBody mt-5">Your document is now due for payment. Please settle it through your preferred payment method and upload the proof of payment here.</p>
+            <div>
+                <label for="proof_of_payment" class="form-label bodyFont formLabel globalSubHeader">Proof of Payment<span style="color: #B30000;">*</span></label>
+                <p class="bodyFont globalBody">Accepted files: .jpeg, .jpg, .png, .docx, .pdf</p>
+                <input name="proof_of_payment" class="form-control form-control-lg" id="proof_of_payment" type="file"
+                    accept=".jpeg, .jpg, .png, .docx, .pdf" required>
+                <div class="d-flex justify-content-end mt-5">
+                    <input class="btn btn-secondary" type="submit" value="submit">
+                </div>
+            </div>
+        </form>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

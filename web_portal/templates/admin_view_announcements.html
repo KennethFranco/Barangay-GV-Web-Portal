@@ -1,0 +1,31 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block content %}
+<body>
+<div class="row mt-5" id="documentList1">
+    <h1 class = "titleFont globalSubHeader">Barangay IDs</h1>
+    <table class="tdl">
+        <thead>
+            <tr class="tdlr globalTableCell">
+                <th class="tdlh bodyFont globalBody">Document Request Number</th>
+                <th class="tdlh bodyFont globalBody">Date Requested</th>
+                <th class="tdlh bodyFont globalBody">Current Status of Document</th>
+                <th class="tdlh bodyFont globalBody">Latest Contributor</th>
+            </tr>
+
+        </thead>
+        <tbody id="IDRows">
+            {% for a in announcements %}
+            <tr class="globalTableCell">
+                <!-- <td class="tdld"><a class = "bodyFont globalBody" href="{% url 'admin_individual_barangay_id' pk=i.pk %}">{{ i.document_id }}</a>
+                </td> -->
+                <td class="tdld bodyFont globalBody">{{ a.title}}</td>
+                <td class="tdld bodyFont globalBody">{{ a.content }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "admin_base.html" %}
+{% load static %}
+
+{% block content %}
+<body>
+    <div class = "container mt-5 mb-5 p-5" style = "background-color: white; border: 3px solid #0F2456">
+        <div>
+            <a href="{% url 'admin_documents_list' %}">
+                <button class="btn btn-secondary">Back</button>
+            </a>
+        </div>
+        <div class="row mt-5" id="documentList1">
+            <h1 class = "titleFont globalSubHeader">Announcements</h1>
+            <table class="tdl">
+                <thead>
+                    <tr class="tdlr globalTableCell">
+                        <th class="tdlh bodyFont globalBody">Title</th>
+                        <th class="tdlh bodyFont globalBody">Content</th>
+                        <th class="tdlh bodyFont globalBody">Edit</th>
+                        <th class="tdlh bodyFont globalBody">Delete</th>
+                    </tr>
+        
+                </thead>
+                <tbody id="IDRows">
+                    {% for a in announcements %}
+                    <tr class="globalTableCell">
+                        <td class="tdld bodyFont globalBody">{{ a.title}}</td>
+                        <td class="tdld bodyFont globalBody">{{ a.content }}</td>
+                        <td class="tdld bodyFont globalBody"><a href = "{% url 'admin_individual_announcement' pk=a.pk %}">Edit</a></td>
+                        <td class="tdld bodyFont globalBody"><a href = "{% url 'delete_announcement' pk=a.pk %}">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+{% endblock %}

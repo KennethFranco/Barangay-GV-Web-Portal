@@ -1,0 +1,189 @@
+{% extends "admin_base.html" %}
+{% load static %}
+{% block content %}
+
+<body>
+    <!-- CONTENT -->
+    <div class="container">
+        <div class="adminMainBlock p-5 mt-5" style="background-color: white;">
+            <div class="row">
+                <h1 class = "titleFont globalSubHeader">Resolved Documents</h1>
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="btn btn-secondary dropdownMain" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Current Filter: All Documents
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdown-menu" >
+                        <a class="dropdown-item" href="#" onclick="filterState0()">All Documents</a>
+                        <a class="dropdown-item" href="#" onclick="filterState1()">Barangay IDs</a>
+                        <a class="dropdown-item" href="#" onclick="filterState2()">Barangay Clearances</a>
+                        <a class="dropdown-item" href="#" onclick="filterState3()">Certificates of Indigency</a>
+                        <a class="dropdown-item" href="#" onclick="filterState4()">Barangay Certificates</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5" id="documentList1">
+                <h1 class = "titleFont globalSubHeader">Barangay IDs</h1>
+                <table class="tdl">
+                    <thead>
+                        <tr class="tdlr globalTableCell">
+                            <th class="tdlh bodyFont globalBody">Document Request Number</th>
+                            <th class="tdlh bodyFont globalBody">Date Requested</th>
+                            <th class="tdlh bodyFont globalBody">Current Status of Document</th>
+                            <th class="tdlh bodyFont globalBody">Latest Contributor</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="IDRows">
+                        {% for i in ids %}
+                        <tr class="globalTableCell">
+                            <td class="tdld"><a class = "bodyFont globalBody" href="{% url 'admin_individual_barangay_id' pk=i.pk %}">{{ i.document_id }}</a>
+                            </td>
+                            <td class="tdld bodyFont globalBody">{{ i.date_submitted}}</td>
+                            <td class="tdld bodyFont globalBody">{{ i.status }}</td>
+                            <td class="tdld bodyFont globalBody">{{ i.latest_contributor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row mt-5" id="documentList2">
+                <h1 class = "titleFont globalSubHeader">Barangay Clearances</h1>
+                <table class="tdl">
+                    <thead>
+                        <tr class="tdlr globalTableCell">
+                            <th class="tdlh bodyFont globalBody">Document Request Number</th>
+                            <th class="tdlh bodyFont globalBody">Date Requested</th>
+                            <th class="tdlh bodyFont globalBody">Current Status of Document</th>
+                            <th class="tdlh bodyFont globalBody">Latest Contributor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cl in clearances %}
+                        <tr class="globalTableCell">
+                            <td class="tdld bodyFont globalBody"><a class = "bodyFont globalBody" href="{% url 'admin_individual_barangay_clearance' pk=cl.pk %}">{{ cl.document_id }}</a></td>
+                            <td class="tdld bodyFont globalBody">{{ cl.date_submitted}}</td>
+                            <td class="tdld bodyFont globalBody">{{ cl.status }}</td>
+                            <td class="tdld bodyFont globalBody">{{ cl.latest_contributor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row mt-5" id="documentList3">
+                <h1 class = "titleFont globalSubHeader">Certificates of Indigency</h1>
+                <table class="tdl">
+                    <thead>
+                        <tr class="tdlr globalTableCell">
+                            <th class="tdlh bodyFont globalBody">Document Request Number</th>
+                            <th class="tdlh bodyFont globalBody">Date Requested</th>
+                            <th class="tdlh bodyFont globalBody">Current Status of Document</th>
+                            <th class="tdlh bodyFont globalBody">Latest Contributor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in indigencies %}
+                            <tr class="globalTableCell">
+                                <td class="tdld bodyFont globalBody"><a class = "bodyFont globalBody" href="">{{ a.document_id }}</a></td>
+                                <td class="tdld bodyFont globalBody">{{ a.date_submitted}}</td>
+                                <td class="tdld bodyFont globalBody">{{ a.status }}</td>
+                                <td class="tdld bodyFont globalBody">{{ a.latest_contributor }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row mt-5" id="documentList4">
+                <h1 class = "titleFont globalSubHeader">Barangay Certificates</h1>
+                <table class="tdl">
+                    <thead>
+                        <tr class="tdlr globalTableCell">
+                            <th class="tdlh bodyFont globalBody">Document Request Number</th>
+                            <th class="tdlh bodyFont globalBody">Date Requested</th>
+                            <th class="tdlh bodyFont globalBody">Current Status of Document</th>
+                            <th class="tdlh bodyFont globalBody">Latest Contributor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ce in certificates %}
+                        <tr class="globalTableCell">
+                            <td class="tdld"><a class = "bodyFont globalBody" href="{% url 'admin_individual_barangay_certificate' pk=ce.pk %}">{{ ce.document_id  }}</a></td>
+                            <td class="tdld bodyFont globalBody">{{ ce.date_submitted}}</td>
+                            <td class="tdld bodyFont globalBody">{{ ce.status }}</td>
+                            <td class="tdld bodyFont globalBody">{{ ce.latest_contributor }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+    <script>
+        function myFunction() {
+            document.getElementById("dropdown-menu").classList.toggle("show");
+        }
+
+        function filterState0() {
+            document.getElementById("dropdownMenuButton").textContent = "Current Filter: All Documents"
+            document.getElementById("documentList1").style.display = "block";
+            document.getElementById("documentList2").style.display = "block";
+            document.getElementById("documentList3").style.display = "block";
+            document.getElementById("documentList4").style.display = "block";
+            document.getElementById("dropdown-menu").classList.toggle("show");
+        }
+
+        function filterState1() {
+            document.getElementById("dropdownMenuButton").textContent = "Current Filter: Barangay IDs"
+            document.getElementById("documentList1").style.display = "block";
+            document.getElementById("documentList2").style.display = "none";
+            document.getElementById("documentList3").style.display = "none";
+            document.getElementById("documentList4").style.display = "none";
+            document.getElementById("dropdown-menu").classList.toggle("show");
+        }
+
+        function filterState2() {
+            document.getElementById("dropdownMenuButton").textContent = "Current Filter: Barangay Clearances"
+            document.getElementById("documentList1").style.display = "none";
+            document.getElementById("documentList2").style.display = "block";
+            document.getElementById("documentList3").style.display = "none";
+            document.getElementById("documentList4").style.display = "none";
+            document.getElementById("dropdown-menu").classList.toggle("show");
+        }
+
+        function filterState3() {
+            document.getElementById("dropdownMenuButton").textContent = "Current Filter: Certificates of Indigency"
+            document.getElementById("documentList1").style.display = "none";
+            document.getElementById("documentList2").style.display = "none";
+            document.getElementById("documentList3").style.display = "block";
+            document.getElementById("documentList4").style.display = "none";
+            document.getElementById("dropdown-menu").classList.toggle("show");
+        }
+
+        function filterState4() {
+            document.getElementById("dropdownMenuButton").textContent = "Current Filter: Barangay Certificates"
+            document.getElementById("documentList1").style.display = "none";
+            document.getElementById("documentList2").style.display = "none";
+            document.getElementById("documentList3").style.display = "none";
+            document.getElementById("documentList4").style.display = "block";
+            document.getElementById("dropdown-menu").classList.toggle("show");
+        }
+    </script>
+
+</body>
+{% endblock %}

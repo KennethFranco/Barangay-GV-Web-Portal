@@ -1,0 +1,238 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+
+    <div class="adminMainBlock p-5 mt-5" style="background-color: white;">
+        <div>
+            <a href="{% url 'admin_documents_list' %}">
+                <button class="btn btn-secondary">Back</button>
+            </a>
+        </div>
+        <form method="POST"> {% csrf_token %}
+            <div class="row mt-5 mb-3">
+                <div class="row">
+                    <div class="col d-flex justify-content-between">
+                        <span class="formTitle titleFont globalHeader mb-5">Account Information</span>
+                        <div id="editDiv">
+                            <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="45" height="45"
+                                fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16"
+                                onclick="toggleForm()">
+                                <path
+                                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                            </svg>
+                            <p class="bodyFont globalBody mt-2">Edit</p>
+                        </div>
+
+                        <div id="finishDiv" style="display: none;">
+                            <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="45" height="45"
+                                fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16"
+                                onclick="finishForm()">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                            </svg>
+                            <p class="bodyFont globalBody mt-2">Finish</p>
+                        </div>
+
+                    </div>
+                </div>
+                {% if messages %}
+                <div class="messages text-left mt-3">
+                    {% for message in messages %}
+                    <p class="globalBody bodyFont" style="color: rgb(241, 42, 42);">
+                        {{ message }}
+                    </p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="row mt-5 mb-3">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="bodyFont formLabel globalSubHeader" for="last_name">Last Name<span
+                                style="color: #B30000;">*</span></label></label>
+                        <input value="{{ user.last_name }}" name="last_name" type="text"
+                            class="bodyFont formInput form-control" id="last_name" placeholder="Last Name" required
+                            readonly>
+                        <div class="invalid-feedback">
+                            <p class="bodyFont globalBody">Please enter a valid Last Name.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label class="bodyFont formLabel globalSubHeader" for="first_name">First Name<span
+                                style="color: #B30000;">*</span></label></label>
+                        <input value="{{ user.first_name }}" name="first_name" type="text"
+                            class="bodyFont formInput form-control" id="first_name" placeholder="First Name" required
+                            readonly>
+                        <div class="invalid-feedback">
+                            <p class="bodyFont globalBody">Please enter a valid First Name.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label class="bodyFont formLabel globalSubHeader" for="middle_name">Middle Name<span
+                                style="color: #B30000;">*</span></label></label>
+                        <input value="{{ user.middle_name }}" name="middle_name" type="text"
+                            class="bodyFont formInput form-control" id="middle_name" placeholder="Middle Name" readonly>
+                        <div class="invalid-feedback">
+                            <p class="bodyFont globalBody">Please enter a valid Middle Name.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5 mb-3">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="bodyFont formLabel globalSubHeader" for="age">Age<span
+                                style="color: #B30000;">*</span></label></label>
+                        <input value="{{ user.admin_account.age }}" name="age" type="number"
+                            class="bodyFont formInput form-control" id="age" placeholder="age" required readonly
+                            readonly>
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="bodyFont formLabel globalSubHeader" for="birthday">Birthday<span
+                                style="color: #B30000;">*</span></label></label>
+                        <input value="{{ user.admin_account.birthday }}" name="birthday" type="date"
+                            class="bodyFont formInput form-control" id="birthday" placeholder="Birthday" required
+                            readonly>
+                        <div class="invalid-feedback">
+                            <p class="bodyFont globalBody">Please enter a valid Birthday. (Minimum Age: 18 Years Old)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="bodyFont formLabel globalSubHeader" for="contact_number">Contact Number<span
+                                style="color: #B30000;">*</span></label></label>
+                        <input value="{{ user.admin_account.contact_number }}" name="contact_number" type="text"
+                            class="bodyFont formInput form-control" id="contact_number" placeholder="Contact Number"
+                            readonly>
+                        <div class="invalid-feedback">
+                            <p class="bodyFont globalBody">Please enter a valid Contact Number.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 mb-3">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="bodyFont formLabel globalSubHeader" for="email">Email<span
+                                style="color: #B30000;">*</span></label>
+                        <input value="{{ user.email }}" name="email" type="email" class="bodyFont formInput form-control" id="email" 
+                            placeholder="someone@email.com" required readonly>
+                        <div class="invalid-feedback">
+                            <p class="bodyFont globalBody">Please enter a valid Email. (someone@email.com)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <input class="btn btn-secondary" type="submit" value="Save Account Details">
+            </div>
+        </form>
+    </div>
+    <script>
+        function taskDate(dateMilli) {
+            var d = (new Date(dateMilli) + '').split(' ');
+            d[2] = d[2] + ',';
+
+            return [d[0], d[1], d[2], d[3]].join(' ');
+        }
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        birthday = '{{ user.admin_account.birthday }}'
+        var datemilli = Date.parse(birthday);
+        document.getElementById('birthday').value = formatDate(taskDate(datemilli))
+    </script>
+    <script>
+        function toggleForm() {
+            console.log("TOGGLIGN");
+            document.getElementById("last_name").readOnly = false;
+            document.getElementById("first_name").readOnly = false;
+            document.getElementById("middle_name").readOnly = false;
+            document.getElementById("birthday").readOnly = false;
+            document.getElementById("contact_number").readOnly = false;
+            document.getElementById("email").readOnly = false;
+
+            document.getElementById("editDiv").style.display = "none";
+            document.getElementById("finishDiv").style.display = "";
+        }
+
+        function finishForm() {
+            document.getElementById("last_name").readOnly = true;
+            document.getElementById("first_name").readOnly = true;
+            document.getElementById("middle_name").readOnly = true;
+            document.getElementById("birthday").readOnly = true;
+            document.getElementById("contact_number").readOnly = true;
+            document.getElementById("email").readOnly = true;
+
+            document.getElementById("editDiv").style.display = "";
+            document.getElementById("finishDiv").style.display = "none";
+        }
+    </script>
+    <script>
+        const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10)
+
+        const selectElement = document.getElementById("birthday");
+        console.log(selectElement);
+        selectElement.addEventListener('change', (event) => {
+            var bday = document.getElementById("birthday").value;
+            if (bday == document.getElementById("birthday").max) {
+                document.getElementById("age").value = 18;
+            }
+            else {
+                var age = getAge(bday);
+                document.getElementById("age").value = age;
+            }
+        }); 
+    </script>
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                            alert("There are some fields that may have been left blank or have invalid inputs. Please go through your form again to correct these.");
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</div>
+
+</html>
+{% endblock %}

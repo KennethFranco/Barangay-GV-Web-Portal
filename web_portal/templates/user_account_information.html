@@ -1,0 +1,779 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<style>
+</style>
+
+<body class="main">
+
+    <nav class="container-fluid navbar navbar-expand-md navbarGV">
+        <div class="container">
+            <a href="{% url 'base' %}" style="padding: 0px; margin: 0px;"><img class="mr-2"
+                    src="{% static 'logo.png' %}" style="width: 60px; height: 60px; margin-right: 20px" alt=""></a>
+
+            <div class="titleFont">
+                <a href="{% url 'base' %}" class="navbarTitle globalSubHeader" style="text-decoration: none; ">Barangay
+                    GV Web
+                    Portal</a>
+            </div>
+
+            <button class="navbar-toggler btn-secondary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#toggleMobileMenu" aria-controls="toggleMobileMenu" aria-expanded="false"
+                aria-lable="Toggle navigation">
+                <div class="navBarDrawer">
+                </div>
+                <div class="navBarDrawer">
+                </div>
+                <div class="navBarDrawer">
+                </div>
+            </button>
+
+            <div class="collapse navbar-collapse" id="toggleMobileMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="bodyFont globalBody p-2">
+                        <a class="nav-link navbarOption" href="{% url 'base' %}">Home</a>
+                    </li>
+                    <li class="bodyFont globalBody p-2">
+                        <a class="nav-link navbarOption" href="">Contact</a>
+                    </li>
+                    <li class="bodyFont globalBody p-2">
+                        <a class="nav-link navbarOption" href="">About Us</a>
+                    </li>
+                    <li class="bodyFont globalBody p-2" id="signin">
+                        <a class="nav-link navbarOption" href="{% url 'user_login' %}">Sign In</a>
+                    </li>
+                    <li class="bodyFont globalBody p-2" id="register">
+                        <a style="margin-right: 0px;" class="nav-link navbarOption" href="">Register</a>
+                    </li>
+                    <li>
+                        <div class="dropdown" id="modalButton">
+                            <div class="dropbtn row p-2">
+                                <div class="col-sm-12 col-lg-12 avatar text-center pt-2 globalBody" id="avatar">
+
+                                </div>
+                                <div class="col-sm col-lg align-self-center">
+                                    <p class="p-0 m-0" id="accountArrow" style="color: white;">&#x25BC</p>
+                                </div>
+                            </div>
+                            <div class="dropdown-content">
+                                <a class="content" href="{% url 'user_account_information' %}">
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <p class="globalTableCell bodyFont">My Account</p>
+                                    </div>
+                                </a>
+                                <a class="content" href="{% url 'user_logout' %}">
+                                    <div class="d-flex justify-content-center">
+                                        <p class="globalTableCell bodyFont">Sign Out</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="adminMainBlock p-5 mt-5 mb-5" style="background-color: white;">
+            <div>
+                <a href="{% url 'base' %}">
+                    <button class="btn btn-secondary">Back</button>
+                </a>
+            </div>
+            <div class="mt-5 mb-5">
+                <div class="row">
+                    <div class="col d-flex justify-content-between">
+                        <span class="formTitle titleFont globalHeader mb-3">Account Information</span>
+
+                        <div id="editDiv">
+                            <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="45" height="45"
+                                fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16"
+                                onclick="toggleForm()">
+                                <path
+                                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                            </svg>
+                            <p class="bodyFont globalBody mt-2">Edit</p>
+                        </div>
+                    </div>
+                </div>
+                {% if messages %}
+                <div class="messages text-left mt-3">
+                    {% for message in messages %}
+                    <p class="globalBody bodyFont" style="color: rgb(241, 42, 42);">
+                        {{ message }}
+                    </p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <form class="pb-5 needs-validation" method="POST" onsubmit="checkSubmit()" novalidate enctype="multipart/form-data"> {% csrf_token %}
+                <div id="personal_details">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="form-group">
+                                <label class="bodyFont formLabel globalSubHeader" for="last_name">Last Name<span
+                                        style="color: #B30000;">*</span></label></label>
+                                <input name="last_name" type="text" class="bodyFont formInput form-control"
+                                    id="last_name" value="{{ user.last_name }}" placeholder="Last Name" required
+                                    readonly>
+                                <div class="invalid-feedback">
+                                    <p class="bodyFont globalBody">Please enter a valid Last Name.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <div class="form-group">
+                                <label class="bodyFont formLabel globalSubHeader" for="nationality">Nationality<span
+                                        style="color: #B30000;">*</span></label></label>
+                                <input name="nationality" type="text" class="bodyFont formInput form-control"
+                                    value="{{ user.user_account.nationality }}" id="nationality"
+                                    placeholder="Nationality" required readonly>
+                                <div class="invalid-feedback">
+                                    <p class="bodyFont globalBody">Please enter a valid Nationality.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6 mb-4">
+                            <div class="form-group">
+                                <label class="bodyFont formLabel globalSubHeader" for="sex"
+                                    aria-label="Default select example">Sex<span
+                                        style="color: #B30000;">*</span></label></label>
+                                <select id="sex" name="sex" class="form-select" required disabled
+                                    style="border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    <p class="bodyFont globalBody">Please enter a valid Sex.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="form-group">
+                                <label class="bodyFont formLabel globalSubHeader" for="first_name">First
+                                    Name<span style="color: #B30000;">*</span></label></label>
+                                <input name="first_name" type="text" class="bodyFont formInput form-control"
+                                    id="first_name" value="{{ user.first_name }}" placeholder="First Name" required
+                                    readonly>
+                                <div class="invalid-feedback">
+                                    <p class="bodyFont globalBody">Please enter a valid First Name.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12 mb-4">
+                            <div class="form-group">
+                                <label class="bodyFont formLabel globalSubHeader" for="birthday">Birthday<span
+                                        style="color: #B30000;">*</span></label></label>
+                                <input name="birthday" type="date" class="bodyFont formInput form-control" id="birthday"
+                                    required readonly>
+                                <div class="invalid-feedback">
+                                    <p class="bodyFont globalBody">Please enter a valid Birthday. (Minimum Age:
+                                        18 Years Old)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-6 mb-4">
+                            <div class="form-group">
+                                <label class="bodyFont formLabel globalSubHeader" for="age">Age<span
+                                        style="color: #B30000;">*</span></label></label>
+                                <input name="age" type="number" class="bodyFont formInput form-control" id="age"
+                                    placeholder="age" required readonly readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 mb-4">
+                            <div class="form-group">
+                                <label class="bodyFont formLabel globalSubHeader" for="middle_name">Middle
+                                    Name<span style="color: #B30000;">*</span></label></label>
+                                <input name="middle_name" type="text" class="bodyFont formInput form-control"
+                                    value="{{ user.user_account.middle_name }}" id="middle_name"
+                                    placeholder="Middle Name" required readonly>
+                                <div class="invalid-feedback">
+                                    <p class="bodyFont globalBody">Please enter a valid Middle Name.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-12 mb-4">
+                            <div class="form-group">
+                                <label class="bodyFont formLabel globalSubHeader" for="civil_status">Civil
+                                    Status<span style="color: #B30000;">*</span></label></label>
+                                <select id="civil_status" name="civil_status" class="form-select" required disabled
+                                    style="border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Widowed">Widowed</option>
+                                    <option value="Separated">Separated</option>
+                                    <option value="Divorced">Divorced</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    <p class="bodyFont globalBody">Please enter a valid Civil Status.</p>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-lg-3 col-sm-12 mb-4">
+                            <div class="form-group">
+                                <label class="bodyFont formLabel globalSubHeader" for="blood_type"
+                                    aria-label="Default select example">Blood Type<span
+                                        style="color: #B30000;">*</span></label></label> 
+                                <select id="blood_type" name="blood_type" class="form-select" required disabled
+                                    style="border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                                    <option vFalue="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    <p class="bodyFont globalBody">Please enter a valid Blood Type.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="account_info">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12 mb-4">
+                                <div class="form-group">
+                                    <label class="bodyFont formLabel globalSubHeader" for="contact_number">Mobile
+                                        Number<span style="color: #B30000;">*</span></label>
+                                    <input name="contact_number" type="tel" class="bodyFont formInput form-control"
+                                        value="{{ user.user_account.contact_number }}" id="contact_number"
+                                        pattern="[9]{1}[0-9]{9}" placeholder="9XXXXXXXXX" required readonly>
+                                    <div class="invalid-feedback">
+                                        <p class="bodyFont globalBody">Please enter a Mobile Number. (9XXXXXXXXX)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="addressPage">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12 mb-4">
+                                <div class="form-group">
+                                    <label class="bodyFont formLabel globalSubHeader" for="street">House Number -
+                                        Blk - Street<span style="color: #B30000;">*</span></label></label>
+                                    <input name="street" type="text" class="bodyFont formInput form-control" id="street"
+                                        value="{{ user.user_account.street }}" placeholder="House Number - Blk - Street"
+                                        required readonly>
+                                    <div class="invalid-feedback">
+                                        <p class="bodyFont globalBody">Please enter a valid House Number - Blk -
+                                            Street.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 spacer">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12 mb-4">
+                                <div class="form-group">
+                                    <label class="bodyFont formLabel globalSubHeader" for="address_province"
+                                        aria-label="Default select example">Province<span
+                                            style="color: #B30000;">*</span></label></label>
+                                    <select id="address_province" name="province" class="form-select" required disabled
+                                        style="border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        <p class="bodyFont globalBody">Please enter a valid Province.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-12 mb-4">
+                                <div class="form-group">
+                                    <label class="bodyFont formLabel globalSubHeader" for="city">City<span
+                                            style="color: #B30000;">*</span></label>
+                                    <select id="address_city" name="city" class="form-select" required disabled
+                                        style="border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12 mb-4">
+                                <div class="form-group">
+                                    <label class="bodyFont formLabel globalSubHeader" for="barangay">Barangay<span
+                                            style="color: #B30000;">*</span></label></label>
+                                    <select id="address_barangay" name="barangay" class="form-select" required disabled
+                                        style="border-radius: 10px; font-family: 'Work Sans', sans-serif; font-size: calc(16px + 0.70vw);">
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        <p class="bodyFont globalBody">Please enter a valid Barangay.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-12 mb-4">
+                                <div class="form-group">
+                                    <label class="bodyFont formLabel globalSubHeader" for="zip_code">Zip
+                                        Code<span style="color: #B30000;">*</span></label>
+                                    <input name="zip_code" type="tel" class="bodyFont formInput form-control"
+                                        id="zip_code" value="{{ user.user_account.zip_code }}" pattern="[0-9]{4}"
+                                        placeholder="XXXX" required readonly>
+                                    <div class="invalid-feedback">
+                                        <p class="bodyFont globalBody">Please enter a valid Zip Code. (XXXX)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-5 d-flex justify-content-between">
+                        <a href="{% url 'change_password' %}" class="btn btn-secondary">
+                            <div>Change Password</div>
+                        </a>
+                        <input class="btn btn-secondary" type="submit" value="Save Account Details">
+                    </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <script>
+        function checkSubmit() {
+            document.getElementById("sex").disabled = false;
+            document.getElementById("blood_type").disabled = false;
+            document.getElementById("address_province").disabled = false;
+            document.getElementById("address_city").disabled = false;
+            document.getElementById("address_barangay").disabled = false;
+            document.getElementById("civil_status").disabled = false;
+        }
+
+        function toggleForm() {
+            document.getElementById("last_name").readOnly = false;
+            document.getElementById("first_name").readOnly = false;
+            document.getElementById("middle_name").readOnly = false;
+            document.getElementById("birthday").readOnly = false;
+            document.getElementById("sex").disabled = false;
+            document.getElementById("blood_type").disabled = false;
+            document.getElementById("nationality").readOnly = false;
+            document.getElementById("contact_number").readOnly = false;
+            document.getElementById("address_province").disabled = false;
+            document.getElementById("address_city").disabled = false;
+            document.getElementById("address_barangay").disabled = false;
+            document.getElementById("street").readOnly = false;
+            document.getElementById("zip_code").readOnly = false;
+            document.getElementById("civil_status").disabled = false;
+
+            try {
+                document.getElementById("landlord_name").readOnly = false;
+                document.getElementById("landlord_contact_number").readOnly = false;
+                document.getElementById("landlord_address").readOnly = false;
+            } catch (error) {
+                console.log(error);
+            }
+
+            document.getElementById("editDiv").style.display = "none";
+        }
+
+        function finishForm() {
+            document.getElementById("last_name").readOnly = true;
+            document.getElementById("first_name").readOnly = true;
+            document.getElementById("middle_name").readOnly = true;
+            document.getElementById("birthday").readOnly = true;
+            document.getElementById("sex").disabled = true;
+            document.getElementById("blood_type").disabled = true;
+            document.getElementById("nationality").readOnly = true;
+            document.getElementById("contact_number").readOnly = true;
+            document.getElementById("address_province").disabled = true;
+            document.getElementById("address_city").disabled = true;
+            document.getElementById("address_barangay").disabled = true;
+            document.getElementById("street").readOnly = true;
+            document.getElementById("zip_code").readOnly = true;
+
+            document.getElementById("editDiv").style.display = "";
+            document.getElementById("finishDiv").style.display = "none";
+        }
+    </script>
+
+    <script>
+        // SET MIN AND MAX DATES
+        date2 = new Date();
+        date2.setFullYear(date2.getFullYear() - 120);
+        var date2String = moment(date2).format("YYYY-MM-DD");
+        document.getElementById("birthday").min = date2String;
+
+        date = new Date();
+        date.setFullYear(date.getFullYear() - 18);
+        var dateString = moment(date).format("YYYY-MM-DD");
+        document.getElementById("birthday").max = dateString;
+    </script>
+    <!-- GET AGE -->
+    <script>
+        function taskDate(dateMilli) {
+            var d = (new Date(dateMilli) + '').split(' ');
+            d[2] = d[2] + ',';
+
+            return [d[0], d[1], d[2], d[3]].join(' ');
+        }
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10)
+
+        const selectElement = document.getElementById("birthday");
+        // console.log(selectElement);
+        selectElement.addEventListener('change', (event) => {
+            console.log('here is ur bday:')
+            var bday = document.getElementById("birthday").value;
+            if (bday == document.getElementById("birthday").max) {
+                document.getElementById("age").value = 18;
+            }
+            else {
+                var age = getAge(bday);
+                document.getElementById("age").value = age;
+            }
+
+        });
+
+
+
+        birthday = '{{ user.user_account.birthday }}'
+        birthdayArray = birthday.split(",")
+        formattedBirthday = birthdayArray[0] + birthdayArray[1]
+        var datemilli = Date.parse(formattedBirthday);
+        selectElement.value = formatDate(taskDate(datemilli))
+        var bday = selectElement.value;
+        document.getElementById("age").value = '{{ user.user_account.age }}'
+
+    </script>
+    <!-- LOCATION HANDLER -->
+    <script>
+        var finalData = [];
+        var result = "";
+        var result2 = "";
+        provinceSelect = document.getElementById("address_province");
+        sexSelect = document.getElementById("sex");
+        bloodSelect = document.getElementById("blood_type");
+        citySelect = document.getElementById("address_city");
+        barangaySelect = document.getElementById("address_barangay");
+        civilStatusSelect = document.getElementById("civil_status");
+
+        initialProvince = `{{ user.user_account.province }}`;
+        initialCity = `{{ user.user_account.city }}`;
+        initialBarangay = `{{ user.user_account.barangay }}`;
+        initialSex = `{{ user.user_account.sex }}`;
+        initialBlood = `{{ user.user_account.blood_type }}`;
+        initialCivilStatus = `{{ user.user_account.civil_status }}`;
+
+        if (initialSex == "Male") {
+            sexSelect.options[0].selected = true;
+        }
+        else if (initialSex == "Female") {
+            sexSelect.options[1].selected = true;
+        }
+        else if (initialSex == "Prefer not to say") {
+            sexSelect.options[2].selected = true;
+        }
+
+        if (initialCivilStatus == "Single") {
+            civilStatusSelect.options[0].selected = true;
+        }
+        else if (initialCivilStatus == "Married") {
+            civilStatusSelect.options[1].selected = true;
+        }
+        else if (initialCivilStatus == "Divorced") {
+            civilStatusSelect.options[4].selected = true;
+        }
+        else if (initialCivilStatus == "Separated") {
+            civilStatusSelect.options[3].selected = true;
+        }
+        else if (initialCivilStatus == "Widowed") {
+            civilStatusSelect.options[2].selected = true;
+        }
+
+        if (initialBlood == "A+") {
+            bloodSelect.options[0].selected = true;
+        }
+        else if (initialBlood == "A-") {
+            bloodSelect.options[1].selected = true;
+        }
+        else if (initialBlood == "AB+") {
+            bloodSelect.options[2].selected = true;
+        }
+        else if (initialBlood == "AB-") {
+            bloodSelect.options[3].selected = true;
+        }
+        else if (initialBlood == "B+") {
+            bloodSelect.options[4].selected = true;
+        }
+        else if (initialBlood == "B-") {
+            bloodSelect.options[5].selected = true;
+        }
+        else if (initialBlood == "O+") {
+            bloodSelect.options[6].selected = true;
+        }
+        else if (initialBlood == "O-") {
+            bloodSelect.options[7].selected = true;
+        }
+
+        // INITIAL FILL
+        fetch("{% static 'locations.json' %}")
+            .then(res => res.json())
+            .then(data => {
+
+                finalData.push(data);
+
+                for (var i = 0; i < data.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = finalData[0][i].Province;
+                    opt.innerHTML = finalData[0][i].Province;
+                    if (i == 0 && "{{ user }}" == 'AnonymousUser') {
+                        opt.selected = true;
+                    }
+                    document.getElementById("address_province").appendChild(opt);
+                    if ("{{ user }}" != 'AnonymousUser' && opt.value == initialProvince) {
+                        opt.selected = true;
+                    }
+
+                }
+
+                var provinceChosen = provinceSelect.value;
+
+                result = finalData[0].find(({ Province }) => Province === provinceChosen);
+
+                for (var i = 0; i < result.Cities.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = result.Cities[i].City;
+                    opt.innerHTML = result.Cities[i].City;
+                    if (i == 0 && "{{ user }}" == 'AnonymousUser') {
+                        opt.selected = true;
+                    }
+                    document.getElementById("address_city").appendChild(opt);
+                    if ("{{ user }}" != 'AnonymousUser' && opt.value == initialCity) {
+                        opt.selected = true;
+                    }
+                }
+
+                var cityChosen = citySelect.value;
+                result2 = result.Cities.find(({ City }) => City === cityChosen);
+
+                for (var i = 0; i < result2.Barangays.length; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = result2.Barangays[i];
+                    opt.innerHTML = result2.Barangays[i];
+                    if (i == 0 && "{{ user }}" == 'AnonymousUser') {
+                        opt.selected = true;
+                    }
+                    document.getElementById("address_barangay").appendChild(opt);
+                    if ("{{ user }}" != 'AnonymousUser' && opt.value == initialBarangay) {
+                        opt.selected = true;
+                    }
+                }
+            }
+            )
+
+        // PROVINCE CHANGE
+        provinceSelect.addEventListener('change', (event) => {
+            while (citySelect.options.length > 0) {
+                citySelect.remove(0);
+            }
+
+            while (barangaySelect.options.length > 0) {
+                barangaySelect.remove(0);
+            }
+
+            var provinceChosen = provinceSelect.value;
+            // console.log(provinceChosen);
+
+            // FIND CITIES
+            result = finalData[0].find(({ Province }) => Province === provinceChosen);
+            // console.log("CITIES:");
+            // console.log(result.Cities);
+            for (var i = 0; i < result.Cities.length; i++) {
+                // console.log(result.Cities[i]);
+                var opt = document.createElement('option');
+                opt.value = result.Cities[i].City;
+                opt.innerHTML = result.Cities[i].City;
+                if (i == 0) {
+                    opt.selected = true;
+                }
+                document.getElementById("address_city").appendChild(opt);
+            }
+
+            var cityChosen = citySelect.value;
+            // console.log("City Chosen: " + cityChosen);
+
+            var result2 = result.Cities.find(({ City }) => City === cityChosen);
+            // console.log(result2);
+
+            for (var i = 0; i < result2.Barangays.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result2.Barangays[i];
+                opt.innerHTML = result2.Barangays[i];
+                if (i == 0) {
+                    opt.selected = true;
+                }
+                document.getElementById("address_barangay").appendChild(opt);
+            }
+        })
+
+        citySelect.addEventListener('change', (event) => {
+            while (barangaySelect.options.length > 0) {
+                barangaySelect.remove(0);
+            }
+
+            var cityChosen = citySelect.value;
+            // console.log(cityChosen);
+            // console.log("HERE");
+
+            var result2 = result.Cities.find(({ City }) => City === cityChosen);
+            // console.log(result2);
+
+            for (var i = 0; i < result2.Barangays.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = result2.Barangays[i];
+                opt.innerHTML = result2.Barangays[i];
+                if (i == 0) {
+                    opt.selected = true;
+                }
+                document.getElementById("address_barangay").appendChild(opt);
+            }
+        })
+
+
+    </script>
+
+    <!-- SUBMISSION HANDLER -->
+    <script>
+            (function () {
+                'use strict'
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+    </script>
+    <!-- DISPLAY ACCOUNT AVATAR -->
+    <script>
+        avatarSection = document.getElementById('modalButton')
+        avatar = document.getElementById('avatar')
+        signin = document.getElementById('signin')
+        register = document.getElementById('register')
+
+        userArray = '{{ user }}'.split("");
+
+        console.log('{{ user }}')
+
+        if ('{{ user }}' != "AnonymousUser" && '{{ user }}' != "") {
+            signin.style.display = "none"
+            register.style.display = "none"
+            avatar.style.display = "block"
+            avatar.innerHTML = userArray[0]
+
+        }
+        else if ('{{ user }}' == "AnonymousUser") {
+            signin.style.display = "block"
+            register.style.display = "block"
+            avatar.style.display = "none"
+            avatarSection.style.display = "none"
+        }
+
+        var coll = document.getElementsByClassName("collapsible");
+
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                var symbol = this.lastElementChild.lastElementChild.lastElementChild;
+                console.log(symbol);
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    symbol.innerHTML = "&#x25BC";
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    symbol.innerHTML = "&#x25B2";
+                }
+            });
+        }
+    </script>
+    <!-- DISPLAY MODAL FOR ACCOUNT AVATAR -->
+    <script>
+        var modal = document.getElementById("myModal");
+        var btn = document.getElementById("modalButton");
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    <script>
+        window.onbeforeunload = function () {
+            if (submitting == false) {
+                return "Data will be lost if you leave the page, are you sure?";
+            }
+            else if (submitting == true) {
+                return;
+            }
+        };
+    </script>
+</body>
+
+</html>

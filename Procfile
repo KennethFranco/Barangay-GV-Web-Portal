@@ -1,0 +1,1 @@
+web: gunicorn BarangayGV.wsgi --log-file -

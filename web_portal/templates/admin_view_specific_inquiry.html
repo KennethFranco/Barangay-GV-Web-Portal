@@ -1,0 +1,48 @@
+{% extends "admin_base.html" %}
+{% load static %}
+{% block content %}
+
+<body>
+    <div class = "container mt-5 mb-5 p-5" style = "background-color: white; border: 3px solid #0F2456">
+        <div>
+            <a href="{% url 'admin_view_inquiries' %}">
+                <button class="btn btn-secondary">Back</button>
+            </a>
+        </div>
+
+        <div>
+            <form method="POST" action="{% url 'admin_view_specific_inquiry' pk=i.pk %}">{% csrf_token %}
+                <label for="name"> <b>Name:</b> </label>
+                <input type="text" name="name" class="form-control" value="{{i.last_name}}, {{i.first_name}}" disabled>
+                <div class="row align-items-center mt-4">
+                    <div class="col">
+                        <label for="email"> <b>Email:</b> </label>
+                        <input type="text" name="email" class="form-control" value="{{i.email}}" disabled>
+                    </div>
+                </div>
+                <div class="row align-items-center mt-4">
+                  <div class="col">
+                      <label for="message"> <b>Message:</b> </label>
+                      <textarea type="content" name="message" class="form-control" cols="60" rows="10" disabled>{{ i.message }}</textarea>
+                  </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+<!-- <div class="row mt-5"> 
+    <div class="row">
+        {{i.last_name}}, {{i.first_name}}
+    </div>
+    <div class="row">
+        {{i.email}}
+    </div>
+    <div class="row">
+        {{i.message}}
+    </div>
+</div> -->
+
+
+{% endblock %}

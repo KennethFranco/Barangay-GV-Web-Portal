@@ -1,0 +1,67 @@
+{% extends "admin_base.html" %}
+{% load static %}
+{% block content %}
+<body>
+    <div class = "container mt-5 mb-5 p-5" style = "background-color: white; border: 3px solid #0F2456">
+        <div class="row mt-5" id="documentList1">
+            <h1 class = "titleFont globalSubHeader">Inquiries</h1>
+            <table class="tdl">
+                <thead>
+                    <tr class="globalTableCell">
+                        <th class="tdlh bodyFont globalBody" scope="col">Name</th>
+                        <th class="tdlh bodyFont globalBody" scope="col">Email</th>
+                        <th class="tdlh bodyFont globalBody" scope="col">Message</th>
+                        <th class="tdlh bodyFont globalBody" scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for i in inquiries %}
+                    <tr class="globalTableCell">
+                        <td class="tdld bodyFont globalBody">{{i.last_name}}, {{i.first_name}}</td>
+                        <td class="tdld bodyFont globalBody">{{i.email}} </td>
+                        <td style="height: 20px; text-overflow: ellipsis; overflow: hidden;" class="tdld bodyFont globalBody">{{i.message}}</td>
+                        <td class="tdld bodyFont globalBody">
+                            <a class="btn btn-secondary" href="{% url 'admin_view_specific_inquiry' pk=i.pk %}">Open</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+<!-- <body>
+
+    <div class = "container">
+        <div class="row mt-5"> 
+            <table class="tdl">
+            <thead>
+                <tr class="globalTableCell">
+                    <th class="tdlh bodyFont globalBody" scope="col">Name</th>
+                    <th class="tdlh bodyFont globalBody" scope="col">Email</th>
+                    <th class="tdlh bodyFont globalBody" scope="col">Message</th>
+                    <th class="tdlh bodyFont globalBody" scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in inquiries %}
+                <tr class="globalTableCell">
+                    <td class="tdld bodyFont globalBody">{{i.last_name}}, {{i.first_name}}</td>
+                    <td class="tdld bodyFont globalBody">{{i.email}} </td>
+                    <td class="tdld bodyFont globalBody">{{i.message}}</td>
+                    <td class="tdld bodyFont globalBody">
+                        <a class="btn btn-secondary" href="{% url 'admin_view_specific_inquiry' pk=i.pk %}">Open</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+
+</body> -->
+
+
+{% endblock %}
