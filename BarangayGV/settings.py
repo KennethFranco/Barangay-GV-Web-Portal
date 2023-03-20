@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-b1a9ru9esch0v5cy&j$gans!scoskc#-01*3rx&d9ad3hv8xt7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com', 'barangay-gv-web-portal.herokuapp.com', 'guadalupeviejo.com', 'www.guadalupeviejo.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com', 'barangay-gv-web-portal.herokuapp.com', 'guadalupeviejo.com', 'www.guadalupeviejo.com', '.vercel.app']
 
 # SMTP CONFIGURATION
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
